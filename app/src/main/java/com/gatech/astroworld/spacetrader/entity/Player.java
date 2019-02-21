@@ -2,6 +2,8 @@ package com.gatech.astroworld.spacetrader.entity;
 
 import com.gatech.astroworld.spacetrader.model.Spaceship;
 
+import java.util.ArrayList;
+
 public class Player {
     private String name;
     private int skillPoints;
@@ -17,7 +19,7 @@ public class Player {
         this.traderPoints = 0;
         this.engineerPoints = 0;
         this.credits = 1000;
-        this.ship = Spaceship.GNAT;
+        this.ship = new Spaceship("Gnat", 8, 500);
     }
 
     public void setPilotPoints(int pilotPoints) {
