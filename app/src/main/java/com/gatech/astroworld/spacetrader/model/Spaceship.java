@@ -2,6 +2,7 @@ package com.gatech.astroworld.spacetrader.model;
 
 import com.gatech.astroworld.spacetrader.entity.Good;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Spaceship {
@@ -11,10 +12,14 @@ public class Spaceship {
     private int capacity;
     private int fuel;
 
-    public Spaceship (String name, List<Good> goods, int capacity, int fuel) {
+    public Spaceship (String name, int capacity, int fuel) {
         this.name = name;
-        this.goods = goods;
+        this.goods = new ArrayList<>();
         this.capacity = capacity;
         this.fuel = fuel;
+    }
+    @Override
+    public String toString() {
+        return name;
     }
 }
