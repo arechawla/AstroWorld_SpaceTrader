@@ -1,6 +1,9 @@
 package com.gatech.astroworld.spacetrader.model;
 
+import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
+
+import java.util.List;
 
 public class SolarSystem {
 
@@ -9,5 +12,7 @@ public class SolarSystem {
     private int yPos;
     private List<Planet> listOfPlanets;
     private TechLevel techLevel;
+    private Resources resources;
+
 
 }

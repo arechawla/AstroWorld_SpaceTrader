@@ -1,15 +1,20 @@
 package com.gatech.astroworld.spacetrader.model;
 
-public enum Spaceship {
+import com.gatech.astroworld.spacetrader.entity.Good;
 
-    GNAT("Gnat");
+import java.util.List;
 
-    private final String code;
+public class Spaceship {
 
-    Spaceship(String code) {this.code = code;}
+    private String name;
+    private List<Good> goods;
+    private int capacity;
+    private int fuel;
 
-    @Override
-    public String toString() {
-        return code;
+    public Spaceship (String name, List<Good> goods, int capacity, int fuel) {
+        this.name = name;
+        this.goods = goods;
+        this.capacity = capacity;
+        this.fuel = fuel;
     }
 }
