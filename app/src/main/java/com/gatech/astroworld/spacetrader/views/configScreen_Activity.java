@@ -10,7 +10,10 @@ import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import android.widget.EditText;
 import com.gatech.astroworld.spacetrader.entity.Player;
+import com.gatech.astroworld.spacetrader.entity.Resources;
+import com.gatech.astroworld.spacetrader.entity.TechLevel;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 
 public class configScreen_Activity extends AppCompatActivity {
@@ -137,6 +140,10 @@ public class configScreen_Activity extends AppCompatActivity {
                 viewmodel.updateGame(difficulty);
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(initPlayer());
+                System.out.println("******************************************");
+                SolarSystem test = new SolarSystem("test", TechLevel.HI_TECH, Resources.DESERT);
+                System.out.println(test.toString());
+
 
                 //Print game settings when character is confirmed
                 System.out.println(Game.getInstance().toString());
