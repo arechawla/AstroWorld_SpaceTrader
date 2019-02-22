@@ -2,12 +2,19 @@ package com.gatech.astroworld.spacetrader.model;
 
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import com.gatech.astroworld.spacetrader.entity.Player;
+import com.gatech.astroworld.spacetrader.entity.Resources;
+import com.gatech.astroworld.spacetrader.entity.TechLevel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
     //Init game vars
     private Difficulty difficulty;
     private Player player;
+    private List<SolarSystem> systemList = new ArrayList<>();
+    private int galaxySize = 1000;
 
     // static variable single_instance of type Singleton
     private static Game single_instance = null;
@@ -33,6 +40,21 @@ public class Game {
     public Difficulty getDifficulty () { return this.difficulty; }
 
     public void setDifficulty (Difficulty difficulty) { this.difficulty = difficulty; }
+
+    public List<SolarSystem> getSystemList() {
+        return systemList;
+    }
+    public void addSystem(SolarSystem newSystem) {
+        systemList.add(newSystem);
+    }
+
+    public int getGalaxySize() {
+        return this.galaxySize;
+    }
+
+    public void setGalaxySize(int newSize) {
+        this.galaxySize = newSize;
+    }
 
     @Override
     public String toString () {

@@ -17,5 +17,5 @@ public enum PoliticalSystems {
     SOCIALIST_STATE,
     STATE_OF_SATORI,
     TECHNOCRACY,
-    THEOCRACY;
+    THEOCRACY
 }
