@@ -55,7 +55,7 @@ public class Planet {
             systemCenterDist = Math.hypot(xPos, yPos);
         }
 
-        public double getGalacCenterDist() {
+        public double getSystemCenterDist() {
             return systemCenterDist;
         }
         public void updateLocation(double newX, double newY){
