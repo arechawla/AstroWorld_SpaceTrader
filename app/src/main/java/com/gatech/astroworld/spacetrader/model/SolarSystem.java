@@ -13,6 +13,7 @@ public class SolarSystem {
     private TechLevel techLevel;
     private Resources resources;
     private SysLocation sysLocation;
+    private int systemSize = 1000;
 
     private int systemMargin = 5;
 
@@ -38,6 +39,10 @@ public class SolarSystem {
                         + Math.pow((sysLocation.yPos - tempY), 2));
             }
         }
+    }
+
+    public int getSystemSize() {
+        return this.systemSize;
     }
 
     public List<Planet> getListOfPlanets() {
