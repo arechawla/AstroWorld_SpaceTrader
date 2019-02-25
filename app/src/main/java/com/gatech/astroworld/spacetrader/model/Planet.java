@@ -10,12 +10,9 @@ public class Planet {
     private PoliticalSystems gov;
     private SolarSystem sys;
 
-    public Planet(String name, PlanetLocation loc, PoliticalSystems gov,
-    SolarSystem sys) {
-        this.name = name;
-        this.loc = loc;
-        this.gov = gov;
+    public Planet(SolarSystem sys) {
         this.sys = sys;
+        name = "Planet "+ sys.getListOfPlanets().size();
     }
 
     public String getName() {
