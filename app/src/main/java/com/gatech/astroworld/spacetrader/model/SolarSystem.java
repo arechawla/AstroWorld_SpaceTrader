@@ -5,6 +5,7 @@ import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -12,11 +13,12 @@ import java.util.Random;
 
 public class SolarSystem {
     private String name;
-    private List<Planet> listOfPlanets;
+    private List<Planet> listOfPlanets = new ArrayList<>();
     private TechLevel techLevel;
     private Resources resources;
     private SysLocation sysLocation;
     private int systemSize = 1000;
+    private int maxPlanets = 9;
 
     private int systemMargin = 5;
 
@@ -29,7 +31,6 @@ public class SolarSystem {
         final TechLevel[] TECHLEVEL_VALUES = TechLevel.values();
         final Resources[] RESOURCES_VALUES = Resources.values();
         this.name = SolarSystemName[rand.nextInt(SolarSystemName.length)];
-        //this.name = "Test";
         this.techLevel = TECHLEVEL_VALUES[rand.nextInt(TECHLEVEL_VALUES.length - 1)];
         this.resources = RESOURCES_VALUES[rand.nextInt(RESOURCES_VALUES.length - 1)];
 
@@ -47,6 +48,9 @@ public class SolarSystem {
                 distance = Math.sqrt(Math.pow((sysLocation.xPos - tempX), 2)
                         + Math.pow((sysLocation.yPos - tempY), 2));
             }
+        }
+        for (int i = 0; i < rand.nextInt(maxPlanets); i++) {
+            addPlanet(new Planet(this));
         }
     }
 
@@ -112,17 +116,10 @@ public class SolarSystem {
 
     @Override
     public String toString() {
-        /*return String.format("Name: %s" +
-                "\nPlanets: %d" +
-                "\nLocation:  " +
-                "\n\tXpos = %d" +
-                "\n\tYpos = %d" +
-                "\nTech Level: %s" +
-                "\nResources:" +
-                "\n\t%s",
-                (double)5, sysLocation.getxPos(), sysLocation.getyPos(), getTechLevel().toString(), resources.toString());
-                */
-        return ("X LOCATION = " + this.sysLocation.getxPos() + " Y LOCATION = " + this.sysLocation.getyPos() + " Name: " +name + "Tech: " +techLevel.toString());
+
+        return ("\n\nName:  " + name + "\nPosition: (" + this.sysLocation.getxPos() + "," + this.sysLocation.getyPos() + ")"
+                + "\nTech Level: " + techLevel.toString() + "\nResources: "
+                + this.resources.toString() + "\nTech: " + techLevel.toString()) + "\nNumber of Planets: " + listOfPlanets.size();
     }
 
     String SolarSystemName[] =
