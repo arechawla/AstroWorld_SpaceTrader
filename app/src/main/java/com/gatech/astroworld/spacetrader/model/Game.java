@@ -24,9 +24,7 @@ public class Game {
     private Game() {
         player = new Player(null);
         difficulty = Difficulty.BEGINNER;
-        for (int i = 0; i < maxSystems; i++) {
-            //systemList.add(new SolarSystem())
-        }
+
     }
 
     // static method to create instance of Singleton class
