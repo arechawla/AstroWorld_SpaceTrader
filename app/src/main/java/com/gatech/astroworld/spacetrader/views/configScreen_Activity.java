@@ -141,8 +141,8 @@ public class configScreen_Activity extends AppCompatActivity {
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(initPlayer());
                 System.out.println("******************************************");
-                SolarSystem test = new SolarSystem("test", TechLevel.HI_TECH, Resources.DESERT);
-                System.out.println(test.toString());
+//                SolarSystem test = new SolarSystem("test", TechLevel.HI_TECH, Resources.DESERT);
+//                System.out.println(test.toString());
 
 
                 //Print game settings when character is confirmed

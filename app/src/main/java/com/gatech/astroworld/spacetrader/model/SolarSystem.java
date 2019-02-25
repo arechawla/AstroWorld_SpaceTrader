@@ -1,6 +1,7 @@
 package com.gatech.astroworld.spacetrader.model;
 
 
+import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
 
@@ -53,6 +54,10 @@ public class SolarSystem {
 
     public void addPlanet(Planet newPlanet) {
         this.listOfPlanets.add(newPlanet);
+        Random rand = new Random();
+        PoliticalSystems[] arr = PoliticalSystems.values();
+        PoliticalSystems g = arr[rand.nextInt(PoliticalSystems.values().length - 1)];
+        newPlanet.setGov(g);
     }
 
     public String getName() {
