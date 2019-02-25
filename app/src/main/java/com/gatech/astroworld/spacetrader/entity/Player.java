@@ -18,6 +18,7 @@ public class Player {
     private Planet currentPlanet;
     private Spaceship ship;
 
+
     public Player(String name){
         this.name = name;
         this.skillPoints = 16;
