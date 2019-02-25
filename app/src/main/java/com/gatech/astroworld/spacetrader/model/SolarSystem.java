@@ -5,6 +5,8 @@ import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -20,12 +22,16 @@ public class SolarSystem {
 
 
     private Random rand = new Random();
-    public SolarSystem (TechLevel techLevel, Resources resources) {
+    public SolarSystem () {
         SysLocation loc = new SysLocation();
-        this.name = name;
-        this.resources = resources;
-        this.techLevel = techLevel;
         this.sysLocation = loc;
+
+        final TechLevel[] TECHLEVEL_VALUES = TechLevel.values();
+        final Resources[] RESOURCES_VALUES = Resources.values();
+        this.name = SolarSystemName[rand.nextInt(SolarSystemName.length)];
+        //this.name = "Test";
+        this.techLevel = TECHLEVEL_VALUES[rand.nextInt(TECHLEVEL_VALUES.length - 1)];
+        this.resources = RESOURCES_VALUES[rand.nextInt(RESOURCES_VALUES.length - 1)];
 
         /* Compare new system distance from galactic center to the distance of every system created.
          * If the new system is within +/- systemMargin of an existing system, then the new system
@@ -35,7 +41,7 @@ public class SolarSystem {
             double tempY = tempSys.sysLocation.yPos;
             double distance = Math.sqrt(Math.pow((sysLocation.xPos - tempX), 2)
                             + Math.pow((sysLocation.yPos - tempY), 2));
-            this.name = SolarSystemName[rand.nextInt(SolarSystemName.length)];
+
             while (distance < systemMargin) {
                 sysLocation.randomLocation();
                 distance = Math.sqrt(Math.pow((sysLocation.xPos - tempX), 2)
@@ -116,7 +122,7 @@ public class SolarSystem {
                 "\n\t%s",
                 (double)5, sysLocation.getxPos(), sysLocation.getyPos(), getTechLevel().toString(), resources.toString());
                 */
-        return ("X LOCATION = " + this.sysLocation.getxPos() + " Y LOCATION = " + this.sysLocation.getyPos());
+        return ("X LOCATION = " + this.sysLocation.getxPos() + " Y LOCATION = " + this.sysLocation.getyPos() + " Name: " +name + "Tech: " +techLevel.toString());
     }
 
     String SolarSystemName[] =

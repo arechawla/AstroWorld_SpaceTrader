@@ -141,9 +141,13 @@ public class configScreen_Activity extends AppCompatActivity {
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(initPlayer());
                 System.out.println("******************************************");
-//                SolarSystem test = new SolarSystem("test", TechLevel.HI_TECH, Resources.DESERT);
-//                System.out.println(test.toString());
 
+                for (int i = 0; i < Game.getInstance().getMaxSystems(); i++) {
+                    Game.getInstance().getSystemList().add(new SolarSystem());
+                }
+                for (SolarSystem system: Game.getInstance().getSystemList()) {
+                    System.out.println(system.toString());
+                }
 
                 //Print game settings when character is confirmed
                 System.out.println(Game.getInstance().toString());
