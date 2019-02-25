@@ -1,5 +1,9 @@
 package com.gatech.astroworld.spacetrader.entity;
 
+import android.media.Image;
+
+import com.gatech.astroworld.spacetrader.model.Planet;
+import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.model.Spaceship;
 
 import java.util.ArrayList;
@@ -9,6 +13,9 @@ public class Player {
     private int skillPoints;
     private int pilotPoints, fighterPoints, traderPoints, engineerPoints;
     private int credits;
+    private int reputation;
+    private SolarSystem currentSystem;
+    private Planet currentPlanet;
     private Spaceship ship;
 
     public Player(String name){
@@ -58,6 +65,11 @@ public class Player {
         return skillPoints;
     }
 
+    public int getReputation() { return reputation; }
+
+    public SolarSystem getCurrentSystem() { return currentSystem; }
+
+    public Planet getCurrentPlanet() { return currentPlanet; }
 
     public String getName() {
         return name;
@@ -82,6 +94,28 @@ public class Player {
     public void setShip(Spaceship s) {
         ship = s;
     }
+
+    public void setReputation(int r) { reputation = r;}
+
+    public void setCurrentSystem(SolarSystem ss) { currentSystem = ss; }
+
+    public void setCurrentPlanet(Planet p) { currentPlanet = p; }
+
+    /**
+     *
+     * @return a percent of encountering an NPC
+     */
+    private double encounterChance() {
+        double chance = Math.random() / this.pilotPoints;
+        return chance;
+    }
+
+
+
+
+
+
+
     @Override
     public String toString(){
         return String.format(
