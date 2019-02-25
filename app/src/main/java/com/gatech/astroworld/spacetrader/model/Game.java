@@ -15,6 +15,7 @@ public class Game {
     private Player player;
     private List<SolarSystem> systemList = new ArrayList<>();
     private int galaxySize = 1000;
+    private int maxSystems = (galaxySize / 50) ;
 
     // static variable single_instance of type Singleton
     private static Game single_instance = null;
@@ -23,6 +24,9 @@ public class Game {
     private Game() {
         player = new Player(null);
         difficulty = Difficulty.BEGINNER;
+        for (int i = 0; i < maxSystems; i++) {
+            //systemList.add(new SolarSystem())
+        }
     }
 
     // static method to create instance of Singleton class
@@ -56,6 +60,9 @@ public class Game {
         this.galaxySize = newSize;
     }
 
+    public int getMaxSystems() {
+        return maxSystems;
+    }
     @Override
     public String toString () {
         return "\n********************************************************"
