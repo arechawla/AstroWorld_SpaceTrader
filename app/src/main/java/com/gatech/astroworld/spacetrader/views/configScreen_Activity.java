@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.gatech.astroworld.spacetrader.R;
@@ -146,7 +147,8 @@ public class configScreen_Activity extends AppCompatActivity {
                     Game.getInstance().getSystemList().add(new SolarSystem());
                 }
                 for (SolarSystem system: Game.getInstance().getSystemList()) {
-                    System.out.println(system.toString());
+                    //System.out.println(system.toString());
+                    largeLog("System", system.toString());
                 }
 
                 //Print game settings when character is confirmed
@@ -183,5 +185,13 @@ public class configScreen_Activity extends AppCompatActivity {
                  + traderPoints.getProgress()
                  + fighterPoints.getProgress();
         return sum;
+    }
+    public static void largeLog(String tag, String content) {
+        if (content.length() > 4000) {
+            Log.d(tag, content.substring(0, 4000));
+            largeLog(tag, content.substring(4000));
+        } else {
+            Log.d(tag, content);
+        }
     }
 }

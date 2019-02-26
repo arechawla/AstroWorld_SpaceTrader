@@ -1,6 +1,8 @@
 package com.gatech.astroworld.spacetrader.model;
 
 
+import android.util.Log;
+
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
@@ -117,7 +119,7 @@ public class SolarSystem {
     @Override
     public String toString() {
 
-        return ("\n\nName:  " + name + "\nPosition: (" + this.sysLocation.getxPos() + "," + this.sysLocation.getyPos() + ")"
+        return ("\n\n\nName:  " + name + "\nPosition: (" + this.sysLocation.getxPos() + "," + this.sysLocation.getyPos() + ")"
                 + "\nTech Level: " + techLevel.toString() + "\nResources: "
                 + this.resources.toString() + "\nTech: " + techLevel.toString()) + "\nNumber of Planets: " + listOfPlanets.size();
     }
@@ -245,5 +247,6 @@ public class SolarSystem {
             "Zalkon",
             "Zuul"			// From the first Ghostbusters movie
     };
+
 
 }
