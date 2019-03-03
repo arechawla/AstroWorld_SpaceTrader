@@ -4,17 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import android.widget.EditText;
 import com.gatech.astroworld.spacetrader.entity.Player;
-import com.gatech.astroworld.spacetrader.entity.Resources;
-import com.gatech.astroworld.spacetrader.entity.TechLevel;
-import com.gatech.astroworld.spacetrader.model.Game;
-import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 
 public class configScreen_Activity extends AppCompatActivity {
@@ -135,28 +130,15 @@ public class configScreen_Activity extends AppCompatActivity {
                     error3.show();
                     return;
                 }
+
+                Player newPlayer = initPlayer();
+
                 //Set chosen game difficulty
                 difficulty = (Difficulty) difficultySpinner.getSelectedItem();
                 //Update game Singleton with new difficulty
                 viewmodel.updateGame(difficulty);
                 //Update game Singleton with new Player
-                viewmodel.updatePlayer(initPlayer());
-                System.out.println("******************************************");
-
-                for (int i = 0; i < Game.getInstance().getMaxSystems(); i++) {
-                    Game.getInstance().getSystemList().add(new SolarSystem());
-                }
-                for (SolarSystem system: Game.getInstance().getSystemList()) {
-                    //System.out.println(system.toString());
-                    largeLog("System", system.toString());
-                }
-
-                //Print game settings when character is confirmed
-                System.out.println(Game.getInstance().toString());
-
-                Toast.makeText(getApplicationContext(), "Player: "
-                        + nameField.getText().toString()
-                        + " created.", Toast.LENGTH_SHORT).show();
+                viewmodel.updatePlayer(newPlayer);
 
                 Intent i = new Intent(getApplicationContext(), playerReviewScreen.class);
                 startActivity(i);
@@ -185,13 +167,5 @@ public class configScreen_Activity extends AppCompatActivity {
                  + traderPoints.getProgress()
                  + fighterPoints.getProgress();
         return sum;
-    }
-    public static void largeLog(String tag, String content) {
-        if (content.length() > 4000) {
-            Log.d(tag, content.substring(0, 4000));
-            largeLog(tag, content.substring(4000));
-        } else {
-            Log.d(tag, content);
-        }
     }
 }

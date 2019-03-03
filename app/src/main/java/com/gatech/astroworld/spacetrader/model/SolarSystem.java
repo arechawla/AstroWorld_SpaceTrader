@@ -1,15 +1,9 @@
 package com.gatech.astroworld.spacetrader.model;
-
-
-import android.util.Log;
-
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -51,7 +45,7 @@ public class SolarSystem {
                         + Math.pow((sysLocation.yPos - tempY), 2));
             }
         }
-        for (int i = 0; i < rand.nextInt(maxPlanets); i++) {
+        for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
             addPlanet(new Planet(this));
         }
     }
@@ -119,12 +113,13 @@ public class SolarSystem {
     @Override
     public String toString() {
 
-        return ("\n\n\nName:  " + name + "\nPosition: (" + this.sysLocation.getxPos() + "," + this.sysLocation.getyPos() + ")"
+        /*return ("\n\n\nName:  " + name + "\nPosition: (" + this.sysLocation.getxPos() + "," + this.sysLocation.getyPos() + ")"
                 + "\nTech Level: " + techLevel.toString() + "\nResources: "
-                + this.resources.toString() + "\nTech: " + techLevel.toString()) + "\nNumber of Planets: " + listOfPlanets.size();
+                + this.resources.toString() + "\nTech: " + techLevel.toString()) + "\nNumber of Planets: " + listOfPlanets.size(); */
+        return "Testing system toString";
     }
 
-    String SolarSystemName[] =
+    private String[] SolarSystemName =
     {
         "Acamar",
             "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"

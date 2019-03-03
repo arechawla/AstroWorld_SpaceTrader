@@ -1,5 +1,7 @@
 package com.gatech.astroworld.spacetrader.views;
 
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,12 +13,22 @@ import com.gatech.astroworld.spacetrader.entity.Player;
 import com.gatech.astroworld.spacetrader.model.Game;
 import org.w3c.dom.Text;
 
+import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
+import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
+
+import java.util.Random;
+
 public class playerReviewScreen extends AppCompatActivity {
+    private Galaxy_viewmodel galaxy_viewmodel;
+    private Configuration_viewmodel playerConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_review_screen);
+
+        galaxy_viewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
+        playerConfig = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
 
         //Init Counters
         TextView pilotPointCount = findViewById(R.id.pilotPointCount);
@@ -31,7 +43,7 @@ public class playerReviewScreen extends AppCompatActivity {
         //Init Name
         TextView playerName = findViewById(R.id.playerName);
         //Init Button
-        Button exitButton = findViewById(R.id.quitButton);
+        Button continueButton = findViewById(R.id.continueButton);
         //Init Ship Name
         TextView shipName = findViewById(R.id.shipHeader);
 
@@ -43,7 +55,6 @@ public class playerReviewScreen extends AppCompatActivity {
 
         shipName.setText("Ship: " + tempPlayer.getShip().toString());
         playerName.setText(tempPlayer.getName());
-        playerName.setTextColor(Color.BLACK);
         pilotPointCount.setText(String.valueOf(pilotPoints));
         traderPointCount.setText(String.valueOf(traderPoints));
         fighterPointCount.setText(String.valueOf(fighterPoints));
@@ -93,11 +104,25 @@ public class playerReviewScreen extends AppCompatActivity {
             engineerDescription.setTextColor(Color.GREEN);
         }
 
-        exitButton.setOnClickListener(new View.OnClickListener() {
+        continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                System.exit(0);
+
+                Random rand = new Random();
+                Player currPlayer = playerConfig.getPlayer();
+                //Generate max number of systems
+                galaxy_viewmodel.generateSystems();
+                //Assign the player a random system
+                currPlayer.setCurrentSystem(galaxy_viewmodel.getRandomSystem());
+                //Assign the player a random planet in that system
+                currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
+                        rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size() - 1))); 
+                //Update the player
+                playerConfig.updatePlayer(currPlayer);
+                //Start planet view activity (Should be changed to galaxy view later)
+                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
             }
         });
 

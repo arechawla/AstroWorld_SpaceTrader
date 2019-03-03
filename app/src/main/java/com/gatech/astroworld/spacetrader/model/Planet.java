@@ -75,5 +75,8 @@ public class Planet {
 
     }
 
-
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
