@@ -16,4 +16,5 @@ public class Configuration_viewmodel extends AndroidViewModel {
 
     public void updatePlayer (Player player) { game.setPlayer(player); }
     public void updateGame (Difficulty difficulty) { game.setDifficulty(difficulty); }
+    public Player getPlayer(){return game.getPlayer();}
 }

@@ -19,8 +19,7 @@ public class Player {
     private Spaceship ship;
 
 
-    public Player(String name){
-        this.name = name;
+    public Player(){
         this.skillPoints = 16;
         this.pilotPoints = 0;
         this.fighterPoints = 0;
@@ -28,6 +27,10 @@ public class Player {
         this.engineerPoints = 0;
         this.credits = 1000;
         this.ship = new Spaceship("Gnat", 8, 500);
+    }
+    public Player(String name) {
+        this();
+        this.name = name;
     }
 
     public void setPilotPoints(int pilotPoints) {
@@ -127,7 +130,8 @@ public class Player {
                 "\n\t\t\t- Pilot Points:    %d" +
                 "\n\t\t\t- Fighter Points:  %d" +
                 "\n\t\t\t- Trader Points:   %d" +
-                "\n\t\t\t- Engineer Points: %d",
-                name, getCredits(), getShip().toString(), getPilotPoints(), getFighterPoints(), getTraderPoints(), getEngineerPoints());
+                "\n\t\t\t- Engineer Points: %d" +
+                "\nCurrent Planet: ",
+                name, getCredits(), getShip().toString(), getPilotPoints(), getFighterPoints(), getTraderPoints(), getEngineerPoints(), currentPlanet.toString());
     }
 }
