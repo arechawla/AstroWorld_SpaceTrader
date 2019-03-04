@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Store {
 
-    private List<GoodType> storeInventory;
+    private List<MarketGood> storeInventory;
     private int storeCredits;
     private List<GoodType> cart;
 
@@ -20,7 +20,7 @@ public class Store {
                 Integer index = buyer.getShip().containsCargo(item);
                 int originalQuanity = buyer.getShip().getCargoList().get(index).getQuantity();
                 if (index != null) {
-                    buyer.getShip().getCargoList().get(index).setQuantity(originalQuanity +=
+                    buyer.getShip().getCargoList().get(index).setQuantity(originalQuanity +
                             item.getQuantity());
                 } else {
                     buyer.getShip().getCargoList().add(item);
@@ -30,8 +30,16 @@ public class Store {
         cart = null;
     }
 
-    public void addToCart(GoodType GoodType) {
-        cart.add(GoodType);
+    public void addToCart() {
+        for (int i = 0; i < storeInventory.size(); i++) {
+            int quantBuy = storeInventory.get(i).getCount();
+            if (quantBuy != 0) {
+                GoodType good = storeInventory.get(i).getGoodType();
+                good.setQuantity(storeInventory.get(i).getCount());
+                good.setPrice(storeInventory.get(i).getPrice());
+                cart.add(good);
+            }
+        }
     }
 
 
@@ -42,6 +50,45 @@ public class Store {
         }
         return total;
     }
+
+    private class MarketGood {
+        private GoodType good;
+        private int count;
+        private Planet planet;
+        private SolarSystem sys;
+        private int quantity;
+        private int price;
+
+        public MarketGood(GoodType good, int count, int quantity, int price,
+                          SolarSystem sys, Planet planet) {
+            this.good = good;
+            this.count = count;
+            this.quantity = quantity;
+            this.price = price;
+
+        }
+
+        private int calculatePrice() {
+            int newPrice = 0;
+            newPrice = good.getBasePrice() + (good.getIPL() * sys.getTechLevel().ordinal());
+            return newPrice;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public GoodType getGoodType() {
+            return good;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+    }
+
+
 
 
 }
