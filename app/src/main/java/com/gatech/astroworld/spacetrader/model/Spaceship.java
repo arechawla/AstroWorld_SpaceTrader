@@ -1,6 +1,6 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import com.gatech.astroworld.spacetrader.entity.Good;
+import com.gatech.astroworld.spacetrader.entity.GoodType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 public class Spaceship {
 
     private String name;
-    private List<Good> cargo;
+    private List<GoodType> cargo;
     private int capacity;
     private int fuel;
 
@@ -19,8 +19,25 @@ public class Spaceship {
         this.fuel = fuel;
     }
 
-    public List<Good> getCargoList() {
+    public List<GoodType> getCargoList() {
         return cargo;
+    }
+
+    public int cargoAmount() {
+        int total = 0;
+        for (GoodType item: cargo) {
+            total += item.getQuantity();
+        }
+        return total;
+    }
+
+    public Integer containsCargo(GoodType find) {
+        for (int i = 0; i < cargo.size(); i++) {
+            if (find.ordinal() == cargo.get(i).ordinal()) {
+                return i;
+            }
+        }
+        return null;
     }
 
 
