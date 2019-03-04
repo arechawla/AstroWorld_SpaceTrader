@@ -27,4 +27,8 @@ public class Good {
         this.rarity = rarity;
         this.type = GoodType.NONE;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }
