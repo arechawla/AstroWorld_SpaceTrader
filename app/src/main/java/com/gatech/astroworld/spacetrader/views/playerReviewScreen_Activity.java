@@ -18,7 +18,7 @@ import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 
 import java.util.Random;
 
-public class playerReviewScreen extends AppCompatActivity {
+public class playerReviewScreen_Activity extends AppCompatActivity {
     private Galaxy_viewmodel galaxy_viewmodel;
     private Configuration_viewmodel playerConfig;
 
