@@ -9,6 +9,7 @@ public class Planet {
     private PlanetLocation loc;
     private PoliticalSystems gov;
     private SolarSystem sys;
+    private Store store;
 
     public Planet(SolarSystem sys) {
         this.sys = sys;

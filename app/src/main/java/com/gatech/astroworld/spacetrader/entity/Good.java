@@ -19,13 +19,14 @@ public class Good {
     private int size;
     private int rarity;
     private GoodType type;
-
-    public Good(String name, int price, int size, int rarity) {
+    private int quantity;
+    public Good(String name, int price, int size, int rarity, int quantity) {
         this.name = name;
         this.price = price;
         this.size = size;
         this.rarity = rarity;
         this.type = GoodType.NONE;
+        this.quantity = quantity;
     }
 
     public int getPrice() {
