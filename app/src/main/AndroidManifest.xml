@@ -15,12 +15,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.playerReviewScreen"></activity>
-        <activity android:name=".views.galaxyView_Activity"></activity>
-        <activity android:name=".views.planetView_Activity"></activity>
+        <activity android:name=".views.playerReviewScreen_Activity" />
+        <activity android:name=".views.galaxyView_Activity" />
+        <activity android:name=".views.planetView_Activity" />
+        <activity android:name=".views.market_Activity" />
+        <activity android:name=".views.menu_Activity" />
+        <activity android:name=".views.systemView_Activity">
+        </activity>
+
     </application>
 
 </manifest>

@@ -140,7 +140,7 @@ public class configScreen_Activity extends AppCompatActivity {
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(newPlayer);
 
-                Intent i = new Intent(getApplicationContext(), playerReviewScreen.class);
+                Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
                 startActivity(i);
             }
         });
