@@ -15,14 +15,19 @@ public class Store {
     private List<MarketGood> cartSell;
 
 
+    public void populateStoreInventory() {
+
+    }
+
+
     public void buy(Player buyer) {
         int availSpace = buyer.getShip().getCapacity() - buyer.getShip().cargoAmount();
         if (cartBuy.size() <= availSpace && buyer.getCredits() >= cartBuyTotal()) {
             for (GoodType item: cartBuy) {
                 Integer index = buyer.getShip().containsCargo(item);
-                int originalQuanity = buyer.getShip().getCargoList().get(index).getQuantity();
+                int originalQuantity = buyer.getShip().getCargoList().get(index).getQuantity();
                 if (index != null) {
-                    buyer.getShip().getCargoList().get(index).setQuantity(originalQuanity +
+                    buyer.getShip().getCargoList().get(index).setQuantity(originalQuantity +
                             item.getQuantity());
                 } else {
                     buyer.getShip().getCargoList().add(item);
@@ -139,13 +144,14 @@ public class Store {
             this.name = good.getName();
             this.count = count;
             this.quantity = quantity;
-            this.price = price;
+            this.price = calculatePrice();
 
         }
 
         private int calculatePrice() {
             int newPrice = 0;
-            newPrice = good.getBasePrice() + (good.getIPL() * sys.getTechLevel().ordinal());
+            newPrice = good.getBasePrice() + (good.getIPL() * sys.getTechLevel().ordinal()) +
+                    good.getVar();
             return newPrice;
         }
 
