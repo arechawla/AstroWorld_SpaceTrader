@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.entity.Player;
+import java.util.Random;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Store {
 
 
     public void populateStoreInventory() {
-
+            
     }
 
 
@@ -185,6 +186,33 @@ public class Store {
 
         public void setPlanet(Planet plan) {
             planet = plan;
+        }
+
+
+        /**
+         * Calculates the expected quantity of a GoodType given the System's tech level
+         *
+         * @param item instance of good type item
+         * @param play current player
+         * @return expected quantity of GoodType based on tech level
+         */
+        private int calculateQuantity(GoodType item, Player play) {
+            int base = 10;
+            if (play.getCurrentSystem().getTechLevel().ordinal() < item.getMTLP()) {
+                return 0;
+            } else {
+                Random ranCalc = new Random();
+                int upperBound = 10;
+                base += ranCalc.nextInt(upperBound);
+
+                if (play.getCurrentSystem().getTechLevel().ordinal() == item.getTTP()) {
+                    upperBound =15;
+                    base += ranCalc.nextInt(upperBound);
+                }
+
+            }
+            return base;
+
         }
 
     }
