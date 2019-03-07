@@ -52,9 +52,4 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
     public void onListFragmentInteraction(com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem item) {
 
     }
-
-    @Override
-    public void onListFragmentInteraction(GoodType item) {
-
-    }
 }

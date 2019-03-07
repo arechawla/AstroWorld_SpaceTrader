@@ -9,6 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.lifecycle.ViewModelProviders;
+import android.app.Activity;
+import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent;
@@ -58,7 +67,6 @@ public class Buy_ItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_buy_itemlist, container, false);
-
 
         // Set the adapter
         if (view instanceof RecyclerView) {
