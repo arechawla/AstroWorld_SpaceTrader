@@ -14,13 +14,24 @@ public class Store {
     private int storeCredits;
     private List<GoodType> cartBuy;
     private List<MarketGood> cartSell;
+    private SolarSystem sys;
+    private Planet plan;
+
+    public Store(List<MarketGood> storeInventory, int storeCredits, SolarSystem sys,
+                 Planet plan) {
+        this.storeInventory = storeInventory;
+        this.storeCredits = storeCredits;
+        this.sys = sys;
+        this.plan = plan;
+    }
 
 
-    public void populateStoreInventory(Player player) {
+    public void populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
-            MarketGood mark = new MarketGood(good, good.getName(), 0, calculateQuantity(good, player),
-                    0, player.getCurrentSystem(), player.getCurrentPlanet());
+            MarketGood mark = new MarketGood(good, good.getName(), 0,
+                    calculateQuantity(good), 0, sys,
+                    plan);
             mark.calculatePrice();
             if (mark.getQuantity() != 0) {
                 storeInventory.add(mark);
@@ -28,16 +39,16 @@ public class Store {
         }
     }
 
-    private int calculateQuantity(GoodType item, Player play) {
+    private int calculateQuantity(GoodType item) {
         int base = 10;
-        if (play.getCurrentSystem().getTechLevel().ordinal() < item.getMTLP()) {
+        if (sys.getTechLevel().ordinal() < item.getMTLP()) {
             return 0;
         } else {
             Random ranCalc = new Random();
             int upperBound = 10;
             base += ranCalc.nextInt(upperBound);
 
-            if (play.getCurrentSystem().getTechLevel().ordinal() == item.getTTP()) {
+            if (sys.getTechLevel().ordinal() == item.getTTP()) {
                 upperBound =15;
                 base += ranCalc.nextInt(upperBound);
             }
