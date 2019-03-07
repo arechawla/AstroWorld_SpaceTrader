@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_map"
+    app:startDestination="@id/buy_ItemFragment">
+
+    <fragment
+        android:id="@+id/buy_ItemFragment"
+        android:name="com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment"
+        android:label="buyFragment"
+        tools:layout="@layout/fragment_buy_itemlist">
+        <action
+            android:id="@+id/toSellFragment"
+            app:destination="@id/sell_ItemFragment" />
+        <action
+            android:id="@+id/toCartFragment"
+            app:destination="@id/cart_ItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sell_ItemFragment"
+        android:name="com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment"
+        android:label="sellFragment"
+        tools:layout="@layout/fragment_sell_itemlist">
+        <action
+            android:id="@+id/toCartFragment"
+            app:destination="@id/cart_ItemFragment" />
+        <action
+            android:id="@+id/toBuyFragment"
+            app:destination="@id/buy_ItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cart_ItemFragment"
+        android:name="com.gatech.astroworld.spacetrader.views.market.Cart_ItemFragment"
+        android:label="cartFragment"
+        tools:layout="@layout/fragment_cart_itemlist">
+        <action
+            android:id="@+id/toSellFragment"
+            app:destination="@id/sell_ItemFragment" />
+        <action
+            android:id="@+id/toBuyFragment"
+            app:destination="@id/buy_ItemFragment" />
+    </fragment>
+</navigation>
