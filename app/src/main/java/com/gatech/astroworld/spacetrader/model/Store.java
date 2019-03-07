@@ -5,6 +5,7 @@ import android.widget.Toast;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,16 +18,16 @@ public class Store {
     private SolarSystem sys;
     private Planet plan;
 
-    public Store(List<MarketGood> storeInventory, int storeCredits, SolarSystem sys,
+    public Store(int storeCredits, SolarSystem sys,
                  Planet plan) {
-        this.storeInventory = storeInventory;
         this.storeCredits = storeCredits;
         this.sys = sys;
         this.plan = plan;
+        this.storeInventory = new ArrayList<>();
     }
 
 
-    public void populateStoreInventory() {
+    public List<MarketGood> populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
             MarketGood mark = new MarketGood(good, good.getName(), 0,
@@ -37,7 +38,25 @@ public class Store {
                 storeInventory.add(mark);
             }
         }
+
+
+        return storeInventory;
     }
+
+    /**
+     * for testing purposes
+     * @return goodtypes as strings
+     */
+    public String[] getListString() {
+        GoodType[] goods = GoodType.values();
+        String[] StringGoods = new String[goods.length];
+        for (int i = 0; i < goods.length; i++) {
+            StringGoods[i] = goods[i].name();
+        }
+        return StringGoods;
+    }
+
+
 
     private int calculateQuantity(GoodType item) {
         int base = 10;
@@ -167,7 +186,10 @@ public class Store {
         return total;
     }
 
-    private class MarketGood {
+
+    public List<MarketGood> getStoreInventory() { return storeInventory; }
+
+    public class MarketGood {
         private GoodType good;
         private String name;
         private int count;
@@ -185,6 +207,8 @@ public class Store {
             this.price = price;
 
         }
+
+
 
         public int calculatePrice() {
             int newPrice = 0;
@@ -226,6 +250,7 @@ public class Store {
         public void setPlanet(Planet plan) {
             planet = plan;
         }
+
 
     }
 

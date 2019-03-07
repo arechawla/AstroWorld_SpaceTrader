@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Space Trader</string>
+    <string name="title_activity_market_next">MarketNext</string>
 </resources>

@@ -15,7 +15,7 @@ public class Planet {
 
     public Planet(SolarSystem sys) {
         this.sys = sys;
-        this.store = new Store(null, 3000, sys, this);
+        this.store = new Store( 3000, sys, this);
         store.populateStoreInventory();
         name = "Planet "+ sys.getListOfPlanets().size();
     }
@@ -84,4 +84,6 @@ public class Planet {
     public String toString() {
         return getName();
     }
+
+    public Store getStore() { return store; }
 }
