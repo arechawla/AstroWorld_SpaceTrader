@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/pilotCounter"
-        android:layout_width="16dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/fighterCounter"
-        android:layout_width="16dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
@@ -72,7 +72,7 @@
 
     <TextView
         android:id="@+id/traderCounter"
-        android:layout_width="16dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
@@ -97,7 +97,7 @@
 
     <TextView
         android:id="@+id/engineerCounter"
-        android:layout_width="16dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
@@ -201,7 +201,7 @@
 
     <TextView
         android:id="@+id/remainingPointsCounter"
-        android:layout_width="16dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
