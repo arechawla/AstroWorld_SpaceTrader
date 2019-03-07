@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/destination_buy"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="Buy"
+        />
+    <item
+        android:id="@+id/destination_sell"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="Sell"
+        />
+    <item
+        android:id="@+id/destination_cart"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="Cart"
+        />
+
+</menu>

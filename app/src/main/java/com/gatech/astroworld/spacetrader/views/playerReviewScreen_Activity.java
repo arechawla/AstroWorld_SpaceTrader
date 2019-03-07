@@ -115,7 +115,7 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                 currPlayer.setCurrentSystem(galaxy_viewmodel.getRandomSystem());
                 //Assign the player a random planet in that system
                 currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-                        rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size() - 1))); 
+                        rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
                 //Update the player
                 playerConfig.updatePlayer(currPlayer);
                 //Start planet view activity (Should be changed to galaxy view later)
