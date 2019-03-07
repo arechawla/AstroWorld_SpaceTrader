@@ -13,7 +13,7 @@ public class Planet {
     private Store store;
     private Player player;
 
-    public Planet(SolarSystem sys, Player player) {
+    public Planet(SolarSystem sys) {
         this.sys = sys;
         this.store = new Store(null, 3000, sys, this);
         store.populateStoreInventory();
