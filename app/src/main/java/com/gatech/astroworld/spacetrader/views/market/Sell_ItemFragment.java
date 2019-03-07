@@ -2,19 +2,20 @@ package com.gatech.astroworld.spacetrader.views.market;
 
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent;
+import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class Sell_ItemFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    private TradePropogation tradePropogation;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -62,7 +62,8 @@ public class Sell_ItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sell_itemlist, container, false);
+        View view = inflater.inflate(R.layout.fragment_buy_itemlist, container, false);
+
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -73,7 +74,9 @@ public class Sell_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new Sell_Item_RecyclerAdapter(TradePropogation.ITEMS, mListener));
+            List<GoodType> goods = new ArrayList<>();
+
+            recyclerView.setAdapter(new Sell_Item_RecyclerAdapter(goods, mListener));
         }
         return view;
     }
@@ -108,6 +111,6 @@ public class Sell_ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(GoodType item);
+        void onListFragmentInteraction(DummyItem item);
     }
 }
