@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
 
@@ -18,9 +19,12 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
-
+    private int itemCount;
+    private TextView countText;
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private Button plusButton;
+    private Button minusButton;
 
     public Buy_Item_RecyclerAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -31,6 +35,11 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_market_buy_item, parent, false);
+
+        plusButton = view.findViewById(R.id.plusButton);
+        minusButton = view.findViewById(R.id.minusButton);
+        countText = view.findViewById(R.id.countText);
+
         return new ViewHolder(view);
     }
 
@@ -48,6 +57,24 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
+            }
+        });
+
+        itemCount = 0;
+         countText.setText(itemCount);
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemCount++;
+                countText.setText(itemCount);
+
+            }
+        });
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemCount--;
+                countText.setText(itemCount);
             }
         });
     }

@@ -21,7 +21,7 @@ public class planetView_Activity extends FragmentActivity {
         marketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Market2.class);
+                Intent i = new Intent(getApplicationContext(), market_Activity.class);
                 startActivity(i);
             }
         });

@@ -2,24 +2,19 @@ package com.gatech.astroworld.spacetrader.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.gatech.astroworld.spacetrader.R;
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
-import com.gatech.astroworld.spacetrader.views.market.Cart_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 public class market_Activity extends AppCompatActivity implements Buy_ItemFragment.OnListFragmentInteractionListener,
-        Cart_ItemFragment.OnListFragmentInteractionListener, Sell_ItemFragment.OnListFragmentInteractionListener {
+        Sell_ItemFragment.OnListFragmentInteractionListener {
     private BottomNavigationView bottomNav;
     private int selectedItem;
 
