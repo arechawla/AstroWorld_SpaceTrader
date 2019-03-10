@@ -30,6 +30,10 @@ import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyIt
  * interface.
  */
 public class Buy_ItemFragment extends Fragment {
+    private int itemCount = 0;
+    private TextView countText;
+    private Button plusButton;
+    private Button minusButton;
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -67,6 +71,7 @@ public class Buy_ItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_buy_itemlist, container, false);
+
 
         // Set the adapter
         if (view instanceof RecyclerView) {
