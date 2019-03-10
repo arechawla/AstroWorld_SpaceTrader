@@ -1,5 +1,6 @@
 package com.gatech.astroworld.spacetrader.model;
 
+import com.gatech.astroworld.spacetrader.entity.Player;
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 
 import java.util.Random;
@@ -10,9 +11,12 @@ public class Planet {
     private PoliticalSystems gov;
     private SolarSystem sys;
     private Store store;
+    private Player player;
 
     public Planet(SolarSystem sys) {
         this.sys = sys;
+        this.store = new Store( 3000, sys, this);
+        store.populateStoreInventory();
         name = "Planet "+ sys.getListOfPlanets().size();
     }
 
@@ -80,4 +84,6 @@ public class Planet {
     public String toString() {
         return getName();
     }
+
+    public Store getStore() { return store; }
 }
