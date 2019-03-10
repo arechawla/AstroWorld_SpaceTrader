@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.*;
 
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.model.Store;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -32,6 +36,7 @@ public class Buy_ItemFragment extends Fragment {
     private TextView countText;
     private Button plusButton;
     private Button minusButton;
+    List<Store.MarketGood> goodList = new ArrayList<Store.MarketGood>();
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -44,6 +49,7 @@ public class Buy_ItemFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public Buy_ItemFragment() {
+
     }
 
     // TODO: Customize parameter initialization
@@ -65,6 +71,10 @@ public class Buy_ItemFragment extends Fragment {
         }
     }
 
+    public void setGoodList(ArrayList<Store.MarketGood> list) {
+        goodList = list;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,7 +90,7 @@ public class Buy_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-//MAKE SURE TO UNCOMMENT            recyclerView.setAdapter(new Buy_Item_RecyclerAdapter( , mListener));
+            recyclerView.setAdapter(new Buy_Item_RecyclerAdapter(goodList, mListener));
         }
         return view;
     }
@@ -115,6 +125,6 @@ public class Buy_ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Store.MarketGood item);
     }
 }

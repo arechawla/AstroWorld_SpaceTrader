@@ -9,7 +9,6 @@ import com.gatech.astroworld.spacetrader.R;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment.OnListFragmentInteractionListener;
-import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
@@ -62,7 +61,7 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public GoodType mItem;
 
         public ViewHolder(View view) {
             super(view);

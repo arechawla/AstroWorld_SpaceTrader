@@ -12,10 +12,8 @@ import android.view.ViewGroup;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
-import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent;
-import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem;
+import com.gatech.astroworld.spacetrader.model.Store;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,6 +109,6 @@ public class Sell_ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(GoodType item);
     }
 }
