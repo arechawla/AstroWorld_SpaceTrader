@@ -20,8 +20,6 @@ import android.view.View;
 import android.widget.*;
 
 import com.gatech.astroworld.spacetrader.R;
-import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent;
-import com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
@@ -82,7 +80,7 @@ public class Buy_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new Buy_Item_RecyclerAdapter(DummyContent.ITEMS, mListener));
+//MAKE SURE TO UNCOMMENT            recyclerView.setAdapter(new Buy_Item_RecyclerAdapter( , mListener));
         }
         return view;
     }
