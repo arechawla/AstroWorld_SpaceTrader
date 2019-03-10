@@ -58,6 +58,9 @@ public class Store {
 
 
 
+
+
+
     private int calculateQuantity(GoodType item) {
         int base = 10;
         if (sys.getTechLevel().ordinal() < item.getMTLP()) {
@@ -143,7 +146,7 @@ public class Store {
             int quantSell = list.get(i).getSellCount();
             if (quantSell != 0) {
                 MarketGood good = new MarketGood(list.get(i), list.get(i).getName(), 0,
-                        quantSell, list.get(i).getBasePrice(), null, null);
+                        quantSell, list.get(i).getBasePrice(), sys, plan);
                 cartSell.add(good);
                 int orig = list.get(i).getQuantity();
                 list.get(i).setQuantity(orig - quantSell);
@@ -205,10 +208,10 @@ public class Store {
             this.count = count;
             this.quantity = quantity;
             this.price = price;
+            this.sys = sys;
+            this.planet = planet;
 
         }
-
-
 
         public int calculatePrice() {
             int newPrice = 0;
@@ -216,6 +219,7 @@ public class Store {
                     good.getVar();
             return newPrice;
         }
+
 
 
 

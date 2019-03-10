@@ -20,6 +20,10 @@ public class Planet {
         name = "Planet "+ sys.getListOfPlanets().size();
     }
 
+    public void setSys(SolarSystem system) {
+        sys = system;
+    }
+
     public String getName() {
         return name;
     }
