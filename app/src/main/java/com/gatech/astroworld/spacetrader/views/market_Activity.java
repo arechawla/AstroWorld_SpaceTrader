@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,9 +36,6 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
                     case R.id.destination_sell:
                         nav.navigate(R.id.toSellFragment);
                         return true;
-                    case R.id.destination_cart:
-                        nav.navigate(R.id.toCartFragment);
-                        return true;
                     default: return false;
                 }
             }
@@ -44,7 +43,17 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
     }
 
     @Override
-    public void onListFragmentInteraction(com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Store.MarketGood item) {
 
     }
+
+    @Override
+    public void onListFragmentInteraction(GoodType item) {
+
+    }
+
+//    @Override
+//    public void onListFragmentInteraction(com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem item) {
+//
+//    }
 }

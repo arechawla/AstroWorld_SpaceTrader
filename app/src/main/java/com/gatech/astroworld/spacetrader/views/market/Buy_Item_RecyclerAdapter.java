@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment.OnListFragmentInteractionListener;
 
 import org.w3c.dom.Text;
@@ -21,10 +22,10 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
-    private final List<GoodType> mValues;
+    private final List<Store.MarketGood> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public Buy_Item_RecyclerAdapter(List<GoodType> items, OnListFragmentInteractionListener listener) {
+    public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -64,7 +65,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         public View mView;
         public TextView mIdView;
         public TextView mContentView;
-        public GoodType mItem;
+        public Store.MarketGood mItem;
         public int textCount = 0;
 
         public ViewHolder(View view) {
