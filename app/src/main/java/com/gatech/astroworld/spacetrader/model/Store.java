@@ -22,8 +22,6 @@ public class Store {
 //    public Store(int storeCredits, SolarSystem sys, Planet plan)
     public Store(int storeCredits) {
         this.storeCredits = storeCredits;
-//        this.sys = sys;
-//        this.plan = plan;
         this.sys = Game.getInstance().getPlayer().getCurrentSystem();
         this.plan = Game.getInstance().getPlayer().getCurrentPlanet();
         this.storeInventory = populateStoreInventory();

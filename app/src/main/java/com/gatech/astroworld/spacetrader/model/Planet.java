@@ -13,7 +13,7 @@ public class Planet {
     private Store store;
     private Player player;
 
-    public Planet(SolarSystem sys) {
+     public Planet(SolarSystem sys) {
         this.sys = sys;
         this.store = null;
 //        this.store = new Store( 3000, sys, this);
@@ -24,8 +24,9 @@ public class Planet {
         sys = system;
     }
 
-    public void setStore(Store store) {
-        store = new Store(3000);
+    public void setStore(Store s) {
+        store = s;
+
     }
 
     public String getName() {
