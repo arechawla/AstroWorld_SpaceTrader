@@ -31,6 +31,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         mValues = items;
         mListener = listener;
         store = Game.getInstance().getPlayer().getCurrentPlanet().getStore();
+
     }
 
     @Override
@@ -84,16 +85,16 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    textCount++;
-                    itemCountText.setText(String.valueOf(textCount));
+                    store.incrementCountBuy(mItem);
+                    itemCountText.setText(String.valueOf(mItem.getCount()));
                 }
             });
 
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    textCount--;
-                    itemCountText.setText(String.valueOf(textCount));
+                    store.decrementCountBuy(mItem);
+                    itemCountText.setText(String.valueOf(mItem.getCount()));
                 }
             });
         }
