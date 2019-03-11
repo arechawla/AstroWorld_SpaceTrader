@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment.OnListFragmentInteractionListener;
 
@@ -24,10 +25,12 @@ import java.util.List;
 public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
     private final List<Store.MarketGood> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private Store store;
 
     public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+        store = Game.getInstance().getPlayer().getCurrentPlanet().getStore();
     }
 
     @Override
