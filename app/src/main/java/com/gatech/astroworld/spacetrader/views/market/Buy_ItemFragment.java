@@ -91,6 +91,9 @@ public class Buy_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            Store store = new Store(3000);
+            Game.getInstance().getPlayer().getCurrentPlanet().setStore(new Store(3000));
+
             goodList = Game.getInstance().getPlayer().getCurrentPlanet().
                     getStore().getStoreInventory();
             recyclerView.setAdapter(new Buy_Item_RecyclerAdapter(goodList, mListener));
