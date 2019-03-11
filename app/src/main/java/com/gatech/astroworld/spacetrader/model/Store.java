@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Store {
 
-    private List<MarketGood> storeInventory;
+    private ArrayList<MarketGood> storeInventory;
     private int storeCredits;
     private List<GoodType> cartBuy;
     private List<MarketGood> cartSell;
@@ -24,11 +24,11 @@ public class Store {
         this.storeCredits = storeCredits;
         this.sys = Game.getInstance().getPlayer().getCurrentSystem();
         this.plan = Game.getInstance().getPlayer().getCurrentPlanet();
-        this.storeInventory = populateStoreInventory();
+        this.storeInventory = new ArrayList<>();
     }
 
 
-    public List<MarketGood> populateStoreInventory() {
+    public ArrayList<MarketGood> populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
             MarketGood mark = new MarketGood(good);
