@@ -5,6 +5,7 @@ import android.widget.Toast;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.entity.Player;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,17 +24,17 @@ public class Store {
         this.storeCredits = storeCredits;
         this.sys = sys;
         this.plan = plan;
-        this.storeInventory = new ArrayList<>();
+        this.storeInventory = populateStoreInventory();
     }
 
 
     public List<MarketGood> populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
-            MarketGood mark = new MarketGood(good, good.getName(), 0,
-                    calculateQuantity(good), 0, sys,
-                    plan);
-            mark.calculatePrice();
+            MarketGood mark = new MarketGood(good, sys,
+                    new Planet(sys));
+            mark.setQuantity(calculateQuantity(good));
+            System.out.println(mark.getQuantity());
             if (mark.getQuantity() != 0) {
                 storeInventory.add(mark);
             }
@@ -142,8 +143,9 @@ public class Store {
         for (int i = 0; i < list.size(); i++) {
             int quantSell = list.get(i).getSellCount();
             if (quantSell != 0) {
-                MarketGood good = new MarketGood(list.get(i), list.get(i).getName(), 0,
-                        quantSell, list.get(i).getBasePrice(), sys, plan);
+                MarketGood good = new MarketGood(list.get(i), sys, plan);
+                good.setPrice( list.get(i).getBasePrice());
+                good.setQuantity(quantSell);
                 cartSell.add(good);
                 int orig = list.get(i).getQuantity();
                 list.get(i).setQuantity(orig - quantSell);
@@ -198,16 +200,12 @@ public class Store {
         private int quantity;
         private int price;
 
-        public MarketGood(GoodType good, String name, int count, int quantity, int price,
-                          SolarSystem sys, Planet planet) {
+        public MarketGood(GoodType good, SolarSystem sys, Planet planet) {
             this.good = good;
             this.name = good.getName();
-            this.count = count;
-            this.quantity = quantity;
-            this.price = price;
             this.sys = sys;
             this.planet = planet;
-
+            this.price = calculatePrice();
         }
 
         public int calculatePrice() {
@@ -217,8 +215,14 @@ public class Store {
             return newPrice;
         }
 
+        public void setQuantity(int q) {
+            quantity = q;
+        }
 
 
+        public void setPrice(int p) {
+            price = p;
+        }
 
         public int getCount() {
             return count;

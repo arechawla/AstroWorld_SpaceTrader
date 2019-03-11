@@ -16,7 +16,6 @@ public class Planet {
     public Planet(SolarSystem sys) {
         this.sys = sys;
         this.store = new Store( 3000, sys, this);
-//        store.populateStoreInventory();
         name = "Planet "+ sys.getListOfPlanets().size();
     }
 

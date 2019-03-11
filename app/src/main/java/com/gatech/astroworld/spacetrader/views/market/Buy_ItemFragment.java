@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.*;
 
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Store;
 
 import java.util.ArrayList;
@@ -71,9 +72,9 @@ public class Buy_ItemFragment extends Fragment {
         }
     }
 
-    public void setGoodList(ArrayList<Store.MarketGood> list) {
-        goodList = list;
-    }
+//    public void setGoodList(List<Store.MarketGood> list) {
+//        goodList = list;
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +91,8 @@ public class Buy_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            goodList = Game.getInstance().getPlayer().getCurrentPlanet().
+                    getStore().getStoreInventory();
             recyclerView.setAdapter(new Buy_Item_RecyclerAdapter(goodList, mListener));
         }
         return view;
