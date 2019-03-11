@@ -19,11 +19,13 @@ public class Store {
     private SolarSystem sys;
     private Planet plan;
 
-    public Store(int storeCredits, SolarSystem sys,
-                 Planet plan) {
+//    public Store(int storeCredits, SolarSystem sys, Planet plan)
+    public Store(int storeCredits) {
         this.storeCredits = storeCredits;
-        this.sys = sys;
-        this.plan = plan;
+//        this.sys = sys;
+//        this.plan = plan;
+        this.sys = Game.getInstance().getPlayer().getCurrentSystem();
+        this.plan = Game.getInstance().getPlayer().getCurrentPlanet();
         this.storeInventory = populateStoreInventory();
     }
 
@@ -31,16 +33,13 @@ public class Store {
     public List<MarketGood> populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
-            MarketGood mark = new MarketGood(good, sys,
-                    new Planet(sys));
+            MarketGood mark = new MarketGood(good);
             mark.setQuantity(calculateQuantity(good));
             System.out.println(mark.getQuantity());
             if (mark.getQuantity() != 0) {
                 storeInventory.add(mark);
             }
         }
-
-
         return storeInventory;
     }
 
@@ -143,7 +142,7 @@ public class Store {
         for (int i = 0; i < list.size(); i++) {
             int quantSell = list.get(i).getSellCount();
             if (quantSell != 0) {
-                MarketGood good = new MarketGood(list.get(i), sys, plan);
+                MarketGood good = new MarketGood(list.get(i));
                 good.setPrice( list.get(i).getBasePrice());
                 good.setQuantity(quantSell);
                 cartSell.add(good);
@@ -200,11 +199,11 @@ public class Store {
         private int quantity;
         private int price;
 
-        public MarketGood(GoodType good, SolarSystem sys, Planet planet) {
+        public MarketGood(GoodType good) {
             this.good = good;
             this.name = good.getName();
-            this.sys = sys;
-            this.planet = planet;
+            this.sys = Game.getInstance().getPlayer().getCurrentSystem();
+            this.planet = Game.getInstance().getPlayer().getCurrentPlanet();
             this.price = calculatePrice();
         }
 

@@ -15,12 +15,17 @@ public class Planet {
 
     public Planet(SolarSystem sys) {
         this.sys = sys;
-        this.store = new Store( 3000, sys, this);
+        this.store = null;
+//        this.store = new Store( 3000, sys, this);
         name = "Planet "+ sys.getListOfPlanets().size();
     }
 
     public void setSys(SolarSystem system) {
         sys = system;
+    }
+
+    public void setStore(Store store) {
+        store = new Store(3000);
     }
 
     public String getName() {
