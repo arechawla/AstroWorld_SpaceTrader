@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Store;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Sell_ItemFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    List<GoodType> sellList = new ArrayList<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,9 +74,8 @@ public class Sell_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            List<GoodType> goods = new ArrayList<>();
-
-            recyclerView.setAdapter(new Sell_Item_RecyclerAdapter(goods, mListener));
+            sellList = Game.getInstance().getPlayer().getShip().getCargoList();
+            recyclerView.setAdapter(new Sell_Item_RecyclerAdapter(sellList, mListener));
         }
         return view;
     }
