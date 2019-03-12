@@ -12,6 +12,7 @@ import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment.OnListFragmentInteractionListener;
+import com.gatech.astroworld.spacetrader.views.market_Activity;
 
 import org.w3c.dom.Text;
 
@@ -26,6 +27,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     private final List<Store.MarketGood> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Store store;
+    int mTotal = 0;
 
 
     public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items, OnListFragmentInteractionListener listener) {
@@ -48,7 +50,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(mValues.get(position).getName());
         holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
-        holder.mTotal.setText("testing");
+//        market_Activity.mTotal.setText("testing");
 
     }
     @Override
@@ -63,7 +65,6 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         public TextView mIdView;
         public TextView mContentView;
         public TextView mPriceView;
-        public TextView mTotal;
         public Store.MarketGood mItem;
 
 
@@ -74,7 +75,6 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             mIdView = view.findViewById(R.id.item_number);
             mContentView = view.findViewById(R.id.itemName);
             mPriceView = view.findViewById(R.id.itemPrice);
-            mTotal = view.findViewById(R.id.buyTotal);
             final TextView itemCountText = view.findViewById(R.id.countText);
             Button plusButton = mView.findViewById(R.id.plusButton);
             Button minusButton = mView.findViewById(R.id.minusButton);
@@ -85,7 +85,10 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 public void onClick(View v) {
                     store.incrementCountBuy(mItem);
                     itemCountText.setText(String.valueOf(mItem.getCount()));
-                    mTotal.setText(String.valueOf(store.getBuyTotal()));
+
+                    mListener.onListFragmentInteraction(mItem);
+                    mTotal += mItem.getPrice();
+                    updateTotal();
                 }
             });
 
@@ -94,14 +97,26 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 public void onClick(View v) {
                     store.decrementCountBuy(mItem);
                     itemCountText.setText(String.valueOf(mItem.getCount()));
-                    mTotal.setText(String.valueOf(store.getBuyTotal()));
+                    int i = mTotal - mItem.getPrice();
+                    if (i >= 0) {
+                        mTotal = i;
+                        updateTotal();
+                    }
                 }
             });
+        }
+
+        public int getMTotal() {
+            return mTotal;
         }
 
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
+        }
+
+        public void updateTotal() {
+            market_Activity.mBuyTotal.setText(String.valueOf(mTotal));
         }
     }
 

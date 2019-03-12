@@ -121,7 +121,7 @@ public class Store {
     public void decrementCountBuy(MarketGood good) {
         int i = good.count - 1;
         if (i >= 0) {
-            good.setCount(i-1);
+            good.setCount(i);
             buyTotal -= good.getPrice();
         }
     }
