@@ -4,17 +4,9 @@
     <item
         android:id="@+id/destination_buy"
         android:icon="@mipmap/ic_launcher_round"
-        android:title="Buy"
-        />
+        android:title="BUY" />
     <item
         android:id="@+id/destination_sell"
         android:icon="@mipmap/ic_launcher_round"
-        android:title="Sell"
-        />
-    <item
-        android:id="@+id/destination_cart"
-        android:icon="@mipmap/ic_launcher_round"
-        android:title="Cart"
-        />
-
+        android:title="SELL" />
 </menu>

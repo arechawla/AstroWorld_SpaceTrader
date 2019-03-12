@@ -13,30 +13,14 @@
         <action
             android:id="@+id/toSellFragment"
             app:destination="@id/sell_ItemFragment" />
-        <action
-            android:id="@+id/toCartFragment"
-            app:destination="@id/cart_ItemFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/sell_ItemFragment"
         android:name="com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment"
         android:label="sellFragment"
         tools:layout="@layout/fragment_sell_itemlist">
-        <action
-            android:id="@+id/toCartFragment"
-            app:destination="@id/cart_ItemFragment" />
-        <action
-            android:id="@+id/toBuyFragment"
-            app:destination="@id/buy_ItemFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/cart_ItemFragment"
-        android:name="com.gatech.astroworld.spacetrader.views.market.Cart_ItemFragment"
-        android:label="cartFragment"
-        tools:layout="@layout/fragment_cart_itemlist">
-        <action
-            android:id="@+id/toSellFragment"
-            app:destination="@id/sell_ItemFragment" />
+
         <action
             android:id="@+id/toBuyFragment"
             app:destination="@id/buy_ItemFragment" />
