@@ -19,6 +19,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/yourCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavMenu"
         android:layout_width="match_parent"
@@ -32,13 +44,13 @@
     <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="597dp"
+        android:layout_width="411dp"
+        android:layout_height="510dp"
         android:layout_marginTop="24dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         app:navGraph="@navigation/nav_map"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

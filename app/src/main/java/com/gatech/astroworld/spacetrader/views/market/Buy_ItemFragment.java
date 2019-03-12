@@ -35,6 +35,7 @@ import java.util.List;
 public class Buy_ItemFragment extends Fragment {
     private int itemCount = 0;
     private TextView countText;
+    private TextView showName;
     private Button plusButton;
     private Button minusButton;
     List<Store.MarketGood> goodList = new ArrayList<Store.MarketGood>();
@@ -50,8 +51,10 @@ public class Buy_ItemFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public Buy_ItemFragment() {
-
+        //showName = getView().findViewById(R.id.itemName);
     }
+
+    public TextView getShowName() { return showName; }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
@@ -98,7 +101,9 @@ public class Buy_ItemFragment extends Fragment {
 
             goodList = Game.getInstance().getPlayer().getCurrentPlanet().
                     getStore().getStoreInventory();
+
             recyclerView.setAdapter(new Buy_Item_RecyclerAdapter(goodList, mListener));
+
         }
         return view;
     }
