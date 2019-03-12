@@ -18,6 +18,7 @@ public class Store {
     private List<MarketGood> cartSell;
     private SolarSystem sys;
     private Planet plan;
+    private int buyTotal;
 
 //    public Store(int storeCredits, SolarSystem sys, Planet plan)
     public Store(int storeCredits) {
@@ -78,8 +79,9 @@ public class Store {
 
 
     public void buy(Player buyer) {
+        convertToGoodList();
         int availSpace = buyer.getShip().getCapacity() - buyer.getShip().cargoAmount();
-        if (cartBuy.size() <= availSpace && buyer.getCredits() >= cartBuyTotal()) {
+        if (cartBuy.size() <= availSpace && buyer.getCredits() >= buyTotal) {
             for (GoodType item: cartBuy) {
                 Integer index = buyer.getShip().containsCargo(item);
                 int originalQuantity = buyer.getShip().getCargoList().get(index).getQuantity();
@@ -94,7 +96,7 @@ public class Store {
         cartBuy = null;
     }
 
-    public void addToCartBuy() {
+    public void convertToGoodList() {
         for (int i = 0; i < storeInventory.size(); i++) {
             int quantBuy = storeInventory.get(i).getCount();
             if (quantBuy > 0) {
@@ -110,7 +112,9 @@ public class Store {
     }
 
     public void incrementCountBuy(MarketGood good) {
+
         good.setCount(good.getCount() + 1);
+        buyTotal = buyTotal();
     }
 
     public void decrementCountBuy(MarketGood good) {
@@ -118,6 +122,7 @@ public class Store {
         if (i >= 0) {
             good.setCount(i-1);
         }
+        buyTotal = buyTotal();
     }
 
     public void incrementCountSell(GoodType good) {
@@ -170,15 +175,25 @@ public class Store {
         }
     }
 
-
-    public int cartBuyTotal() {
+    public int buyTotal() {
         int total = 0;
-        for (GoodType item: cartBuy) {
-            total += item.getPrice();
+        for (MarketGood item: storeInventory) {
+            if (item.getCount() > 0) {
+                total += item.getPrice() * item.getCount();
+            }
         }
         return total;
     }
 
+
+//    public int cartBuyTotal() {
+//        int total = 0;
+//        for (GoodType item: cartBuy) {
+//            total += item.getPrice();
+//        }
+//        return total;
+//    }
+//
     public int cartSellTotal() {
         int total = 0;
         for (MarketGood item: cartSell) {
