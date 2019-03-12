@@ -32,8 +32,6 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
         final NavController nav = Navigation.findNavController(this, R.id.nav_host_fragment);
         TextView remainingCredits = findViewById(R.id.yourCredits);
         mBuyTotal = findViewById(R.id.buyTotal);
-
-        //mBuyTotal.setText(get)
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
         remainingCredits.setText("Remaining Credits: " + String.valueOf(Game.getInstance().getPlayer().getCredits()));
         bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);

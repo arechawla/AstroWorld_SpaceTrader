@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.gatech.astroworld.spacetrader.R;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
@@ -50,7 +52,11 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(mValues.get(position).getName());
         holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
-//        market_Activity.mTotal.setText("testing");
+        String name = String.format("%11s", mValues.get(position).getName());
+        holder.mContentView.setText(name);
+        String price = String.format("%11s", "Price: " + Integer.toString(mValues.get(position).getPrice()));
+        String qty = String.format("%11s", "Qty: " + Integer.toString(mValues.get(position).getQuantity()));
+        holder.mPriceView.setText(price + "\n" + qty);
 
     }
     @Override
@@ -78,17 +84,22 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             final TextView itemCountText = view.findViewById(R.id.countText);
             Button plusButton = mView.findViewById(R.id.plusButton);
             Button minusButton = mView.findViewById(R.id.minusButton);
+            final Toast error = Toast.makeText(view.getContext(), "You cannot" +
+                    " buy more than the available amount!", Toast.LENGTH_LONG);
 
 
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    store.incrementCountBuy(mItem);
-                    itemCountText.setText(String.valueOf(mItem.getCount()));
-
-                    mListener.onListFragmentInteraction(mItem);
-                    mTotal += mItem.getPrice();
-                    updateTotal();
+                    if (mItem.getCount() + 1 > mItem.getQuantity()) {
+                        error.show();
+                    } else {
+                        store.incrementCountBuy(mItem);
+                        itemCountText.setText(String.valueOf(mItem.getCount()));
+                        mListener.onListFragmentInteraction(mItem);
+                        mTotal += mItem.getPrice();
+                        updateTotal();
+                    }
                 }
             });
 
