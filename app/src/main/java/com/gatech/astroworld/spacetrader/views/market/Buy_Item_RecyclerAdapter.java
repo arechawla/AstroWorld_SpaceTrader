@@ -30,6 +30,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     private final OnListFragmentInteractionListener mListener;
     private Store store;
     int mTotal = 0;
+    public static int mCountTot = 0;
 
 
     public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items, OnListFragmentInteractionListener listener) {
@@ -86,18 +87,26 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             Button minusButton = mView.findViewById(R.id.minusButton);
             final Toast error = Toast.makeText(view.getContext(), "You cannot" +
                     " buy more than the available amount!", Toast.LENGTH_LONG);
+            final Toast error2 = Toast.makeText(view.getContext(), "You cannot" +
+                    " afford to buy this!", Toast.LENGTH_LONG);
 
 
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int i = mTotal + mItem.getPrice();
                     if (mItem.getCount() + 1 > mItem.getQuantity()) {
                         error.show();
-                    } else {
+                    }
+                    else if (Game.getInstance().getPlayer().getCredits() < i) {
+                        error2.show();
+                    }
+                    else {
                         store.incrementCountBuy(mItem);
                         itemCountText.setText(String.valueOf(mItem.getCount()));
                         mListener.onListFragmentInteraction(mItem);
-                        mTotal += mItem.getPrice();
+                        mTotal = i;
+                        mCountTot++;
                         updateTotal();
                     }
                 }
@@ -111,6 +120,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                     int i = mTotal - mItem.getPrice();
                     if (i >= 0) {
                         mTotal = i;
+                        mCountTot--;
                         updateTotal();
                     }
                 }

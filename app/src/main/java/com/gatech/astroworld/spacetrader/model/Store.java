@@ -14,8 +14,8 @@ public class Store {
 
     private ArrayList<MarketGood> storeInventory;
     private int storeCredits;
-    private List<GoodType> cartBuy;
-    private List<MarketGood> cartSell;
+    private ArrayList<GoodType> cartBuy;
+    private ArrayList<MarketGood> cartSell;
     private SolarSystem sys;
     private Planet plan;
     private int buyTotal;
@@ -79,37 +79,31 @@ public class Store {
 
 
     public void buy(Player buyer) {
-        int availSpace = buyer.getShip().getCapacity() - buyer.getShip().cargoAmount();
-        int buySpace = 0;
-        for (MarketGood item: storeInventory) {
-            if (item.getCount() > 0) {
-                buySpace += item.getCount();
+        int total = 0;
+        for (MarketGood mark: storeInventory) {
+            if (mark.count > 0) {
+                GoodType good = mark.getGoodType();
+                good.setQuantity(mark.getCount());
+                good.setPrice(mark.getPrice());
+                total += mark.getPrice() * mark.getCount();
+                mark.setQuantity(mark.quantity - mark.count);
+                cartBuy.add(good);
             }
         }
-        if (buySpace <= availSpace && buyer.getCredits() >= buyTotal) {
-            for (MarketGood mark: storeInventory) {
-                int quantBuy = mark.getCount();
-                if (quantBuy > 0) {
-                    GoodType good = mark.getGoodType();
-                    good.setQuantity(mark.getCount());
-                    good.setPrice(mark.getPrice());
-                    mark.setQuantity(mark.quantity - mark.count);
-                    cartBuy.add(good);
-                }
-            }
-            for (GoodType item: cartBuy) {
-                Integer index = buyer.getShip().containsCargo(item);
+        for (GoodType item: cartBuy) {
+            Integer index = buyer.getShip().containsCargo(item);
+            if (index == -1) {
+                buyer.getShip().getCargoList().add(item);
+            } else {
                 int originalQuantity = buyer.getShip().getCargoList().get(index).getQuantity();
-                if (index != null) {
-                    buyer.getShip().getCargoList().get(index).setQuantity(originalQuantity +
-                            item.getQuantity());
-                } else {
-                    buyer.getShip().getCargoList().add(item);
-                }
+                buyer.getShip().getCargoList().get(index).setQuantity(originalQuantity +
+                        item.getQuantity());
             }
         }
-        cartBuy = null;
+        int playerCreds = Game.getInstance().getPlayer().getCredits();
+        Game.getInstance().getPlayer().setCredits(playerCreds - total);
     }
+
 
 
     public void incrementCountBuy(MarketGood good) {
@@ -177,9 +171,7 @@ public class Store {
     }
 
 
-    public int getBuyTotal() {
-        return buyTotal;
-    }
+
 
 
 
