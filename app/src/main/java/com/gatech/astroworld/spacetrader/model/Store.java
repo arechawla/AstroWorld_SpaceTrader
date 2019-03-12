@@ -18,7 +18,7 @@ public class Store {
     private List<MarketGood> cartSell;
     private SolarSystem sys;
     private Planet plan;
-    private int buyTotal;
+    private int buyTotal = 0;
 
 //    public Store(int storeCredits, SolarSystem sys, Planet plan)
     public Store(int storeCredits) {
@@ -114,15 +114,16 @@ public class Store {
     public void incrementCountBuy(MarketGood good) {
 
         good.setCount(good.getCount() + 1);
-        buyTotal = buyTotal();
+        buyTotal += good.price;
     }
 
     public void decrementCountBuy(MarketGood good) {
-        int i = good.getCount() - 1;
+        int i = good.count - 1;
         if (i >= 0) {
             good.setCount(i-1);
+            good.setCount(i + 1);
         }
-        buyTotal = buyTotal();
+
     }
 
     public void incrementCountSell(GoodType good) {
@@ -175,7 +176,7 @@ public class Store {
         }
     }
 
-    public int buyTotal() {
+    private int buyTotal() {
         int total = 0;
         for (MarketGood item: storeInventory) {
             if (item.getCount() > 0) {
@@ -183,6 +184,9 @@ public class Store {
             }
         }
         return total;
+    }
+    public int getBuyTotal() {
+        return buyTotal;
     }
 
 

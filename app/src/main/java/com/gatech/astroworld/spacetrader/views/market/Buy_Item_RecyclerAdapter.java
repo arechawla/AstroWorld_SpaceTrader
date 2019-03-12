@@ -47,7 +47,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(mValues.get(position).getName());
-        holder.mPriceView.setText(Integer.toString(mValues.get(position).getPrice()));
+        holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
+        holder.mTotal.setText("testing");
 
     }
     @Override
@@ -62,8 +63,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         public TextView mIdView;
         public TextView mContentView;
         public TextView mPriceView;
+        public TextView mTotal;
         public Store.MarketGood mItem;
-        public int textCount = 0;
 
 
 
@@ -73,6 +74,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             mIdView = view.findViewById(R.id.item_number);
             mContentView = view.findViewById(R.id.itemName);
             mPriceView = view.findViewById(R.id.itemPrice);
+            mTotal = view.findViewById(R.id.buyTotal);
             final TextView itemCountText = view.findViewById(R.id.countText);
             Button plusButton = mView.findViewById(R.id.plusButton);
             Button minusButton = mView.findViewById(R.id.minusButton);
@@ -82,9 +84,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 @Override
                 public void onClick(View v) {
                     store.incrementCountBuy(mItem);
-//                    remainingCredits.setText("Remaining Credits: "
-//                    + Game.getInstance().getPlayer().getCredits());
                     itemCountText.setText(String.valueOf(mItem.getCount()));
+                    mTotal.setText(String.valueOf(store.getBuyTotal()));
                 }
             });
 
@@ -92,9 +93,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 @Override
                 public void onClick(View v) {
                     store.decrementCountBuy(mItem);
-//                    remainingCredits.setText("Remaining Credits: "
-//                            + Game.getInstance().getPlayer().getCredits());
                     itemCountText.setText(String.valueOf(mItem.getCount()));
+                    mTotal.setText(String.valueOf(store.getBuyTotal()));
                 }
             });
         }
