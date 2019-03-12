@@ -97,16 +97,16 @@ public class Store {
     public void addToCartBuy() {
         for (int i = 0; i < storeInventory.size(); i++) {
             int quantBuy = storeInventory.get(i).getCount();
-            if (quantBuy != 0) {
+            if (quantBuy > 0) {
                 GoodType good = storeInventory.get(i).getGoodType();
                 good.setQuantity(storeInventory.get(i).getCount());
                 good.setPrice(storeInventory.get(i).getPrice());
                 cartBuy.add(good);
             }
         }
-        for (MarketGood good: storeInventory) {
-            good.setCount(0);
-        }
+//        for (MarketGood good: storeInventory) {
+//            good.setCount(0);
+//        }
     }
 
     public void incrementCountBuy(MarketGood good) {
