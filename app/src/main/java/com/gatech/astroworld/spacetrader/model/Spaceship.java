@@ -37,7 +37,7 @@ public class Spaceship {
                 return i;
             }
         }
-        return null;
+        return -1;
     }
 
 
