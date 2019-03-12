@@ -46,7 +46,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).getName());;
+        holder.mContentView.setText(mValues.get(position).getName());
+        holder.mPriceView.setText(Integer.toString(mValues.get(position).getPrice()));
 
     }
     @Override
@@ -60,6 +61,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         public View mView;
         public TextView mIdView;
         public TextView mContentView;
+        public TextView mPriceView;
         public Store.MarketGood mItem;
         public int textCount = 0;
 
@@ -70,8 +72,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             mView = view;
             mIdView = view.findViewById(R.id.item_number);
             mContentView = view.findViewById(R.id.itemName);
+            mPriceView = view.findViewById(R.id.itemPrice);
             final TextView itemCountText = view.findViewById(R.id.countText);
-            final TextView showName = view.findViewById(R.id.itemName);
             Button plusButton = mView.findViewById(R.id.plusButton);
             Button minusButton = mView.findViewById(R.id.minusButton);
 

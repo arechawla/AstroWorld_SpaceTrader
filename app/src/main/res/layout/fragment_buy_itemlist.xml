@@ -8,5 +8,6 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:scrollbars="vertical"
     tools:context=".views.market.Buy_ItemFragment"
     tools:listitem="@layout/fragment_market_buy_item" />
