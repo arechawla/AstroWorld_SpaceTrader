@@ -25,6 +25,8 @@ public class Store {
         this.sys = Game.getInstance().getPlayer().getCurrentSystem();
         this.plan = Game.getInstance().getPlayer().getCurrentPlanet();
         this.storeInventory = new ArrayList<>();
+        this.cartBuy = new ArrayList<>();
+        this.cartSell = new ArrayList<>();
     }
 
 

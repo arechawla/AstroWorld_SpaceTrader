@@ -27,11 +27,11 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     private final OnListFragmentInteractionListener mListener;
     private Store store;
 
+
     public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         store = Game.getInstance().getPlayer().getCurrentPlanet().getStore();
-
     }
 
     @Override
@@ -40,30 +40,21 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 .inflate(R.layout.fragment_market_buy_item, parent, false);
 
         return new ViewHolder(view);
+
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        //holder.mIdView.setText(mValues.get(position).id);
-        //holder.mContentView.setText(mValues.get(position).content);
+        holder.mContentView.setText(mValues.get(position).getName());;
 
-//        holder.mView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (null != mListener) {
-//                    // Notify the active callbacks interface (the activity, if the
-//                    // fragment is attached to one) that an item has been selected.
-//                    mListener.onListFragmentInteraction(holder.mItem);
-//                }
-//            }
-//        });
     }
-
     @Override
     public int getItemCount() {
         return mValues.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View mView;
@@ -72,12 +63,15 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         public Store.MarketGood mItem;
         public int textCount = 0;
 
+
+
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = view.findViewById(R.id.item_number);
-            mContentView = view.findViewById(R.id.content);
+            mContentView = view.findViewById(R.id.itemName);
             final TextView itemCountText = view.findViewById(R.id.countText);
+            final TextView showName = view.findViewById(R.id.itemName);
             Button plusButton = mView.findViewById(R.id.plusButton);
             Button minusButton = mView.findViewById(R.id.minusButton);
 
@@ -86,6 +80,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 @Override
                 public void onClick(View v) {
                     store.incrementCountBuy(mItem);
+//                    remainingCredits.setText("Remaining Credits: "
+//                    + Game.getInstance().getPlayer().getCredits());
                     itemCountText.setText(String.valueOf(mItem.getCount()));
                 }
             });
@@ -94,6 +90,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 @Override
                 public void onClick(View v) {
                     store.decrementCountBuy(mItem);
+//                    remainingCredits.setText("Remaining Credits: "
+//                            + Game.getInstance().getPlayer().getCredits());
                     itemCountText.setText(String.valueOf(mItem.getCount()));
                 }
             });

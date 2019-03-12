@@ -7,9 +7,11 @@ import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
@@ -25,6 +27,9 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_activity);
         final NavController nav = Navigation.findNavController(this, R.id.nav_host_fragment);
+        TextView remainingCredits = findViewById(R.id.yourCredits);
+        String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
+        remainingCredits.setText("Remaining Credits: " + String.valueOf(Game.getInstance().getPlayer().getCredits()));
         bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -50,6 +55,11 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
     @Override
     public void onListFragmentInteraction(GoodType item) {
 
+    }
+
+    public String updatePlayerCredits() {
+        String cred = String.valueOf(Game.getInstance().getPlayer().getCredits());
+        return  cred;
     }
 
 //    @Override
