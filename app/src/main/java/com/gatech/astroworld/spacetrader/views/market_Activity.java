@@ -27,6 +27,8 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
     private BottomNavigationView bottomNav;
     private int selectedItem;
     public static TextView mBuyTotal;
+//    public static boolean what = false;
+
 
 
     @Override
@@ -41,7 +43,8 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
         Button sell = findViewById(R.id.sellButton);
         mBuyTotal = findViewById(R.id.buyTotal);
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
-        remainingCredits.setText("Remaining Credits: " + String.valueOf(Game.getInstance().getPlayer().getCredits()));
+        remainingCredits.setText("Remaining Credits: " +
+                String.valueOf(Game.getInstance().getPlayer().getCredits()));
         bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -71,7 +74,9 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
                             .buy(Game.getInstance().getPlayer());
                     remainingCredits.setText("Remaining Credits: " +
                             String.valueOf(Game.getInstance().getPlayer().getCredits()));
+                    Buy_Item_RecyclerAdapter.mCountTot = 0;
                 }
+//                what = true;
             }
         });
 

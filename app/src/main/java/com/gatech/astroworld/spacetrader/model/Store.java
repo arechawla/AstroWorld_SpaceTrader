@@ -81,13 +81,20 @@ public class Store {
     public void buy(Player buyer) {
         int total = 0;
         for (MarketGood mark: storeInventory) {
-            if (mark.count > 0) {
+            int q = mark.getQuantity();
+            int c = mark.getCount();
+            if (c > 0) {
                 GoodType good = mark.getGoodType();
-                good.setQuantity(mark.getCount());
+                good.setQuantity(c);
                 good.setPrice(mark.getPrice());
                 total += mark.getPrice() * mark.getCount();
-                mark.setQuantity(mark.quantity - mark.count);
                 cartBuy.add(good);
+                mark.setQuantity(q - c);
+                if (q - c == 0) {
+                    storeInventory.remove(mark);
+                } else {
+                    mark.setCount(0);
+                }
             }
         }
         for (GoodType item: cartBuy) {
@@ -172,10 +179,18 @@ public class Store {
             }
             if (!alreadyAdded) {
                 MarketGood diffGood = new MarketGood(gSold);
+                diffGood.setQuantity(gSold.getSellCount());
                 diffGood.setSolarSystem(player.getCurrentSystem());
                 diffGood.setPlanet(player.getCurrentPlanet());
                 storeInventory.add(diffGood);
             }
+            if (gSold.getSellCount() == gSold.getQuantity()) {
+                list.remove(gSold);
+            } else {
+                gSold.setQuantity(gSold.getQuantity() - gSold.getSellCount());
+                gSold.setSellCount(0);
+            }
+
         }
         player.setCredits(player.getCredits() + total);
     }
