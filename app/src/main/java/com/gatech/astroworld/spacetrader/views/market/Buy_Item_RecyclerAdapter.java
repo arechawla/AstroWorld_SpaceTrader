@@ -20,6 +20,9 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+//import static com.gatech.astroworld.spacetrader.views.market_Activity.what;
+
+
 /**
  * {@link RecyclerView.Adapter} that can display a and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
@@ -33,7 +36,8 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     public static int mCountTot = 0;
 
 
-    public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items, OnListFragmentInteractionListener listener) {
+    public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items,
+                                    OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         store = Game.getInstance().getPlayer().getCurrentPlanet().getStore();
@@ -90,6 +94,10 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             final Toast error2 = Toast.makeText(view.getContext(), "You cannot" +
                     " afford to buy this!", Toast.LENGTH_LONG);
 
+//            if (what == true) {
+//                updateQuant();
+//                what = false;
+//            }
 
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -139,6 +147,18 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         public void updateTotal() {
             market_Activity.mBuyTotal.setText(String.valueOf(mTotal));
         }
+
+        public void updateQuant() {
+            for (int i = 0; i < mValues.size(); i++) {
+                String price = String.format("%11s", "Price: " + Integer.
+                        toString(mValues.get(i).getPrice()));
+                String qty = String.format("%11s", "Qty: " + Integer.
+                        toString(mValues.get(i).getQuantity()));
+                mPriceView.setText(price + "\n" + qty);
+            }
+        }
+
+
     }
 
 }
