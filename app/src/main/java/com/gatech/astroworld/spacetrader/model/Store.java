@@ -121,17 +121,17 @@ public class Store {
     }
 
     public void incrementCountSell(GoodType good) {
-        int i = good.getSellCount();
+        int i = good.getSellCount() + 1;
         if (i <= good.getQuantity()) {
-            good.setSellCount(i + 1);
+            good.setSellCount(i);
         }
     }
 
 
     public void decrementCountSell(GoodType good) {
-        int i = good.getSellCount();
+        int i = good.getSellCount() - 1;
         if (i >= 0) {
-            good.setSellCount(i - 1);
+            good.setSellCount(i);
         }
     }
 

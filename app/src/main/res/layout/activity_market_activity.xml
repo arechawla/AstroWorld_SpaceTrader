@@ -32,38 +32,55 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buySellButton"
-        android:layout_width="220dp"
+        android:id="@+id/buyButton"
+        android:layout_width="92dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="BUY / SELL"
+        android:text="BUY"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toEndOf="@+id/buyTotal"
+        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/sellButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="68dp"
+        android:text="SELL"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buyTotal"
         app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment" />
 
     <TextView
         android:id="@+id/buyTotal"
-        android:layout_width="88dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
+        android:layout_marginEnd="149dp"
         android:text="0"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
+        app:layout_constraintEnd_toStartOf="@+id/sellButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
         app:layout_constraintVertical_bias="0.51" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavMenu"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:itemTextColor="@color/colorAccent"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -72,14 +89,15 @@
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="411dp"
-        android:layout_height="483dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginBottom="8dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
+        app:layout_constraintBottom_toTopOf="@+id/sellButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.346"
         app:navGraph="@navigation/nav_map" />
 

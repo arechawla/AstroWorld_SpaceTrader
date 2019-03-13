@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
 
@@ -43,6 +44,12 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
 //        holder.mItem = mValues.get(position);
 //        holder.mIdView.setText(mValues.get(position).id);
         //holder.mContentView.setText(mValues.get(position).content);
+        holder.mItem = mValues.get(position);
+        holder.mContentView.setText(mValues.get(position).getName());
+        String price = String.format("%11s", "Price: " + Integer.toString(mValues.get(position).getPrice()));
+        String qty = String.format("%11s", "Qty: " + Integer.toString(mValues.get(position).getQuantity()));
+        holder.mPriceView.setText(price + "\n" + qty);
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +72,39 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public final Button plusButton;
+        public final Button minusButton;
         public GoodType mItem;
+        public TextView mPriceView;
 
         public ViewHolder(View view) {
             super(view);
+            plusButton = view.findViewById(R.id.plusButton);
+            minusButton = view.findViewById(R.id.minusButton);
+            final TextView itemCountText = view.findViewById(R.id.countText);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mContentView =  view.findViewById(R.id.itemName);
+            mPriceView = view.findViewById(R.id.itemPrice);
+
+
+            plusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    store.incrementCountSell(mItem);
+                    itemCountText.setText(String.valueOf(mItem.getSellCount()));
+                }
+            });
+
+            minusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    store.decrementCountSell(mItem);
+                    itemCountText.setText(String.valueOf(mItem.getSellCount()));
+                }
+            });
         }
+
 
         @Override
         public String toString() {

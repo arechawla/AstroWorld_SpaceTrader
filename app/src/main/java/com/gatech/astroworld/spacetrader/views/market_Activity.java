@@ -37,7 +37,8 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
         final Toast error3 = Toast.makeText(getApplicationContext(), "You cannot" +
                 " hold this many items in the ship!", Toast.LENGTH_LONG);
         final TextView remainingCredits = findViewById(R.id.yourCredits);
-        Button buy = findViewById(R.id.buySellButton);
+        Button buy = findViewById(R.id.buyButton);
+        Button sell = findViewById(R.id.sellButton);
         mBuyTotal = findViewById(R.id.buyTotal);
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
         remainingCredits.setText("Remaining Credits: " + String.valueOf(Game.getInstance().getPlayer().getCredits()));
@@ -58,6 +59,22 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
         });
 
         buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int availSpace = Game.getInstance().getPlayer().getShip().getCapacity() -
+                        Game.getInstance().getPlayer().getShip().cargoAmount();
+                if (Buy_Item_RecyclerAdapter.mCountTot > availSpace) {
+                    error3.show();
+                } else {
+                    Game.getInstance().getPlayer().getCurrentPlanet().getStore()
+                            .buy(Game.getInstance().getPlayer());
+                    remainingCredits.setText("Remaining Credits: " +
+                            String.valueOf(Game.getInstance().getPlayer().getCredits()));
+                }
+            }
+        });
+
+        sell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int availSpace = Game.getInstance().getPlayer().getShip().getCapacity() -
