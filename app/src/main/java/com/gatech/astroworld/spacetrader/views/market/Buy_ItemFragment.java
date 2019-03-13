@@ -96,8 +96,10 @@ public class Buy_ItemFragment extends Fragment {
             }
 
 
-            Game.getInstance().getPlayer().getCurrentPlanet().setStore(new Store(3000));
-            Game.getInstance().getPlayer().getCurrentPlanet().getStore().populateStoreInventory();
+            if (Game.getInstance().getPlayer().getCurrentPlanet().getStore() == null) {
+                Game.getInstance().getPlayer().getCurrentPlanet().setStore(new Store(3000));
+                Game.getInstance().getPlayer().getCurrentPlanet().getStore().populateStoreInventory();
+            }
 
             goodList = Game.getInstance().getPlayer().getCurrentPlanet().
                     getStore().getStoreInventory();
