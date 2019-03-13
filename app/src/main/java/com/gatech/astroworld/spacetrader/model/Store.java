@@ -157,6 +157,10 @@ public class Store {
 
     public void sell(Player player) {
         List<GoodType> list = Game.getInstance().getPlayer().getShip().getCargoList();
+        int total = 0;
+        for (GoodType i: list) {
+            total += i.getPrice()*i.getSellCount();
+        }
         for (GoodType gSold: list) {
             boolean alreadyAdded = false;
             for (MarketGood gMark: storeInventory) {
@@ -173,7 +177,7 @@ public class Store {
                 storeInventory.add(diffGood);
             }
         }
-        player.setCredits(player.getCredits() + cartSellTotal());
+        player.setCredits(player.getCredits() + total);
     }
 
 
