@@ -90,21 +90,20 @@ public class Store {
                 total += mark.getPrice() * mark.getCount();
                 cartBuy.add(good);
                 mark.setQuantity(q - c);
+                int index = buyer.getShip().containsCargo(good);
+                if (index == -1) {
+                    buyer.getShip().getCargoList().add(good);
+                } else {
+                    int originalQuantity = buyer.getShip().getCargoList().get(index).getQuantity();
+                    buyer.getShip().getCargoList().get(index).setQuantity(originalQuantity +
+                            mark.getCount());
+                }
                 if (q - c == 0) {
                     storeInventory.remove(mark);
                 } else {
                     mark.setCount(0);
                 }
-            }
-        }
-        for (GoodType item: cartBuy) {
-            Integer index = buyer.getShip().containsCargo(item);
-            if (index == -1) {
-                buyer.getShip().getCargoList().add(item);
-            } else {
-                int originalQuantity = buyer.getShip().getCargoList().get(index).getQuantity();
-                buyer.getShip().getCargoList().get(index).setQuantity(originalQuantity +
-                        item.getQuantity());
+
             }
         }
         int playerCreds = Game.getInstance().getPlayer().getCredits();

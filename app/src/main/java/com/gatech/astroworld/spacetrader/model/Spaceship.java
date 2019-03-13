@@ -33,7 +33,7 @@ public class Spaceship {
 
     public Integer containsCargo(GoodType find) {
         for (int i = 0; i < cargo.size(); i++) {
-            if (find.ordinal() == cargo.get(i).ordinal()) {
+            if (find.getName().equals(cargo.get(i).getName())) {
                 return i;
             }
         }
