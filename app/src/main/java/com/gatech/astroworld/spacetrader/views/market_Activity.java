@@ -53,7 +53,8 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
                     case R.id.destination_sell:
                         nav.navigate(R.id.toSellFragment);
                         return true;
-                    default: return false;
+                    default:
+                        return false;
                 }
             }
         });
@@ -77,16 +78,11 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
         sell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int availSpace = Game.getInstance().getPlayer().getShip().getCapacity() -
-                        Game.getInstance().getPlayer().getShip().cargoAmount();
-                if (Buy_Item_RecyclerAdapter.mCountTot > availSpace) {
-                    error3.show();
-                } else {
-                    Game.getInstance().getPlayer().getCurrentPlanet().getStore()
-                            .buy(Game.getInstance().getPlayer());
-                    remainingCredits.setText("Remaining Credits: " +
-                            String.valueOf(Game.getInstance().getPlayer().getCredits()));
-                }
+
+                Game.getInstance().getPlayer().getCurrentPlanet().getStore()
+                        .sell(Game.getInstance().getPlayer());
+                remainingCredits.setText("Remaining Credits: " +
+                        String.valueOf(Game.getInstance().getPlayer().getCredits()));
             }
         });
     }

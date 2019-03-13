@@ -156,18 +156,24 @@ public class Store {
     }
 
     public void sell(Player player) {
-        player.setCredits(player.getCredits() + cartSellTotal());
-        for (MarketGood gSold: cartSell) {
+        List<GoodType> list = Game.getInstance().getPlayer().getShip().getCargoList();
+        for (GoodType gSold: list) {
+            boolean alreadyAdded = false;
             for (MarketGood gMark: storeInventory) {
                 if (gSold.getName().equals(gMark.getName())) {
                     int orig = gMark.getQuantity();
-                    gMark.setCount(orig + gSold.getQuantity());
+                    alreadyAdded = true;
+                    gMark.setQuantity(orig + gSold.getSellCount());
                 }
             }
-            gSold.setSolarSystem(player.getCurrentSystem());
-            gSold.setPlanet(player.getCurrentPlanet());
-            storeInventory.add(gSold);
+            if (!alreadyAdded) {
+                MarketGood diffGood = new MarketGood(gSold);
+                diffGood.setSolarSystem(player.getCurrentSystem());
+                diffGood.setPlanet(player.getCurrentPlanet());
+                storeInventory.add(diffGood);
+            }
         }
+        player.setCredits(player.getCredits() + cartSellTotal());
     }
 
 
