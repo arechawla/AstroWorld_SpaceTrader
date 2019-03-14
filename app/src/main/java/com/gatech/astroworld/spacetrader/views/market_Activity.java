@@ -51,9 +51,15 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.destination_buy:
+                        if (nav.getCurrentDestination().getId() ==R.id.destination_buy) {
+                            return false;
+                        }
                         nav.navigate(R.id.toBuyFragment);
                         return true;
                     case R.id.destination_sell:
+                        if (nav.getCurrentDestination().getId() ==R.id.destination_sell) {
+                            return false;
+                        }
                         nav.navigate(R.id.toSellFragment);
                         return true;
                     default:
