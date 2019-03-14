@@ -1,136 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".views.playerReviewScreen_Activity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.playerReviewScreen_Activity">
 
     <Button
-            android:text="Continue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/continueButton" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
-            android:text="Chosen Skill Points:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/skillPoints" android:textAlignment="center"
-            android:textSize="18sp" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.502" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/playerName"/>
+        android:id="@+id/skillPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Chosen Skill Points:"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerName" />
+
     <TextView
-            android:text="Pilot Points: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pilot" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/pilotPointCount" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.548" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/skillPoints" android:textAlignment="center"/>
+        android:id="@+id/pilot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Pilot Points: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/pilotPointCount"
+        app:layout_constraintHorizontal_bias="0.649"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/skillPoints" />
+
     <TextView
-            android:text="Engineer Points: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/engineer" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/engineerPointCount" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.555" android:textAlignment="center" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/fighterDescription"/>
+        android:id="@+id/engineer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
+        android:text="Engineer Points: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/engineerPointCount"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fighterDescription" />
+
     <TextView
-            android:text="Trader Points: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/trader" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/traderPointCount" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.552" android:textAlignment="center" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/pilotDescription"/>
+        android:id="@+id/trader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Trader Points: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/traderPointCount"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pilotDescription" />
+
     <TextView
-            android:text="Fighter Points: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fighter" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/fighterPointCount" android:layout_marginEnd="8dp"
-            app:layout_constraintHorizontal_bias="0.553" android:textAlignment="center" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/traderDescription"/>
+        android:id="@+id/fighter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Fighter Points: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/fighterPointCount"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/traderDescription" />
+
     <TextView
-            android:text="Ship: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/shipHeader" android:textSize="18sp"
-            android:textAlignment="center" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.501" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/engineerDescription"/>
+        android:id="@+id/shipHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Ship: "
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engineerDescription" />
+
     <ImageView
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/shipImage" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/shipHeader" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/continueButton"/>
+        android:id="@+id/shipImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ufo_spaceship"
+        app:layout_constraintBottom_toTopOf="@+id/continueButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shipHeader"
+        app:layout_constraintVertical_bias="0.376" />
+
     <TextView
-            android:text="Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/playerName" android:textAlignment="center"
-            android:textSize="24sp" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"/>
+        android:id="@+id/playerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Name"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-            android:text="0"
-            android:layout_width="16dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/engineerPointCount" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toTopOf="@+id/engineer"/>
+        android:id="@+id/engineerPointCount"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/engineer" />
+
     <TextView
-            android:text="0"
-            android:layout_width="16dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/fighterPointCount" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" app:layout_constraintTop_toTopOf="@+id/fighter"
-    />
+        android:id="@+id/fighterPointCount"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fighter" />
+
     <TextView
-            android:text="0"
-            android:layout_width="16dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/traderPointCount" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" app:layout_constraintTop_toTopOf="@+id/trader"
-    />
+        android:id="@+id/traderPointCount"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/trader" />
+
     <TextView
-            android:text="0"
-            android:layout_width="16dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/pilotPointCount" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" app:layout_constraintTop_toTopOf="@+id/pilot"
-    />
+        android:id="@+id/pilotPointCount"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pilot" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pilotDescription" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/pilot" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"/>
+        android:id="@+id/pilotDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pilot" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/traderDescription" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/trader"/>
+        android:id="@+id/traderDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trader" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fighterDescription" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/fighter"/>
+        android:id="@+id/fighterDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fighter" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/engineerDescription" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/engineer"/>
+        android:id="@+id/engineerDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engineer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

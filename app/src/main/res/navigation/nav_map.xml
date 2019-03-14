@@ -13,6 +13,9 @@
         <action
             android:id="@+id/toSellFragment"
             app:destination="@id/sell_ItemFragment" />
+        <action
+            android:id="@+id/toBuyFragment"
+            app:destination="@id/buy_ItemFragment" />
 
     </fragment>
     <fragment
@@ -24,5 +27,8 @@
         <action
             android:id="@+id/toBuyFragment"
             app:destination="@id/buy_ItemFragment" />
+        <action
+            android:id="@+id/toSellFragment"
+            app:destination="@id/sell_ItemFragment" />
     </fragment>
 </navigation>
