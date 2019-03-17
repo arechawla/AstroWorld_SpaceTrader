@@ -27,8 +27,7 @@ public class Store {
         this.cartBuy = new ArrayList<>();
         this.cartSell = new ArrayList<>();
     }
-
-
+    
     public ArrayList<MarketGood> populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
@@ -55,8 +54,6 @@ public class Store {
         return StringGoods;
     }
 
-
-
     private int calculateQuantity(GoodType item) {
         int base = 10;
         if (sys.getTechLevel().ordinal() < item.getMTLP()) {
@@ -78,6 +75,7 @@ public class Store {
 
     public void buy(Player buyer) {
         int total = 0;
+        List<MarketGood> toRemove = new ArrayList<MarketGood>();
         for (MarketGood mark: storeInventory) {
             int markQuant = mark.getQuantity();
             int markCount = mark.getCount();
@@ -95,12 +93,16 @@ public class Store {
                     int origQuant = buyer.getShip().getCargoList().get(index).getQuantity();
                     buyer.getShip().getCargoList().get(index).setQuantity(origQuant + markCount);
                 }
+                if (markQuant - markCount == 0) {
+                    toRemove.add(mark);
+                } else {
+                    mark.setCount(0);
+                }
             }
-            if (markQuant - markCount == 0) {
-                storeInventory.remove(mark);
-            } else {
-                mark.setCount(0);
-            }
+
+        }
+        for (MarketGood m: toRemove) {
+            storeInventory.remove(m);
         }
         int playerCreds = Game.getInstance().getPlayer().getCredits();
         Game.getInstance().getPlayer().setCredits(playerCreds - total);
@@ -137,25 +139,6 @@ public class Store {
         }
     }
 
-
-//    public void addToCartSell(Player player) {
-//        List<TradeGood> list = player.getShip().getCargoList();
-//        for (int i = 0; i < list.size(); i++) {
-//            int quantSell = list.get(i).getSellCount();
-//            if (quantSell != 0) {
-//                TradeGood tGood = list.get(i);
-//                MarketGood good = new MarketGood(tGood.getGoodType());
-//                good.setPrice(list.get(i).getGoodType().getBasePrice());
-//                good.setQuantity(quantSell);
-//                cartSell.add(good);
-//                int orig = list.get(i).getQuantity();
-//                list.get(i).setQuantity(orig - quantSell);
-//            }
-//        }
-//        for (TradeGood good: list) {
-//            good.setSellCount(0);
-//        }
-//    }
 
     public void sell(Player player) {
         List<TradeGood> list = Game.getInstance().
