@@ -1,9 +1,6 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
-import com.gatech.astroworld.spacetrader.entity.Player;
-import com.gatech.astroworld.spacetrader.entity.Resources;
-import com.gatech.astroworld.spacetrader.entity.TechLevel;
 
 import java.util.ArrayList;
 import java.util.List;

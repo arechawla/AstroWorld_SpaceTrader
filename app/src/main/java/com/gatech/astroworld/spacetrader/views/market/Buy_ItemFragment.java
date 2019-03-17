@@ -21,6 +21,7 @@ import android.widget.*;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Store;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Buy_ItemFragment extends Fragment {
     private TextView showName;
     private Button plusButton;
     private Button minusButton;
-    List<Store.MarketGood> goodList = new ArrayList<Store.MarketGood>();
+    List<MarketGood> goodList = new ArrayList<MarketGood>();
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -97,8 +98,10 @@ public class Buy_ItemFragment extends Fragment {
 
 
             if (Game.getInstance().getPlayer().getCurrentPlanet().getStore() == null) {
-                Game.getInstance().getPlayer().getCurrentPlanet().setStore(new Store(3000));
-                Game.getInstance().getPlayer().getCurrentPlanet().getStore().populateStoreInventory();
+                Game.getInstance().getPlayer().getCurrentPlanet().
+                        setStore(new Store(3000));
+                Game.getInstance().getPlayer().getCurrentPlanet().getStore().
+                        populateStoreInventory();
             }
 
             goodList = Game.getInstance().getPlayer().getCurrentPlanet().
@@ -140,6 +143,6 @@ public class Buy_ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Store.MarketGood item);
+        void onListFragmentInteraction(MarketGood item);
     }
 }

@@ -1,6 +1,5 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import com.gatech.astroworld.spacetrader.entity.Player;
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 
 import java.util.Random;

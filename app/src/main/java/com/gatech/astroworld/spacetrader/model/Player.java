@@ -1,4 +1,4 @@
-package com.gatech.astroworld.spacetrader.entity;
+package com.gatech.astroworld.spacetrader.model;
 
 import android.media.Image;
 
