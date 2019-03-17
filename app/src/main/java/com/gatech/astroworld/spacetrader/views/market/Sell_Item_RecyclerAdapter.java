@@ -10,6 +10,7 @@ import com.gatech.astroworld.spacetrader.R;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment.OnListFragmentInteractionListener;
 
@@ -22,11 +23,11 @@ import java.util.List;
  */
 public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_RecyclerAdapter.ViewHolder> {
 
-    private final List<GoodType> mValues;
+    private final List<TradeGood> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Store store;
 
-    public Sell_Item_RecyclerAdapter(List<GoodType> items, OnListFragmentInteractionListener listener) {
+    public Sell_Item_RecyclerAdapter(List<TradeGood> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         store = Game.getInstance().getPlayer().getCurrentPlanet().getStore();
@@ -74,7 +75,7 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
         public final TextView mContentView;
         public final Button plusButton;
         public final Button minusButton;
-        public GoodType mItem;
+        public TradeGood mItem;
         public TextView mPriceView;
 
         public ViewHolder(View view) {

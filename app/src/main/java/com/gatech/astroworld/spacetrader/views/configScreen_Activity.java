@@ -9,7 +9,7 @@ import android.widget.*;
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import android.widget.EditText;
-import com.gatech.astroworld.spacetrader.entity.Player;
+import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 
 public class configScreen_Activity extends AppCompatActivity {

@@ -12,6 +12,7 @@ import com.gatech.astroworld.spacetrader.R;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment.OnListFragmentInteractionListener;
 import com.gatech.astroworld.spacetrader.views.market_Activity;
@@ -29,14 +30,14 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
-    private final List<Store.MarketGood> mValues;
+    private final List<MarketGood> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Store store;
     int mTotal = 0;
     public static int mCountTot = 0;
 
 
-    public Buy_Item_RecyclerAdapter(List<Store.MarketGood> items,
+    public Buy_Item_RecyclerAdapter(List<MarketGood> items,
                                     OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
@@ -59,8 +60,10 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
         String name = String.format("%11s", mValues.get(position).getName());
         holder.mContentView.setText(name);
-        String price = String.format("%11s", "Price: " + Integer.toString(mValues.get(position).getPrice()));
-        String qty = String.format("%11s", "Qty: " + Integer.toString(mValues.get(position).getQuantity()));
+        String price = String.format("%11s", "Price: " +
+                Integer.toString(mValues.get(position).getPrice()));
+        String qty = String.format("%11s", "Qty: " +
+                Integer.toString(mValues.get(position).getQuantity()));
         holder.mPriceView.setText(price + "\n" + qty);
 
     }
@@ -76,7 +79,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         public TextView mIdView;
         public TextView mContentView;
         public TextView mPriceView;
-        public Store.MarketGood mItem;
+        public MarketGood mItem;
 
 
 

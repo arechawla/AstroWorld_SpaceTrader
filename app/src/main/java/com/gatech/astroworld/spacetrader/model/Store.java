@@ -1,11 +1,9 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import android.widget.Toast;
-
 import com.gatech.astroworld.spacetrader.entity.GoodType;
-import com.gatech.astroworld.spacetrader.entity.Player;
+import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +12,7 @@ public class Store {
 
     private ArrayList<MarketGood> storeInventory;
     private int storeCredits;
-    private ArrayList<GoodType> cartBuy;
+    private ArrayList<TradeGood> cartBuy;
     private ArrayList<MarketGood> cartSell;
     private SolarSystem sys;
     private Planet plan;
@@ -81,29 +79,27 @@ public class Store {
     public void buy(Player buyer) {
         int total = 0;
         for (MarketGood mark: storeInventory) {
-            int q = mark.getQuantity();
-            int c = mark.getCount();
-            if (c > 0) {
-                GoodType good = mark.getGoodType();
-                good.setQuantity(c);
-                good.setPrice(mark.getPrice());
+            int markQuant = mark.getQuantity();
+            int markCount = mark.getCount();
+            if (markCount > 0) {
+                TradeGood tGood = new TradeGood(mark.getGoodType());
+                tGood.setQuantity(markCount);
+                tGood.setPrice(mark.getPrice());
                 total += mark.getPrice() * mark.getCount();
-                cartBuy.add(good);
-                mark.setQuantity(q - c);
-                int index = buyer.getShip().containsCargo(good);
+                cartBuy.add(tGood);
+                mark.setQuantity(markQuant - markCount);
+                int index = buyer.getShip().containsCargo(tGood);
                 if (index == -1) {
-                    buyer.getShip().getCargoList().add(good);
+                    buyer.getShip().getCargoList().add(tGood);
                 } else {
-                    int originalQuantity = buyer.getShip().getCargoList().get(index).getQuantity();
-                    buyer.getShip().getCargoList().get(index).setQuantity(originalQuantity +
-                            mark.getCount());
+                    int origQuant = buyer.getShip().getCargoList().get(index).getQuantity();
+                    buyer.getShip().getCargoList().get(index).setQuantity(origQuant + markCount);
                 }
-                if (q - c == 0) {
-                    storeInventory.remove(mark);
-                } else {
-                    mark.setCount(0);
-                }
-
+            }
+            if (markQuant - markCount == 0) {
+                storeInventory.remove(mark);
+            } else {
+                mark.setCount(0);
             }
         }
         int playerCreds = Game.getInstance().getPlayer().getCredits();
@@ -119,14 +115,14 @@ public class Store {
     }
 
     public void decrementCountBuy(MarketGood good) {
-        int i = good.count - 1;
+        int i = good.getCount() - 1;
         if (i >= 0) {
             good.setCount(i);
             buyTotal -= good.getPrice();
         }
     }
 
-    public void incrementCountSell(GoodType good) {
+    public void incrementCountSell(TradeGood good) {
         int i = good.getSellCount() + 1;
         if (i <= good.getQuantity()) {
             good.setSellCount(i);
@@ -134,7 +130,7 @@ public class Store {
     }
 
 
-    public void decrementCountSell(GoodType good) {
+    public void decrementCountSell(TradeGood good) {
         int i = good.getSellCount() - 1;
         if (i >= 0) {
             good.setSellCount(i);
@@ -142,32 +138,33 @@ public class Store {
     }
 
 
-    public void addToCartSell(Player player) {
-        List<GoodType> list = player.getShip().getCargoList();
-
-        for (int i = 0; i < list.size(); i++) {
-            int quantSell = list.get(i).getSellCount();
-            if (quantSell != 0) {
-                MarketGood good = new MarketGood(list.get(i));
-                good.setPrice( list.get(i).getBasePrice());
-                good.setQuantity(quantSell);
-                cartSell.add(good);
-                int orig = list.get(i).getQuantity();
-                list.get(i).setQuantity(orig - quantSell);
-            }
-        }
-        for (GoodType good: list) {
-            good.setSellCount(0);
-        }
-    }
+//    public void addToCartSell(Player player) {
+//        List<TradeGood> list = player.getShip().getCargoList();
+//        for (int i = 0; i < list.size(); i++) {
+//            int quantSell = list.get(i).getSellCount();
+//            if (quantSell != 0) {
+//                TradeGood tGood = list.get(i);
+//                MarketGood good = new MarketGood(tGood.getGoodType());
+//                good.setPrice(list.get(i).getGoodType().getBasePrice());
+//                good.setQuantity(quantSell);
+//                cartSell.add(good);
+//                int orig = list.get(i).getQuantity();
+//                list.get(i).setQuantity(orig - quantSell);
+//            }
+//        }
+//        for (TradeGood good: list) {
+//            good.setSellCount(0);
+//        }
+//    }
 
     public void sell(Player player) {
-        List<GoodType> list = Game.getInstance().getPlayer().getShip().getCargoList();
+        List<TradeGood> list = Game.getInstance().
+                getPlayer().getShip().getCargoList();
         int total = 0;
-        for (GoodType i: list) {
-            total += i.getPrice()*i.getSellCount();
+        for (TradeGood i: list) {
+            total += i.getPrice() * i.getSellCount();
         }
-        for (GoodType gSold: list) {
+        for (TradeGood gSold: list) {
             boolean alreadyAdded = false;
             for (MarketGood gMark: storeInventory) {
                 if (gSold.getName().equals(gMark.getName())) {
@@ -177,7 +174,7 @@ public class Store {
                 }
             }
             if (!alreadyAdded) {
-                MarketGood diffGood = new MarketGood(gSold);
+                MarketGood diffGood = new MarketGood(gSold.getGoodType());
                 diffGood.setQuantity(gSold.getSellCount());
                 diffGood.setSolarSystem(player.getCurrentSystem());
                 diffGood.setPlanet(player.getCurrentPlanet());
@@ -189,95 +186,11 @@ public class Store {
                 gSold.setQuantity(gSold.getQuantity() - gSold.getSellCount());
                 gSold.setSellCount(0);
             }
-
         }
         player.setCredits(player.getCredits() + total);
     }
 
-
-
-
-
-
-    public int cartSellTotal() {
-        int total = 0;
-        for (MarketGood item: cartSell) {
-            total += item.getPrice();
-        }
-        return total;
-    }
-
-
     public List<MarketGood> getStoreInventory() { return storeInventory; }
-
-    public class MarketGood {
-        private GoodType good;
-        private String name;
-        private int count;
-        private Planet planet;
-        private SolarSystem sys;
-        private int quantity;
-        private int price;
-
-        public MarketGood(GoodType good) {
-            this.good = good;
-            this.name = good.getName();
-            this.sys = Game.getInstance().getPlayer().getCurrentSystem();
-            this.planet = Game.getInstance().getPlayer().getCurrentPlanet();
-            this.price = calculatePrice();
-        }
-
-        public int calculatePrice() {
-            int newPrice = 0;
-            newPrice = good.getBasePrice() + (good.getIPL() * sys.getTechLevel().ordinal()) +
-                    good.getVar();
-            return newPrice;
-        }
-
-        public void setQuantity(int q) {
-            quantity = q;
-        }
-
-
-        public void setPrice(int p) {
-            price = p;
-        }
-
-        public int getCount() {
-            return count;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setCount(int c) {
-            count = c;
-        }
-
-        public GoodType getGoodType() {
-            return good;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getPrice() {
-            return price;
-        }
-
-        public void setSolarSystem(SolarSystem system) {
-            sys = system;
-        }
-
-        public void setPlanet(Planet plan) {
-            planet = plan;
-        }
-
-
-    }
-
 
 
 

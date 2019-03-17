@@ -16,13 +16,16 @@ import android.widget.Toast;
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class market_Activity extends AppCompatActivity implements Buy_ItemFragment.OnListFragmentInteractionListener,
+public class market_Activity extends AppCompatActivity implements
+        Buy_ItemFragment.OnListFragmentInteractionListener,
         Sell_ItemFragment.OnListFragmentInteractionListener {
     private BottomNavigationView bottomNav;
     private int selectedItem;
@@ -99,12 +102,12 @@ public class market_Activity extends AppCompatActivity implements Buy_ItemFragme
     }
 
     @Override
-    public void onListFragmentInteraction(Store.MarketGood item) {
+    public void onListFragmentInteraction(MarketGood item) {
 
     }
 
     @Override
-    public void onListFragmentInteraction(GoodType item) {
+    public void onListFragmentInteraction(TradeGood item) {
 
     }
 
