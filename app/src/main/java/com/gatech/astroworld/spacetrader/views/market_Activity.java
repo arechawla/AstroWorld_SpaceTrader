@@ -84,8 +84,8 @@ public class market_Activity extends AppCompatActivity implements
                     remainingCredits.setText("Remaining Credits: " +
                             String.valueOf(Game.getInstance().getPlayer().getCredits()));
                     Buy_Item_RecyclerAdapter.mCountTot = 0;
+                    nav.navigate(R.id.toBuyFragment);
                 }
-//                what = true;
             }
         });
 
@@ -97,6 +97,7 @@ public class market_Activity extends AppCompatActivity implements
                         .sell(Game.getInstance().getPlayer());
                 remainingCredits.setText("Remaining Credits: " +
                         String.valueOf(Game.getInstance().getPlayer().getCredits()));
+                nav.navigate(R.id.toSellFragment);
             }
         });
     }
