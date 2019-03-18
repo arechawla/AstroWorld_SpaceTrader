@@ -42,8 +42,8 @@ public class market_Activity extends AppCompatActivity implements
         final Toast error3 = Toast.makeText(getApplicationContext(), "You cannot" +
                 " hold this many items in the ship!", Toast.LENGTH_LONG);
         final TextView remainingCredits = findViewById(R.id.yourCredits);
-        Button buy = findViewById(R.id.buyButton);
-        Button sell = findViewById(R.id.sellButton);
+        final Button buy = findViewById(R.id.buyButton);
+        final Button sell = findViewById(R.id.sellButton);
         mBuyTotal = findViewById(R.id.buyTotal);
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
         remainingCredits.setText("Remaining Credits: " +
@@ -65,6 +65,9 @@ public class market_Activity extends AppCompatActivity implements
                                 getCurrentPlanet().getStore().zeroMarketCounts();
                         Game.getInstance().getPlayer().
                                 getShip().zeroSellCounts();
+
+                        buy.setEnabled(true);
+                        sell.setEnabled(false);
                         nav.navigate(R.id.toBuyFragment);
                         return true;
                     case R.id.destination_sell:
@@ -79,6 +82,9 @@ public class market_Activity extends AppCompatActivity implements
                                 getCurrentPlanet().getStore().zeroMarketCounts();
                         Game.getInstance().getPlayer().
                                 getShip().zeroSellCounts();
+
+                        buy.setEnabled(false);
+                        sell.setEnabled(true);
                         nav.navigate(R.id.toSellFragment);
                         return true;
                     default:
@@ -100,6 +106,7 @@ public class market_Activity extends AppCompatActivity implements
                     remainingCredits.setText("Remaining Credits: " +
                             String.valueOf(Game.getInstance().getPlayer().getCredits()));
                     Buy_Item_RecyclerAdapter.mCountTot = 0;
+
                     nav.navigate(R.id.toBuyFragment);
                 }
             }
@@ -113,6 +120,7 @@ public class market_Activity extends AppCompatActivity implements
                         .sell(Game.getInstance().getPlayer());
                 remainingCredits.setText("Remaining Credits: " +
                         String.valueOf(Game.getInstance().getPlayer().getCredits()));
+                //buy.setEnabled(false);
                 nav.navigate(R.id.toSellFragment);
             }
         });
