@@ -13,6 +13,4 @@ public interface EncounterNPC {
     //and NPC may attack you, dependent on your stats
     void attack();
 
-    //the player may surrender to the NPC
-    void surrenderToNPC();
 }
