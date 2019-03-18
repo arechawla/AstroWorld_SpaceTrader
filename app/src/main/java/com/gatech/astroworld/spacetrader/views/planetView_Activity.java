@@ -19,6 +19,7 @@ public class planetView_Activity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planet_view_);
         Button marketButton = findViewById(R.id.accessMarket_button);
+        Button playerButton = findViewById(R.id.playerInfo);
         TextView title = findViewById(R.id.planetName);
         title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
         TextView info = findViewById(R.id.information);
@@ -26,6 +27,9 @@ public class planetView_Activity extends FragmentActivity {
         String tech = "Tech Level: " + Game.getInstance().getPlayer().getCurrentSystem().getTechLevel().name();
         String system = "Solar System: " + Game.getInstance().getPlayer().getCurrentSystem().getName();
         info.setText(system + "\n" + tech + "\n" + gov);
+
+
+
         marketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +37,15 @@ public class planetView_Activity extends FragmentActivity {
                 startActivity(i);
             }
         });
+
+        playerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PlayerInfo.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 }
