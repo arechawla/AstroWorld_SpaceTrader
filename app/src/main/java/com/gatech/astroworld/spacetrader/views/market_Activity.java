@@ -24,12 +24,16 @@ import com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter.mBuyTotal;
+import static com.gatech.astroworld.spacetrader.views.market.Sell_Item_RecyclerAdapter.mSellTotal;
+
+
 public class market_Activity extends AppCompatActivity implements
         Buy_ItemFragment.OnListFragmentInteractionListener,
         Sell_ItemFragment.OnListFragmentInteractionListener {
     private BottomNavigationView bottomNav;
     private int selectedItem;
-    public static TextView mBuyTotal;
+    public static TextView mShowTotal;
 //    public static boolean what = false;
 
 
@@ -44,7 +48,7 @@ public class market_Activity extends AppCompatActivity implements
         final TextView remainingCredits = findViewById(R.id.yourCredits);
         final Button buy = findViewById(R.id.buyButton);
         final Button sell = findViewById(R.id.sellButton);
-        mBuyTotal = findViewById(R.id.buyTotal);
+        mShowTotal = findViewById(R.id.buyTotal);
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
         remainingCredits.setText("Remaining Credits: " +
                 String.valueOf(Game.getInstance().getPlayer().getCredits()));
@@ -60,6 +64,10 @@ public class market_Activity extends AppCompatActivity implements
                                     getCurrentPlanet().getStore().zeroMarketCounts();
                             Game.getInstance().getPlayer().
                                     getShip().zeroSellCounts();
+                            mBuyTotal = 0;
+                            market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                            mSellTotal = 0;
+                            market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
                             return false;
                         }
                         Game.getInstance().getPlayer().
@@ -69,6 +77,10 @@ public class market_Activity extends AppCompatActivity implements
 
                         buy.setEnabled(true);
                         sell.setEnabled(false);
+                        mBuyTotal = 0;
+                        market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                        mSellTotal = 0;
+                        market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
                         nav.navigate(R.id.toBuyFragment);
                         return true;
                     case R.id.destination_sell:
@@ -77,6 +89,10 @@ public class market_Activity extends AppCompatActivity implements
                                     getCurrentPlanet().getStore().zeroMarketCounts();
                             Game.getInstance().getPlayer().
                                     getShip().zeroSellCounts();
+                            mBuyTotal = 0;
+                            market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                            mSellTotal = 0;
+                            market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
                             return false;
                         }
                         Game.getInstance().getPlayer().
@@ -86,6 +102,10 @@ public class market_Activity extends AppCompatActivity implements
 
                         buy.setEnabled(false);
                         sell.setEnabled(true);
+                        mBuyTotal = 0;
+                        market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                        mSellTotal = 0;
+                        market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
                         nav.navigate(R.id.toSellFragment);
                         return true;
                     default:
@@ -107,6 +127,9 @@ public class market_Activity extends AppCompatActivity implements
                     remainingCredits.setText("Remaining Credits: " +
                             String.valueOf(Game.getInstance().getPlayer().getCredits()));
                     Buy_Item_RecyclerAdapter.mCountTot = 0;
+                    mBuyTotal = 0;
+                    market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+
 
                     nav.navigate(R.id.toBuyFragment);
                 }
@@ -121,7 +144,9 @@ public class market_Activity extends AppCompatActivity implements
                         .sell(Game.getInstance().getPlayer());
                 remainingCredits.setText("Remaining Credits: " +
                         String.valueOf(Game.getInstance().getPlayer().getCredits()));
-                //buy.setEnabled(false);
+                mSellTotal = 0;
+                market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
+
                 nav.navigate(R.id.toSellFragment);
             }
         });

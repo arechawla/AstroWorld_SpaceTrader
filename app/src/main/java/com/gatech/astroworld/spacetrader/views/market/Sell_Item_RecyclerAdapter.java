@@ -13,18 +13,19 @@ import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment.OnListFragmentInteractionListener;
+import com.gatech.astroworld.spacetrader.views.market_Activity;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * 
  * TODO: Replace the implementation with code for your data type.
  */
 public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_RecyclerAdapter.ViewHolder> {
 
     private final List<TradeGood> mValues;
     private final OnListFragmentInteractionListener mListener;
+    public static int mSellTotal = 0;
     private Store store;
 
     public Sell_Item_RecyclerAdapter(List<TradeGood> items, OnListFragmentInteractionListener listener) {
@@ -92,7 +93,12 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int i = mItem.getSellCount();
                     store.incrementCountSell(mItem);
+                    if (mItem.getSellCount() != i) {
+                        mSellTotal += mItem.getPrice();
+                        updateTotal();
+                    }
                     itemCountText.setText(String.valueOf(mItem.getSellCount()));
                 }
             });
@@ -100,10 +106,19 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int i = mItem.getSellCount();
                     store.decrementCountSell(mItem);
+                    if (mItem.getSellCount() != i) {
+                        mSellTotal -= mItem.getPrice();
+                        updateTotal();
+                    }
                     itemCountText.setText(String.valueOf(mItem.getSellCount()));
                 }
             });
+        }
+
+        public void updateTotal() {
+            market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
         }
 
 
