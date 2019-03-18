@@ -55,4 +55,16 @@
         android:text="Planet: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currSystem" />
+
+    <ImageView
+        android:id="@+id/shipPlayerInfo"
+        android:layout_width="213dp"
+        android:layout_height="227dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ufo_spaceship" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
