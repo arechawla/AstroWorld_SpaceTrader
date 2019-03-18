@@ -47,6 +47,12 @@ public class Spaceship {
         return -1;
     }
 
+    public int getSpaceLeft() {
+        return capacity - cargoAmount();
+    }
+
+    public int getFuel() { return fuel; }
+
 
     public int getCapacity() {
         return capacity;
