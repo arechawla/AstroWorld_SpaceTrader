@@ -49,6 +49,7 @@ public class market_Activity extends AppCompatActivity implements
         remainingCredits.setText("Remaining Credits: " +
                 String.valueOf(Game.getInstance().getPlayer().getCredits()));
         bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
+        sell.setEnabled(false);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
