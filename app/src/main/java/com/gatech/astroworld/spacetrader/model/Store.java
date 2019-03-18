@@ -150,6 +150,7 @@ public class Store {
         List<TradeGood> list = Game.getInstance().
                 getPlayer().getShip().getCargoList();
         int total = 0;
+        List<TradeGood> toRemove = new ArrayList<TradeGood>();
         for (TradeGood i: list) {
             total += i.getPrice() * i.getSellCount();
         }
@@ -170,11 +171,14 @@ public class Store {
                 storeInventory.add(diffGood);
             }
             if (gSold.getSellCount() == gSold.getQuantity()) {
-                list.remove(gSold);
+                toRemove.add(gSold);
             } else {
                 gSold.setQuantity(gSold.getQuantity() - gSold.getSellCount());
                 gSold.setSellCount(0);
             }
+        }
+        for (TradeGood t: toRemove) {
+            list.remove(t);
         }
         player.setCredits(player.getCredits() + total);
     }
