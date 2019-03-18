@@ -6,6 +6,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +49,7 @@ public class market_Activity extends AppCompatActivity implements
         final TextView remainingCredits = findViewById(R.id.yourCredits);
         final Button buy = findViewById(R.id.buyButton);
         final Button sell = findViewById(R.id.sellButton);
+        final Button backButton = findViewById(R.id.backButton);
         mShowTotal = findViewById(R.id.buyTotal);
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
         remainingCredits.setText("Remaining Credits: " +
@@ -148,6 +150,22 @@ public class market_Activity extends AppCompatActivity implements
                 market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
 
                 nav.navigate(R.id.toSellFragment);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Game.getInstance().getPlayer().
+                        getCurrentPlanet().getStore().zeroMarketCounts();
+                Game.getInstance().getPlayer().
+                        getShip().zeroSellCounts();
+                mBuyTotal = 0;
+                market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                mSellTotal = 0;
+                market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
+                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+                startActivity(i);
             }
         });
     }
