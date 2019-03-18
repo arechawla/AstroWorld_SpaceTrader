@@ -6,7 +6,6 @@ import com.gatech.astroworld.spacetrader.model.SolarSystem;
 
 public class TradeGood {
 
-
     private int quantity;
     private  String name;
     private int price;

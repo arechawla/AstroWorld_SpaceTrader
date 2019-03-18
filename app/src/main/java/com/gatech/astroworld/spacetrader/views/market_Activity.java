@@ -55,14 +55,30 @@ public class market_Activity extends AppCompatActivity implements
                 switch (menuItem.getItemId()) {
                     case R.id.destination_buy:
                         if (nav.getCurrentDestination().getId() ==R.id.destination_buy) {
+                            Game.getInstance().getPlayer().
+                                    getCurrentPlanet().getStore().zeroMarketCounts();
+                            Game.getInstance().getPlayer().
+                                    getShip().zeroSellCounts();
                             return false;
                         }
+                        Game.getInstance().getPlayer().
+                                getCurrentPlanet().getStore().zeroMarketCounts();
+                        Game.getInstance().getPlayer().
+                                getShip().zeroSellCounts();
                         nav.navigate(R.id.toBuyFragment);
                         return true;
                     case R.id.destination_sell:
                         if (nav.getCurrentDestination().getId() ==R.id.destination_sell) {
+                            Game.getInstance().getPlayer().
+                                    getCurrentPlanet().getStore().zeroMarketCounts();
+                            Game.getInstance().getPlayer().
+                                    getShip().zeroSellCounts();
                             return false;
                         }
+                        Game.getInstance().getPlayer().
+                                getCurrentPlanet().getStore().zeroMarketCounts();
+                        Game.getInstance().getPlayer().
+                                getShip().zeroSellCounts();
                         nav.navigate(R.id.toSellFragment);
                         return true;
                     default:

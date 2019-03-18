@@ -54,6 +54,12 @@ public class Store {
         return StringGoods;
     }
 
+    public void zeroMarketCounts() {
+        for (MarketGood good: storeInventory) {
+            good.setCount(0);
+        }
+    }
+
     private int calculateQuantity(GoodType item) {
         int base = 10;
         if (sys.getTechLevel().ordinal() < item.getMTLP()) {

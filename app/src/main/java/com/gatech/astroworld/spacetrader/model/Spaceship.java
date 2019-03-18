@@ -32,6 +32,12 @@ public class Spaceship {
         return total;
     }
 
+    public void zeroSellCounts() {
+        for (TradeGood tGood: cargo) {
+            tGood.setSellCount(0);
+        }
+    }
+
     public Integer containsCargo(TradeGood find) {
         for (int i = 0; i < cargo.size(); i++) {
             if (find.getName().equals(cargo.get(i).getName())) {
