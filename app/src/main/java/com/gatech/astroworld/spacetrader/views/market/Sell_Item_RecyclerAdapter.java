@@ -18,7 +18,7 @@ import com.gatech.astroworld.spacetrader.views.market_Activity;
 import java.util.List;
 
 /**
- * 
+ *
  * TODO: Replace the implementation with code for your data type.
  */
 public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_RecyclerAdapter.ViewHolder> {
