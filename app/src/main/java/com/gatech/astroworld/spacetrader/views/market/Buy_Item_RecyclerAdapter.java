@@ -33,7 +33,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     private final List<MarketGood> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Store store;
-    int mTotal = 0;
+    public static int mBuyTotal = 0;
     public static int mCountTot = 0;
 
 
@@ -105,7 +105,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int i = mTotal + mItem.getPrice();
+                    int i = mBuyTotal + mItem.getPrice();
                     if (mItem.getCount() + 1 > mItem.getQuantity()) {
                         error.show();
                     }
@@ -116,7 +116,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                         store.incrementCountBuy(mItem);
                         itemCountText.setText(String.valueOf(mItem.getCount()));
                         mListener.onListFragmentInteraction(mItem);
-                        mTotal = i;
+                        mBuyTotal = i;
                         mCountTot++;
                         updateTotal();
                     }
@@ -128,9 +128,9 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 public void onClick(View v) {
                     store.decrementCountBuy(mItem);
                     itemCountText.setText(String.valueOf(mItem.getCount()));
-                    int i = mTotal - mItem.getPrice();
+                    int i = mBuyTotal - mItem.getPrice();
                     if (i >= 0) {
-                        mTotal = i;
+                        mBuyTotal = i;
                         mCountTot--;
                         updateTotal();
                     }
@@ -139,7 +139,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         }
 
         public int getMTotal() {
-            return mTotal;
+            return mBuyTotal;
         }
 
         @Override
@@ -148,8 +148,9 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
         }
 
         public void updateTotal() {
-            market_Activity.mBuyTotal.setText(String.valueOf(mTotal));
+            market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
         }
+
 
         public void updateQuant() {
             for (int i = 0; i < mValues.size(); i++) {
