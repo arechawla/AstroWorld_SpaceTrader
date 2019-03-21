@@ -1,8 +1,12 @@
 package com.gatech.astroworld.spacetrader.model;
+
+import android.graphics.Point;
+
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
-
+import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,41 +17,157 @@ public class SolarSystem {
     private TechLevel techLevel;
     private Resources resources;
     private SysLocation sysLocation;
-    private int systemSize = 1000;
+    private int systemSize = 500;
     private int maxPlanets = 9;
-
-    private int systemMargin = 5;
-
+    private int systemMargin = Game.getInstance().getGalaxySize() / Game.getInstance().getMaxSystems() + 150;
+    private Galaxy_viewmodel galaxyViewmodel;
 
     private Random rand = new Random();
-    public SolarSystem () {
-        SysLocation loc = new SysLocation();
-        this.sysLocation = loc;
+    public SolarSystem (int maxPosX, int maxPosY) {
 
         final TechLevel[] TECHLEVEL_VALUES = TechLevel.values();
         final Resources[] RESOURCES_VALUES = Resources.values();
-        this.name = SolarSystemName[rand.nextInt(SolarSystemName.length)];
+        String[] solarSystemName = {
+                "Acamar",
+                "Adahn",
+                "Aldea",
+                "Andevian",
+                "Antedi",
+                "Balosnee",
+                "Baratas",
+                "Brax",
+                "Bretel",
+                "Calondia",
+                "Campor",
+                "Capelle",
+                "Carzon",
+                "Castor",
+                "Cestus",
+                "Cheron",
+                "Courteney",
+                "Daled",
+                "Damast",
+                "Davlos",
+                "Deneb",
+                "Deneva",
+                "Devidia",
+                "Draylon",
+                "Drema",
+                "Endor",
+                "Esmee",
+                "Exo",
+                "Ferris",
+                "Festen",
+                "Fourmi",
+                "Frolix",
+                "Gemulon",
+                "Guinifer",
+                "Hades",
+                "Hamlet",
+                "Helena",
+                "Hulst",
+                "Iodine",
+                "Iralius",
+                "Janus",
+                "Japori",
+                "Jarada",
+                "Jason",
+                "Kaylon",
+                "Khefka",
+                "Kira",
+                "Klaatu",
+                "Klaestron",
+                "Korma",
+                "Kravat",
+                "Krios",
+                "Laertes",
+                "Largo",
+                "Lave",
+                "Ligon",
+                "Lowry",
+                "Magrat",
+                "Malcoria",
+                "Melina",
+                "Mentar",
+                "Merik",
+                "Mintaka",
+                "Montor",
+                "Mordan",
+                "Myrthe",
+                "Nelvana",
+                "Nix",
+                "Nyle",
+                "Odet",
+                "Og",
+                "Omega",
+                "Omphalos",
+                "Orias",
+                "Othello",
+                "Parade",
+                "Penthara",
+                "Picard",
+                "Pollux",
+                "Quator",
+                "Rakhar",
+                "Ran",
+                "Regulas",
+                "Relva",
+                "Rhymus",
+                "Rochani",
+                "Rubicum",
+                "Rutia",
+                "Sarpeidon",
+                "Sefalla",
+                "Seltrice",
+                "Sigma",
+                "Sol",
+                "Somari",
+                "Stakoron",
+                "Styris",
+                "Talani",
+                "Tamus",
+                "Tantalos",
+                "Tanuga",
+                "Tarchannen",
+                "Terosa",
+                "Thera",
+                "Titan",
+                "Torin",
+                "Triacus",
+                "Turkana",
+                "Tyrus",
+                "Umberlee",
+                "Utopia",
+                "Vadera",
+                "Vagra",
+                "Vandor",
+                "Ventax",
+                "Xenon",
+                "Xerxes",
+                "Yew",
+                "Yojimbo",
+                "Zalkon",
+                "Zuul"
+        };
+        this.name = solarSystemName[rand.nextInt(solarSystemName.length)];
         this.techLevel = TECHLEVEL_VALUES[rand.nextInt(TECHLEVEL_VALUES.length - 1)];
         this.resources = RESOURCES_VALUES[rand.nextInt(RESOURCES_VALUES.length - 1)];
 
         /* Compare new system distance from galactic center to the distance of every system created.
          * If the new system is within +/- systemMargin of an existing system, then the new system
          * distance is changed. */
-        for (SolarSystem tempSys: Game.getInstance().getSystemList()) {
-            double tempX = tempSys.sysLocation.xPos;
-            double tempY = tempSys.sysLocation.yPos;
-            double distance = Math.sqrt(Math.pow((sysLocation.xPos - tempX), 2)
-                            + Math.pow((sysLocation.yPos - tempY), 2));
-
-            while (distance < systemMargin) {
-                sysLocation.randomLocation();
-                distance = Math.sqrt(Math.pow((sysLocation.xPos - tempX), 2)
-                        + Math.pow((sysLocation.yPos - tempY), 2));
-            }
+        int sysListSize = Game.getInstance().getSystemList().size();
+        if(sysListSize <= 0) {
+            sysLocation = new SysLocation();
+        } else {
+            sysLocation = new SysLocation(Game.getInstance().getSystemList().get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
         }
         for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
             addPlanet(new Planet(this));
         }
+    }
+    public SysLocation getSysLocation() {
+        return sysLocation;
     }
 
     public int getSystemSize() {
@@ -76,14 +196,25 @@ public class SolarSystem {
 
     public class SysLocation {
         private int galaxySize = Game.getInstance().getGalaxySize();
-        Random random = new Random();
+        private Point galaxyButtonSize = new Point(100, 100);
+        private Random random = new Random();
         private double xPos;
         private double yPos;
         private double galacCenterDist;
+        private int prevSize = 0;
 
         SysLocation () {
-            this.xPos = (random.nextDouble() * 2 * galaxySize) - galaxySize;
-            this.yPos = (random.nextDouble() * 2 * galaxySize) - galaxySize;
+            this.xPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
+            this.yPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
+            galacCenterDist = Math.hypot(xPos, yPos);
+        }
+        SysLocation (SysLocation prevSystem, Point layoutSize) {
+            prevSize = (int)prevSystem.getGalacCenterDist();
+            if (prevSize >= galaxySize) {
+                prevSize = systemMargin / 3;
+            }
+            this.xPos = (random.nextDouble() * 2 * layoutSize.x) - (prevSize + layoutSize.x - galaxyButtonSize.x);
+            this.yPos = (random.nextDouble() * 2 * layoutSize.y) - (prevSize + layoutSize.y - galaxyButtonSize.y);
             galacCenterDist = Math.hypot(xPos, yPos);
         }
 
@@ -118,130 +249,6 @@ public class SolarSystem {
                 + this.resources.toString() + "\nTech: " + techLevel.toString()) + "\nNumber of Planets: " + listOfPlanets.size(); */
         return "Testing system toString";
     }
-
-    private String[] SolarSystemName =
-    {
-        "Acamar",
-            "Adahn",		// The alternate personality for The Nameless One in "Planescape: Torment"
-            "Aldea",
-            "Andevian",
-            "Antedi",
-            "Balosnee",
-            "Baratas",
-            "Brax",			// One of the heroes in Master of Magic
-            "Bretel",		// This is a Dutch device for keeping your pants up.
-            "Calondia",
-            "Campor",
-            "Capelle",		// The city I lived in while programming this game
-            "Carzon",
-            "Castor",		// A Greek demi-god
-            "Cestus",
-            "Cheron",
-            "Courteney",	// After Courteney Cox…
-            "Daled",
-            "Damast",
-            "Davlos",
-            "Deneb",
-            "Deneva",
-            "Devidia",
-            "Draylon",
-            "Drema",
-            "Endor",
-            "Esmee",		// One of the witches in Pratchett's Discworld
-            "Exo",
-            "Ferris",		// Iron
-            "Festen",		// A great Scandinavian movie
-            "Fourmi",		// An ant, in French
-            "Frolix",		// A solar system in one of Philip K. Dick's novels
-            "Gemulon",
-            "Guinifer",		// One way of writing the name of king Arthur's wife
-            "Hades",		// The underworld
-            "Hamlet",		// From Shakespeare
-            "Helena",		// Of Troy
-            "Hulst",		// A Dutch plant
-            "Iodine",		// An element
-            "Iralius",
-            "Janus",		// A seldom encountered Dutch boy's name
-            "Japori",
-            "Jarada",
-            "Jason",		// A Greek hero
-            "Kaylon",
-            "Khefka",
-            "Kira",			// My dog's name
-            "Klaatu",		// From a classic SF movie
-            "Klaestron",
-            "Korma",		// An Indian sauce
-            "Kravat",		// Interesting spelling of the French word for "tie"
-            "Krios",
-            "Laertes",		// A king in a Greek tragedy
-            "Largo",
-            "Lave",			// The starting system in Elite
-            "Ligon",
-            "Lowry",		// The name of the "hero" in Terry Gilliam's "Brazil"
-            "Magrat",		// The second of the witches in Pratchett's Discworld
-            "Malcoria",
-            "Melina",
-            "Mentar",		// The Psilon home system in Master of Orion
-            "Merik",
-            "Mintaka",
-            "Montor",		// A city in Ultima III and Ultima VII part 2
-            "Mordan",
-            "Myrthe",		// The name of my daughter
-            "Nelvana",
-            "Nix",			// An interesting spelling of a word meaning "nothing" in Dutch
-            "Nyle",			// An interesting spelling of the great river
-            "Odet",
-            "Og",			// The last of the witches in Pratchett's Discworld
-            "Omega",		// The end of it all
-            "Omphalos",		// Greek for navel
-            "Orias",
-            "Othello",		// From Shakespeare
-            "Parade",		// This word means the same in Dutch and in English
-            "Penthara",
-            "Picard",		// The enigmatic captain from ST:TNG
-            "Pollux",		// Brother of Castor
-            "Quator",
-            "Rakhar",
-            "Ran",			// A film by Akira Kurosawa
-            "Regulas",
-            "Relva",
-            "Rhymus",
-            "Rochani",
-            "Rubicum",		// The river Ceasar crossed to get into Rome
-            "Rutia",
-            "Sarpeidon",
-            "Sefalla",
-            "Seltrice",
-            "Sigma",
-            "Sol",			// That's our own solar system
-            "Somari",
-            "Stakoron",
-            "Styris",
-            "Talani",
-            "Tamus",
-            "Tantalos",		// A king from a Greek tragedy
-            "Tanuga",
-            "Tarchannen",
-            "Terosa",
-            "Thera",		// A seldom encountered Dutch girl's name
-            "Titan",		// The largest moon of Jupiter
-            "Torin",		// A hero from Master of Magic
-            "Triacus",
-            "Turkana",
-            "Tyrus",
-            "Umberlee",		// A god from AD&D, which has a prominent role in Baldur's Gate
-            "Utopia",		// The ultimate goal
-            "Vadera",
-            "Vagra",
-            "Vandor",
-            "Ventax",
-            "Xenon",
-            "Xerxes",		// A Greek hero
-            "Yew",			// A city which is in almost all of the Ultima games
-            "Yojimbo",		// A film by Akira Kurosawa
-            "Zalkon",
-            "Zuul"			// From the first Ghostbusters movie
-    };
 
 
 }

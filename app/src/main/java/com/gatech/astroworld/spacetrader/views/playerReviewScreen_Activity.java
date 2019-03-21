@@ -106,20 +106,8 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Random rand = new Random();
-                Player currPlayer = playerConfig.getPlayer();
-                //Generate max number of systems
-                galaxy_viewmodel.generateSystems();
-                //Assign the player a random system
-                currPlayer.setCurrentSystem(galaxy_viewmodel.getRandomSystem());
-                //Assign the player a random planet in that system
-                currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-                        rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
-                //Update the player
-                playerConfig.updatePlayer(currPlayer);
                 //Start planet view activity (Should be changed to galaxy view later)
-                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+                Intent i = new Intent(getApplicationContext(), galaxyView_Activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             }

@@ -12,7 +12,7 @@ public class Game {
     private Player player;
     private List<SolarSystem> systemList = new ArrayList<>();
     private int galaxySize = 1000;
-    private int maxSystems = (galaxySize / 50) ;
+    private int maxSystems = (15) ;
 
     // static variable single_instance of type Singleton
     private static Game single_instance = null;
