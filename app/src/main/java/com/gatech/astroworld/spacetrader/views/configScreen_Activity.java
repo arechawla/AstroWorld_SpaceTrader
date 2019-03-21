@@ -35,6 +35,7 @@ public class configScreen_Activity extends AppCompatActivity {
     private int maxStartPoints = 16;
     private int totalPoints = 0;
     private Difficulty difficulty;
+    //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
