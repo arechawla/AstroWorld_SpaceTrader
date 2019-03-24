@@ -158,6 +158,10 @@ public class Planet {
 
     }
 
+    public Planet.PlanetLocation getPlanLocation() {
+        return planetLocation;
+    }
+
     public String getName() {
         return name;
     }

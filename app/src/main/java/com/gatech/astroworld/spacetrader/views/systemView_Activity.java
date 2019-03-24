@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
@@ -79,10 +80,10 @@ public class systemView_Activity extends AppCompatActivity
         //Update the player
         configuration_viewmodel.updatePlayer(currPlayer);
         List<ImageButton> buttonList = new ArrayList<>();
-        for (SolarSystem system : game.getSystemList()) {
-            double xPos = system.getSysLocation().getxPos();
-            double yPos = system.getSysLocation().getyPos();
-            generateSystemButton(xPos, yPos, buttonContainer, buttonList);
+        for (Planet planet : systemViewmodel.getPlanetList()) {
+            double xPos = planet.getPlanLocation().getxPos();
+            double yPos = planet.getPlanLocation().getyPos();
+            generatePlanetButton(xPos, yPos, buttonContainer, buttonList);
         }
     }
 
@@ -135,7 +136,7 @@ public class systemView_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void generateSystemButton(double xPos, double yPos, RelativeLayout layout, List<ImageButton> buttonList) {
+    private void generatePlanetButton(double xPos, double yPos, RelativeLayout layout, List<ImageButton> buttonList) {
 
         ImageButton planetButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);
