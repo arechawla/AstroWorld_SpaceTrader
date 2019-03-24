@@ -34,12 +34,14 @@ public class Galaxy_viewmodel extends AndroidViewModel {
     public List<SolarSystem> getSystemList(){
         return game.getSystemList();
     }
+
+
     public SolarSystem getRandomSystem(){
-        if (game.getSystemList().size() <= 0) {
-            for (int i = 0; i < game.getMaxSystems(); i++) {
-                game.getSystemList().add(new SolarSystem(100, 100));
-            }
-        }
+//        if (game.getSystemList().size() <= 0) {
+//            for (int i = 0; i < game.getMaxSystems(); i++) {
+//                game.getSystemList().add(new SolarSystem(2000, 2000));
+//            }
+//        }
         return game.getSystemList().get(rand.nextInt(game.getSystemList().size() - 1));
     }
 

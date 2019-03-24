@@ -69,22 +69,39 @@ public class galaxyView_Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Random rand = new Random();
-        Player currPlayer = game.getPlayer();
+//        Random rand = new Random();
+//        Player currPlayer = game.getPlayer();
         //Assign the player a random system
-        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
-        //Assign the player a random planet in that system
-        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-                rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
-        //Update the player
-        configuration_viewmodel.updatePlayer(currPlayer);
+
+        View v = (View) findViewById(R.id.buttonContainer);
+        galaxyViewmodel.generateGalaxy(v.getWidth(), v.getHeight());
+
+//        if (game.getSystemList().size() <= 0) {
+//            for (int i = 0; i < game.getMaxSystems(); i++) {
+//                game.getSystemList().add(new SolarSystem(v.getWidth(), v.getHeight()));
+//            }
+//        }
+//        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
+//        //Assign the player a random planet in that system
+//        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
+//                rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
+//        //Update the player
+//        configuration_viewmodel.updatePlayer(currPlayer);
     }
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
         View v = (View) findViewById(R.id.buttonContainer);
         viewCenterX = v.getWidth() / 2;
         viewCenterY = v.getHeight() / 2;
+        Random rand = new Random();
+        Player currPlayer = game.getPlayer();
         galaxyViewmodel.generateGalaxy(viewCenterX * 2, viewCenterY * 2);
+        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
+        //Assign the player a random planet in that system
+        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
+                rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
+        //Update the player
+        configuration_viewmodel.updatePlayer(currPlayer);
         List<ImageButton> buttonList = new ArrayList<>();
         for (SolarSystem system : game.getSystemList()) {
             double xPos = system.getSysLocation().getxPos();
@@ -150,7 +167,8 @@ public class galaxyView_Activity extends AppCompatActivity
         systemButton.setImageBitmap(image);
         systemButton.setBackgroundResource(0);
         buttonList.add(systemButton);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
+                (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
         layout.addView(systemButton, params);
     }
