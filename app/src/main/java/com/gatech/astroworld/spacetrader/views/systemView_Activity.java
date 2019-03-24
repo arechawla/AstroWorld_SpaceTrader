@@ -64,14 +64,14 @@ public class systemView_Activity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navPlanets_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
 
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
-        View v = (View) findViewById(R.id.buttonContainer);
+        View v = (View) findViewById(R.id.buttonContainer2);
         viewCenterX = v.getWidth() / 2;
         viewCenterY = v.getHeight() / 2;
         Random rand = new Random();
@@ -84,6 +84,15 @@ public class systemView_Activity extends AppCompatActivity
             double xPos = planet.getPlanLocation().getxPos();
             double yPos = planet.getPlanLocation().getyPos();
             generatePlanetButton(xPos, yPos, buttonContainer, buttonList);
+        }
+        for (ImageButton b: buttonList) {
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+                    startActivity(i);
+                }
+            });
         }
     }
 

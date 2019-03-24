@@ -27,6 +27,7 @@ import com.gatech.astroworld.spacetrader.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
@@ -103,6 +104,16 @@ public class galaxyView_Activity extends AppCompatActivity
             double yPos = system.getSysLocation().getyPos();
             generateSystemButton(xPos, yPos, buttonContainer, buttonList);
         }
+
+        for (ImageButton b: buttonList) {
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
+                    startActivity(i);
+                }
+            });
+        }
     }
 
     @Override
@@ -167,5 +178,9 @@ public class galaxyView_Activity extends AppCompatActivity
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
         layout.addView(systemButton, params);
     }
+
+
+
+
 
 }
