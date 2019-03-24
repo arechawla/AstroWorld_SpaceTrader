@@ -134,10 +134,10 @@ public class systemView_Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_player) {
+        if (id == R.id.nav2_player) {
             Intent i = new Intent(getApplicationContext(), PlayerInfo.class);
             startActivity(i);
-        } else if (id == R.id.nav_ship) {
+        } else if (id == R.id.nav2_ship) {
 
         }
 

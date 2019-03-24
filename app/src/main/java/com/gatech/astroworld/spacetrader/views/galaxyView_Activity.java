@@ -45,6 +45,7 @@ public class galaxyView_Activity extends AppCompatActivity
     private int viewCenterX;
     private int viewCenterY;
     private Point galaxyButtonSize = new Point(100, 100);
+    int count = 0;
 
 
 
@@ -98,24 +99,25 @@ public class galaxyView_Activity extends AppCompatActivity
                 rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
         //Update the player
         configuration_viewmodel.updatePlayer(currPlayer);
-        List<ImageButton> buttonList = new ArrayList<>();
-        for (SolarSystem system : game.getSystemList()) {
-            double xPos = system.getSysLocation().getxPos();
-            double yPos = system.getSysLocation().getyPos();
-            generateSystemButton(xPos, yPos, buttonContainer, buttonList);
-        }
-
-        for (ImageButton b: buttonList) {
-            b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v){
-                    Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
-                    startActivity(i);
-                }
-            });
+        if (count == 0) {
+            List<ImageButton> buttonList = new ArrayList<>();
+            for (SolarSystem system : game.getSystemList()) {
+                double xPos = system.getSysLocation().getxPos();
+                double yPos = system.getSysLocation().getyPos();
+                generateSystemButton(xPos, yPos, buttonContainer, buttonList);
+            }
+            for (ImageButton b: buttonList) {
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v){
+                        Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
+                        startActivity(i);
+                    }
+                });
+            }
+            count++;
         }
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
