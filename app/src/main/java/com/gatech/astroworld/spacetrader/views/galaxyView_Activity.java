@@ -32,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -45,6 +46,7 @@ public class galaxyView_Activity extends AppCompatActivity
     private int viewCenterX;
     private int viewCenterY;
     private Point galaxyButtonSize = new Point(100, 100);
+    private HashMap<ImageButton, SolarSystem> systemButtons = new HashMap<>();
     int count = 0;
 
 
@@ -59,6 +61,7 @@ public class galaxyView_Activity extends AppCompatActivity
         configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
         //Generate buttons for galaxy view
         game = Game.getInstance();
+
 
         buttonContainer = findViewById(R.id.buttonContainer);
 
@@ -93,29 +96,36 @@ public class galaxyView_Activity extends AppCompatActivity
         Random rand = new Random();
         Player currPlayer = game.getPlayer();
         galaxyViewmodel.generateGalaxy(viewCenterX * 2, viewCenterY * 2);
-        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
+//        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
         //Assign the player a random planet in that system
-        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-                rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
+//        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
+//                rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
         //Update the player
         configuration_viewmodel.updatePlayer(currPlayer);
         if (count == 0) {
-            List<ImageButton> buttonList = new ArrayList<>();
+            currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
+            currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
+                    rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
             for (SolarSystem system : game.getSystemList()) {
                 double xPos = system.getSysLocation().getxPos();
                 double yPos = system.getSysLocation().getyPos();
-                generateSystemButton(xPos, yPos, buttonContainer, buttonList);
-            }
-            for (ImageButton b: buttonList) {
-                b.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v){
-                        Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
-                        startActivity(i);
-                    }
-                });
+                generateSystemButton(xPos, yPos, buttonContainer, systemButtons, system);
             }
             count++;
+        }
+        for (HashMap.Entry b: systemButtons.entrySet()) {
+            final HashMap.Entry entry = b;
+            ImageButton button = (ImageButton) b.getKey();
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Player currPlayer = game.getPlayer();
+                    currPlayer.setCurrentSystem((SolarSystem) entry.getValue());
+                    currPlayer.setCurrentPlanet(null);
+                    Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
+                    startActivity(i);
+                }
+            });
         }
     }
     @Override
@@ -167,14 +177,15 @@ public class galaxyView_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void generateSystemButton(double xPos, double yPos, RelativeLayout layout, List<ImageButton> buttonList) {
+    private void generateSystemButton(double xPos, double yPos, RelativeLayout layout,
+                                      HashMap<ImageButton, SolarSystem> buttonList, SolarSystem system) {
 
         ImageButton systemButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);
         image = Bitmap.createScaledBitmap(image, galaxyButtonSize.x, galaxyButtonSize.y, true);
         systemButton.setImageBitmap(image);
         systemButton.setBackgroundResource(0);
-        buttonList.add(systemButton);
+        buttonList.put(systemButton, system);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
                 (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
