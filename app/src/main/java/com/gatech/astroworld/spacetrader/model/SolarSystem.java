@@ -160,7 +160,9 @@ public class SolarSystem {
         if(sysListSize <= 0) {
             sysLocation = new SysLocation();
         } else {
-            sysLocation = new SysLocation(Game.getInstance().getSystemList().get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
+            sysLocation = new SysLocation(new Point(maxPosX, maxPosY));
+//            sysLocation = new SysLocation(Game.getInstance().getSystemList().
+//                    get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
         }
         for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
             addPlanet(new Planet(this));
@@ -208,15 +210,35 @@ public class SolarSystem {
             this.yPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
             galacCenterDist = Math.hypot(xPos, yPos);
         }
-        SysLocation (SysLocation prevSystem, Point layoutSize) {
-            prevSize = (int)prevSystem.getGalacCenterDist();
-            if (prevSize >= galaxySize) {
-                prevSize = systemMargin / 3;
+
+        SysLocation (Point layoutSize) {
+            int numXintervals = 10;
+            int numYintervals = 10;
+            int[][] grid = new int[numXintervals][numYintervals];
+            int unitXPixelDist = layoutSize.x/numXintervals;
+            int unitYPixelDist = layoutSize.y/numYintervals;
+
+            int xRandPick = random.nextInt(numXintervals);
+            int yRandPick = random.nextInt(numYintervals);
+            while (grid[xRandPick][yRandPick] == 1) {
+                xRandPick = random.nextInt(numXintervals);
+                yRandPick = random.nextInt(numYintervals);
             }
-            this.xPos = (random.nextDouble() * 2 * layoutSize.x) - (prevSize + layoutSize.x - galaxyButtonSize.x);
-            this.yPos = (random.nextDouble() * 2 * layoutSize.y) - (prevSize + layoutSize.y - galaxyButtonSize.y);
-            galacCenterDist = Math.hypot(xPos, yPos);
+            grid[xRandPick][yRandPick] = 1;
+            this.xPos = (xRandPick) * unitXPixelDist;
+            this.yPos = (yRandPick) * unitYPixelDist;
+
         }
+
+//        SysLocation (SysLocation prevSystem, Point layoutSize) {
+//            prevSize = (int)prevSystem.getGalacCenterDist();
+//            if (prevSize >= galaxySize) {
+//                prevSize = systemMargin / 3;
+//            }
+//            this.xPos = (random.nextDouble() * 2 * layoutSize.x) - (prevSize + layoutSize.x - galaxyButtonSize.x);
+//            this.yPos = (random.nextDouble() * 2 * layoutSize.y) - (prevSize + layoutSize.y - galaxyButtonSize.y);
+//            galacCenterDist = Math.hypot(xPos, yPos);
+//        }
 
         public double getGalacCenterDist() {
             return galacCenterDist;
