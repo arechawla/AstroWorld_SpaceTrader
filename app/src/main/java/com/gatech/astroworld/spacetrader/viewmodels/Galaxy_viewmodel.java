@@ -37,16 +37,10 @@ public class Galaxy_viewmodel extends AndroidViewModel {
 
 
     public SolarSystem getRandomSystem(){
-//        if (game.getSystemList().size() <= 0) {
-//            for (int i = 0; i < game.getMaxSystems(); i++) {
-//                game.getSystemList().add(new SolarSystem(2000, 2000));
-//            }
-//        }
         return game.getSystemList().get(rand.nextInt(game.getSystemList().size() - 1));
     }
 
     public void generateGalaxy (int galSizeX, int galSizeY) {
-
         //Generate max number of systems
         for (int i = 0; i < game.getMaxSystems(); i++) {
             game.getSystemList().add(new SolarSystem(galSizeX, galSizeY));

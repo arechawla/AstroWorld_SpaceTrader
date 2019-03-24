@@ -19,8 +19,8 @@ public class SolarSystem {
     private SysLocation sysLocation;
     private int systemSize = 500;
     private int maxPlanets = 9;
-    private int systemMargin = Game.getInstance().getGalaxySize() / Game.getInstance().getMaxSystems() + 150;
-    private Galaxy_viewmodel galaxyViewmodel;
+//    private int systemMargin = Game.getInstance().getGalaxySize() / Game.getInstance().getMaxSystems() + 150;
+//    private Galaxy_viewmodel galaxyViewmodel;
     private int maxPosX;
     private int maxPosY;
 
@@ -168,9 +168,19 @@ public class SolarSystem {
 ////            sysLocation = new SysLocation(Game.getInstance().getSystemList().
 ////                    get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
 //        }
-        for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
+//        this.getListOfPlanets().add(new Planet(this));
+
+        for (int i = 0; i < maxPlanets; i++) {
             addPlanet(new Planet(this));
         }
+
+//        for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
+//            addPlanet(new Planet(this));
+//        }
+    }
+
+    public int getMaxPlanets() {
+        return maxPlanets;
     }
     public SysLocation getSysLocation() {
         return sysLocation;
