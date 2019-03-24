@@ -157,13 +157,13 @@ public class SolarSystem {
          * If the new system is within +/- systemMargin of an existing system, then the new system
          * distance is changed. */
         int sysListSize = Game.getInstance().getSystemList().size();
-        if(sysListSize <= 0) {
-            sysLocation = new SysLocation();
-        } else {
-            sysLocation = new SysLocation(new Point(maxPosX, maxPosY));
-//            sysLocation = new SysLocation(Game.getInstance().getSystemList().
-//                    get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
-        }
+        this.sysLocation = new SysLocation(new Point(maxPosX, maxPosY));
+//        if(sysListSize <= 0) {
+//            sysLocation = new SysLocation();
+//        } else {
+////            sysLocation = new SysLocation(Game.getInstance().getSystemList().
+////                    get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
+//        }
         for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
             addPlanet(new Planet(this));
         }
@@ -205,11 +205,11 @@ public class SolarSystem {
         private double galacCenterDist;
         private int prevSize = 0;
 
-        SysLocation () {
-            this.xPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
-            this.yPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
-            galacCenterDist = Math.hypot(xPos, yPos);
-        }
+//        SysLocation () {
+//            this.xPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
+//            this.yPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
+//            galacCenterDist = Math.hypot(xPos, yPos);
+//        }
 
         SysLocation (Point layoutSize) {
             int numXintervals = 10;
@@ -225,8 +225,8 @@ public class SolarSystem {
                 yRandPick = random.nextInt(numYintervals);
             }
             grid[xRandPick][yRandPick] = 1;
-            this.xPos = (xRandPick) * unitXPixelDist;
-            this.yPos = (yRandPick) * unitYPixelDist;
+            this.xPos = (xRandPick) * unitXPixelDist - layoutSize.x/2;
+            this.yPos = (yRandPick) * unitYPixelDist - layoutSize.y/2;
 
         }
 
