@@ -21,12 +21,16 @@ public class SolarSystem {
     private int maxPlanets = 9;
     private int systemMargin = Game.getInstance().getGalaxySize() / Game.getInstance().getMaxSystems() + 150;
     private Galaxy_viewmodel galaxyViewmodel;
+    private int maxPosX;
+    private int maxPosY;
 
     private Random rand = new Random();
     public SolarSystem (int maxPosX, int maxPosY) {
 
         final TechLevel[] TECHLEVEL_VALUES = TechLevel.values();
         final Resources[] RESOURCES_VALUES = Resources.values();
+        this.maxPosX = maxPosX;
+        this.maxPosY = maxPosY;
         String[] solarSystemName = {
                 "Acamar",
                 "Adahn",
@@ -170,6 +174,14 @@ public class SolarSystem {
     }
     public SysLocation getSysLocation() {
         return sysLocation;
+    }
+
+    public int getMaxPosX() {
+        return maxPosX;
+    }
+
+    public int getMaxPosY() {
+        return maxPosY;
     }
 
     public int getSystemSize() {

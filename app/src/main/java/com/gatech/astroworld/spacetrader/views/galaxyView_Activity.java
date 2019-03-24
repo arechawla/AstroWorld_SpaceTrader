@@ -76,11 +76,6 @@ public class galaxyView_Activity extends AppCompatActivity
         View v = (View) findViewById(R.id.buttonContainer);
         galaxyViewmodel.generateGalaxy(v.getWidth(), v.getHeight());
 
-//        if (game.getSystemList().size() <= 0) {
-//            for (int i = 0; i < game.getMaxSystems(); i++) {
-//                game.getSystemList().add(new SolarSystem(v.getWidth(), v.getHeight()));
-//            }
-//        }
 //        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
 //        //Assign the player a random planet in that system
 //        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
