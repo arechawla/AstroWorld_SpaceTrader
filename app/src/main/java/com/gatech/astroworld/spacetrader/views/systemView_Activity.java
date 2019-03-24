@@ -30,7 +30,9 @@ import com.gatech.astroworld.spacetrader.viewmodels.System_viewmodel;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class systemView_Activity extends AppCompatActivity
@@ -79,21 +81,28 @@ public class systemView_Activity extends AppCompatActivity
         //Assign the player a random planet in that system
         //Update the player
         configuration_viewmodel.updatePlayer(currPlayer);
-        List<ImageButton> buttonList = new ArrayList<>();
+        HashMap<ImageButton, Planet> planetButtons = new HashMap<>();
+
         for (Planet planet : systemViewmodel.getPlanetList()) {
             double xPos = planet.getPlanLocation().getxPos();
             double yPos = planet.getPlanLocation().getyPos();
-            generatePlanetButton(xPos, yPos, buttonContainer, buttonList);
+            generatePlanetButton(xPos, yPos, buttonContainer, planetButtons, planet);
         }
-        for (ImageButton b: buttonList) {
-            b.setOnClickListener(new View.OnClickListener() {
+        for (HashMap.Entry b: planetButtons.entrySet()) {
+            final HashMap.Entry entry = b;
+            ImageButton button = (ImageButton) b.getKey();
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
+                    Player currPlayer = game.getPlayer();
+                    currPlayer.setCurrentPlanet((Planet) entry.getValue());
+
                     Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                     startActivity(i);
                 }
             });
         }
+        configuration_viewmodel.updatePlayer(currPlayer);
     }
 
     @Override
@@ -145,14 +154,15 @@ public class systemView_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void generatePlanetButton(double xPos, double yPos, RelativeLayout layout, List<ImageButton> buttonList) {
+    private void generatePlanetButton(double xPos, double yPos, RelativeLayout layout,
+                                      HashMap<ImageButton, Planet> buttonList, Planet planet) {
 
         ImageButton planetButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);
         image = Bitmap.createScaledBitmap(image, systemButtonSize.x, systemButtonSize.y, true);
         planetButton.setImageBitmap(image);
         planetButton.setBackgroundResource(0);
-        buttonList.add(planetButton);
+        buttonList.put(planetButton, planet);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
                 (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
