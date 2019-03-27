@@ -1,5 +1,6 @@
 package com.gatech.astroworld.spacetrader.views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +17,7 @@ import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,13 +29,11 @@ import com.gatech.astroworld.spacetrader.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 public class galaxyView_Activity extends AppCompatActivity
@@ -47,12 +47,15 @@ public class galaxyView_Activity extends AppCompatActivity
     private int viewCenterY;
     private Point galaxyButtonSize = new Point(100, 100);
     private HashMap<ImageButton, SolarSystem> systemButtons = new HashMap<>();
+    private HashMap.Entry destination;
     int count = 0;
+    private AlertDialog.Builder travelAlertBuilder;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galaxy_view_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,9 +65,6 @@ public class galaxyView_Activity extends AppCompatActivity
         //Generate buttons for galaxy view
         game = Game.getInstance();
 
-
-        buttonContainer = findViewById(R.id.buttonContainer);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -73,34 +73,36 @@ public class galaxyView_Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-//        Random rand = new Random();
-//        Player currPlayer = game.getPlayer();
-        //Assign the player a random system
-
-        View v = (View) findViewById(R.id.buttonContainer);
+        buttonContainer = findViewById(R.id.buttonContainer);
+        View v = (View) buttonContainer;
         galaxyViewmodel.generateGalaxy(v.getWidth(), v.getHeight());
-
-//        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
-//        //Assign the player a random planet in that system
-//        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-//                rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
-//        //Update the player
-//        configuration_viewmodel.updatePlayer(currPlayer);
+        travelAlertBuilder = new AlertDialog.Builder(this);
+        travelAlertBuilder.setPositiveButton(R.string.confirmTravel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                Player currPlayer = game.getPlayer();
+                currPlayer.setCurrentSystem((SolarSystem) destination.getValue());
+                currPlayer.setCurrentPlanet(null);
+                Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
+                startActivity(i);
+            }
+        });
+        travelAlertBuilder.setNegativeButton(R.string.cancelTravel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
+            }
+        });
     }
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
-        View v = (View) findViewById(R.id.buttonContainer);
+        View v = (View) buttonContainer;
         viewCenterX = v.getWidth() / 2;
         viewCenterY = v.getHeight() / 2;
         Random rand = new Random();
         Player currPlayer = game.getPlayer();
         galaxyViewmodel.generateGalaxy(viewCenterX * 2, viewCenterY * 2);
-//        currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
-        //Assign the player a random planet in that system
-//        currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-//                rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
-        //Update the player
         configuration_viewmodel.updatePlayer(currPlayer);
         if (count == 0) {
             currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
@@ -119,11 +121,10 @@ public class galaxyView_Activity extends AppCompatActivity
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    Player currPlayer = game.getPlayer();
-                    currPlayer.setCurrentSystem((SolarSystem) entry.getValue());
-                    currPlayer.setCurrentPlanet(null);
-                    Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
-                    startActivity(i);
+                    destination = entry;
+                    travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
+                            .setTitle("Travel?");
+                    travelAlertBuilder.show();
                 }
             });
         }
@@ -191,9 +192,5 @@ public class galaxyView_Activity extends AppCompatActivity
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
         layout.addView(systemButton, params);
     }
-
-
-
-
 
 }
