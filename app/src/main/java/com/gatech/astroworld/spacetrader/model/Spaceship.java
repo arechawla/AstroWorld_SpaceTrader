@@ -1,5 +1,7 @@
 package com.gatech.astroworld.spacetrader.model;
 
+import android.graphics.Point;
+
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
@@ -12,6 +14,9 @@ public class Spaceship {
     private List<TradeGood> cargo;
     private int capacity;
     private int fuel;
+    private int ssFuelMultiplier = 3;
+    private int unitFuelUse = 100;
+
 
     public Spaceship (String name, int capacity, int fuel) {
         this.name = name;
@@ -45,6 +50,58 @@ public class Spaceship {
             }
         }
         return -1;
+    }
+
+    public boolean travelSolarSystem(SolarSystem current,
+                                      SolarSystem travelTo, Point layoutSize) {
+        int numXintervals = 10;
+        int numYintervals = 10;
+
+        int unitXPixelDist = layoutSize.x/numXintervals;
+        int unitYPixelDist = layoutSize.y/numYintervals;
+
+        double xDist = Math.abs(travelTo.getSysLocation().getxPos() -
+                current.getSysLocation().getxPos());
+        int deltaX = (int)xDist/unitXPixelDist;
+
+        double yDist = Math.abs(travelTo.getSysLocation().getyPos() -
+                current.getSysLocation().getyPos());
+        int deltaY = (int)yDist/unitYPixelDist;
+
+        double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        double fuelUsed = dist * unitFuelUse
+                * ssFuelMultiplier;
+        if (fuelUsed > fuel) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    public boolean travelPlanet(Planet current,
+                                     Planet travelTo, Point layoutSize) {
+        int numXintervals = 10;
+        int numYintervals = 10;
+
+        int unitXPixelDist = layoutSize.x/numXintervals;
+        int unitYPixelDist = layoutSize.y/numYintervals;
+
+        double xDist = Math.abs(travelTo.getPlanLocation().getxPos() -
+                current.getPlanLocation().getxPos());
+        int deltaX = (int)xDist/unitXPixelDist;
+
+        double yDist = Math.abs(travelTo.getPlanLocation().getyPos() -
+                current.getPlanLocation().getyPos());
+        int deltaY = (int)yDist/unitYPixelDist;
+
+        double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        double fuelUsed = dist * unitFuelUse;
+        if (fuelUsed > fuel) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public int getSpaceLeft() {
