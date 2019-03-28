@@ -26,7 +26,7 @@ public class Player {
         this.traderPoints = 0;
         this.engineerPoints = 0;
         this.credits = 1000;
-        this.ship = new Spaceship("Gnat", 25, 500);
+        this.ship = new Spaceship("Gnat", 25, 5000);
     }
     public Player(String name) {
         this();

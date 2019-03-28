@@ -29,11 +29,14 @@ import com.gatech.astroworld.spacetrader.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class galaxyView_Activity extends AppCompatActivity
@@ -65,6 +68,9 @@ public class galaxyView_Activity extends AppCompatActivity
         //Generate buttons for galaxy view
         game = Game.getInstance();
 
+
+        buttonContainer = findViewById(R.id.buttonContainer);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -77,18 +83,23 @@ public class galaxyView_Activity extends AppCompatActivity
         View v = (View) buttonContainer;
         galaxyViewmodel.generateGalaxy(v.getWidth(), v.getHeight());
         travelAlertBuilder = new AlertDialog.Builder(this);
-        travelAlertBuilder.setPositiveButton(R.string.confirmTravel, new DialogInterface.OnClickListener() {
+        travelAlertBuilder.setPositiveButton("Travel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
                 Player currPlayer = game.getPlayer();
+                View v = (View) buttonContainer;
+                double fuelUse = currPlayer.getShip().travelSolarSystem(currPlayer.getCurrentSystem(),
+                        (SolarSystem) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
+                double shipFuel = currPlayer.getShip().getFuel();
+                currPlayer.getShip().setFuel(shipFuel - fuelUse);
                 currPlayer.setCurrentSystem((SolarSystem) destination.getValue());
                 currPlayer.setCurrentPlanet(null);
                 Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
                 startActivity(i);
             }
         });
-        travelAlertBuilder.setNegativeButton(R.string.cancelTravel, new DialogInterface.OnClickListener() {
+        travelAlertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
@@ -121,10 +132,30 @@ public class galaxyView_Activity extends AppCompatActivity
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    destination = entry;
-                    travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
-                            .setTitle("Travel?");
-                    travelAlertBuilder.show();
+                    final Toast error = Toast.makeText(getApplicationContext(), "You do not" +
+                            " have enough fuel to go to this location!", Toast.LENGTH_LONG);
+                    Player currPlayer = game.getPlayer();
+                    double fuelUse = currPlayer.getShip().travelSolarSystem(currPlayer.getCurrentSystem(),
+                            (SolarSystem) entry.getValue(), new Point(v.getWidth(), v.getHeight()));
+                    if (fuelUse == 0) {
+                        error.show();
+                    } else {
+
+                        destination = entry;
+                        travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
+                                .setTitle("Travel?");
+                        travelAlertBuilder.show();
+
+
+
+
+//                        currPlayer.setCurrentSystem((SolarSystem) entry.getValue());
+//                        currPlayer.setCurrentPlanet(null);
+//                        double shipFuel = currPlayer.getShip().getFuel();
+//                        currPlayer.getShip().setFuel(shipFuel - fuelUse);
+//                        Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
+//                        startActivity(i);
+                    }
                 }
             });
         }
@@ -192,5 +223,9 @@ public class galaxyView_Activity extends AppCompatActivity
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
         layout.addView(systemButton, params);
     }
+
+
+
+
 
 }
