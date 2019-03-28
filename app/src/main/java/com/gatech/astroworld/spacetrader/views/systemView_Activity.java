@@ -75,17 +75,21 @@ public class systemView_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         travelAlertBuilder = new AlertDialog.Builder(this);
 
-        travelAlertBuilder.setPositiveButton(R.string.confirmTravel, new DialogInterface.OnClickListener() {
+        travelAlertBuilder.setPositiveButton("Travel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
                 Player currPlayer = game.getPlayer();
+                View v = buttonContainer;
+                double fuelUse = currPlayer.getShip().travelPlanet((Planet) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
+                double shipFuel = currPlayer.getShip().getFuel();
+                currPlayer.getShip().setFuel(shipFuel - fuelUse);
                 currPlayer.setCurrentPlanet((Planet) destination.getValue());
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 startActivity(i);
             }
         });
-        travelAlertBuilder.setNegativeButton(R.string.cancelTravel, new DialogInterface.OnClickListener() {
+        travelAlertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
@@ -118,11 +122,27 @@ public class systemView_Activity extends AppCompatActivity
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    destination = entry;
-                    travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
-                            .setTitle("Travel?");
-                    travelAlertBuilder.show();
+                    final Toast error = Toast.makeText(getApplicationContext(), "You do not" +
+                            " have enough fuel to go to this location!", Toast.LENGTH_LONG);
+                    Player currPlayer = game.getPlayer();
+                    double fuelUse = currPlayer.getShip().travelPlanet((Planet) entry.getValue(), new Point(v.getWidth(), v.getHeight()));
+                    if (fuelUse == 0) {
+                        error.show();
+                    } else {
+                        destination = entry;
+                        travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
+                                .setTitle("Travel?");
+                        travelAlertBuilder.show();
 
+
+
+
+//                        currPlayer.setCurrentPlanet((Planet) entry.getValue());
+//                        double shipFuel = currPlayer.getShip().getFuel();
+//                        currPlayer.getShip().setFuel(shipFuel - fuelUse);
+//                        Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+//                        startActivity(i);
+                    }
                 }
             });
         }

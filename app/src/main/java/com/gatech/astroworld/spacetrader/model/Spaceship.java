@@ -13,9 +13,9 @@ public class Spaceship {
     private String name;
     private List<TradeGood> cargo;
     private int capacity;
-    private int fuel;
+    private double fuel;
     private int ssFuelMultiplier = 3;
-    private int unitFuelUse = 100;
+    private int unitFuelUse = 50;
 
 
     public Spaceship (String name, int capacity, int fuel) {
@@ -52,7 +52,7 @@ public class Spaceship {
         return -1;
     }
 
-    public boolean travelSolarSystem(SolarSystem current,
+    public double travelSolarSystem(SolarSystem current,
                                       SolarSystem travelTo, Point layoutSize) {
         int numXintervals = 10;
         int numYintervals = 10;
@@ -72,15 +72,14 @@ public class Spaceship {
         double fuelUsed = dist * unitFuelUse
                 * ssFuelMultiplier;
         if (fuelUsed > fuel) {
-            return false;
+            return 0;
         } else {
-            return true;
+            return fuelUsed;
         }
     }
 
 
-    public boolean travelPlanet(Planet current,
-                                     Planet travelTo, Point layoutSize) {
+    public double travelPlanet(Planet travelTo, Point layoutSize) {
         int numXintervals = 10;
         int numYintervals = 10;
 
@@ -88,19 +87,19 @@ public class Spaceship {
         int unitYPixelDist = layoutSize.y/numYintervals;
 
         double xDist = Math.abs(travelTo.getPlanLocation().getxPos() -
-                current.getPlanLocation().getxPos());
+                0);
         int deltaX = (int)xDist/unitXPixelDist;
 
         double yDist = Math.abs(travelTo.getPlanLocation().getyPos() -
-                current.getPlanLocation().getyPos());
+                0);
         int deltaY = (int)yDist/unitYPixelDist;
 
         double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         double fuelUsed = dist * unitFuelUse;
         if (fuelUsed > fuel) {
-            return false;
+            return 0;
         } else {
-            return true;
+            return fuelUsed;
         }
     }
 
@@ -108,7 +107,11 @@ public class Spaceship {
         return capacity - cargoAmount();
     }
 
-    public int getFuel() { return fuel; }
+    public double getFuel() { return fuel; }
+
+    public void setFuel(double f) {
+        fuel = f;
+    }
 
 
     public int getCapacity() {
