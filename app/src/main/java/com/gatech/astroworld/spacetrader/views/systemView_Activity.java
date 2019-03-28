@@ -204,13 +204,40 @@ public class systemView_Activity extends AppCompatActivity
         ImageButton planetButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);
         image = Bitmap.createScaledBitmap(image, systemButtonSize.x, systemButtonSize.y, true);
-        planetButton.setImageBitmap(image);
+        Bitmap curImage = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem_current);
+        curImage = getResizedBitmap(curImage, 110);
+
+        if (Game.getInstance().getPlayer().getCurrentPlanet() != null) {
+            if (planet.equals(Game.getInstance().getPlayer().getCurrentPlanet())) {
+                planetButton.setImageBitmap(curImage);
+            }
+        }
+        else {
+
+            planetButton.setImageBitmap(image);
+        }
         planetButton.setBackgroundResource(0);
         buttonList.put(planetButton, planet);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
                 (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
         layout.addView(planetButton, params);
+    }
+
+    private Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+
+        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
 
