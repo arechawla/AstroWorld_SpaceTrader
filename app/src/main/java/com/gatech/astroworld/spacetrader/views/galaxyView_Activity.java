@@ -1,5 +1,6 @@
 package com.gatech.astroworld.spacetrader.views;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,10 +14,12 @@ import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 
+import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -62,6 +65,7 @@ public class galaxyView_Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galaxy_view_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Galaxy Map");
         setSupportActionBar(toolbar);
         galaxyViewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
         configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
@@ -105,7 +109,10 @@ public class galaxyView_Activity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
             }
         });
+
+
     }
+
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
         View v = (View) buttonContainer;

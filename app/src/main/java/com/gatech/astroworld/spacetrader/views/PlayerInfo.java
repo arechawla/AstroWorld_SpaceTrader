@@ -2,14 +2,12 @@ package com.gatech.astroworld.spacetrader.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Player;
 
 public class PlayerInfo extends AppCompatActivity {
 
@@ -22,20 +20,14 @@ public class PlayerInfo extends AppCompatActivity {
         TextView availSpace = findViewById(R.id.availSpace);
         TextView currSys = findViewById(R.id.currSystem);
         TextView currPlanet = findViewById(R.id.currPlanet);
-        Button backButton = findViewById(R.id.backButton);
+        Game game = Game.getInstance();
+        Player player = game.getPlayer();
+        StringBuilder strBuild = new StringBuilder();
 
-        shipName.setText("Ship Name: " + Game.getInstance().getPlayer().getShip().toString());
-        shipFuel.setText("Fuel Remaining: " + Game.getInstance().getPlayer().getShip().getFuel());
-        availSpace.setText("Space Left in Cargo: " + Game.getInstance().getPlayer().getShip().getSpaceLeft());
-        currSys.setText("Solar System: " + Game.getInstance().getPlayer().getCurrentSystem().getName());
-        currPlanet.setText("Planet: " + Game.getInstance().getPlayer().getCurrentPlanet());
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
-                startActivity(i);
-            }
-        });
+        shipName.setText(new StringBuilder().append("Ship Name: ").append(player.getShip().toString()).toString());
+        shipFuel.setText(new StringBuilder().append("Fuel Remaining: ").append(player.getShip().getFuel()).toString());
+        availSpace.setText(new StringBuilder().append("Space Left in Cargo: ").append(player.getShip().getSpaceLeft()).toString());
+        currSys.setText(new StringBuilder().append("Solar System: ").append(player.getCurrentSystem().getName()).toString());
+        currPlanet.setText(new StringBuilder().append("Planet: ").append(player.getCurrentPlanet()).toString());
     }
 }

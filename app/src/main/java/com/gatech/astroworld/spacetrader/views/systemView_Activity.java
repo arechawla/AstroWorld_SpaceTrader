@@ -1,6 +1,6 @@
 package com.gatech.astroworld.spacetrader.views;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,12 +9,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,16 +28,11 @@ import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
-import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
-import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.System_viewmodel;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class systemView_Activity extends AppCompatActivity
@@ -55,13 +52,14 @@ public class systemView_Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_view_);
-
+        game = Game.getInstance();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar.setTitle(game.getPlayer().getCurrentSystem().toString());
         setSupportActionBar(toolbar);
         systemViewmodel = ViewModelProviders.of(this).get(System_viewmodel.class);
         configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
         //Generate buttons for galaxy view
-        game = Game.getInstance();
+
 
         buttonContainer = findViewById(R.id.buttonContainer2);
 
@@ -95,9 +93,10 @@ public class systemView_Activity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
             }
         });
-        AlertDialog travelAlert =  travelAlertBuilder.create();
-    }
 
+
+
+    }
 
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);

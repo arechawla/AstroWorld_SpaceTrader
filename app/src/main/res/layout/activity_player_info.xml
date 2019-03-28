@@ -6,24 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".views.PlayerInfo">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="48dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="@+id/shipName"
-        app:layout_constraintEnd_toEndOf="@+id/shipName"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/shipName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="120dp"
         android:text="Ship Name: "
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,6 +24,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Fuel Remaining: "
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shipName" />
 
@@ -44,6 +35,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Space Left in Cargo: "
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shipFuel" />
 
@@ -54,6 +46,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Solar System: "
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/availSpace" />
 
@@ -64,6 +57,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Planet: "
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currSystem" />
 
@@ -71,11 +65,23 @@
         android:id="@+id/shipPlayerInfo"
         android:layout_width="213dp"
         android:layout_height="227dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ufo_spaceship" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Player Info"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
