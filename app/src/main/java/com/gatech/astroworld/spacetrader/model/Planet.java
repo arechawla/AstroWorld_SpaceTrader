@@ -1,10 +1,13 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import android.graphics.Point;
+import android.media.Image;
 
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 
 import java.util.Random;
+
+import androidx.annotation.Nullable;
 
 public class Planet {
     private String name;
@@ -138,4 +141,13 @@ public class Planet {
     }
 
     public Store getStore() { return store; }
+
+    @Override
+    public boolean equals(Object other) {
+         if (this == other) return true;
+         Planet that = (Planet) other;
+         boolean sameLocation = this.getPlanLocation() == that.getPlanLocation();
+         boolean sameName = this.getName().equals(that.getName());
+         return sameLocation && sameName;
+    }
 }

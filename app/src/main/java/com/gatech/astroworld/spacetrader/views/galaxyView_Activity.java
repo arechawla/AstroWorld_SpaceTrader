@@ -215,13 +215,36 @@ public class galaxyView_Activity extends AppCompatActivity
         ImageButton systemButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);
         image = Bitmap.createScaledBitmap(image, galaxyButtonSize.x, galaxyButtonSize.y, true);
-        systemButton.setImageBitmap(image);
+        Bitmap curImage = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem_current);
+        curImage = getResizedBitmap(curImage, 110);
+        if (system.equals(Game.getInstance().getPlayer().getCurrentSystem())) {
+            systemButton.setImageBitmap(curImage);
+        } else {
+            systemButton.setImageBitmap(image);
+
+        }
         systemButton.setBackgroundResource(0);
         buttonList.put(systemButton, system);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
                 (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
         layout.addView(systemButton, params);
+    }
+
+    private Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+
+        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
 

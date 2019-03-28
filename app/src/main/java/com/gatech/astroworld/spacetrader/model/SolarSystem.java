@@ -226,6 +226,11 @@ public class SolarSystem {
         private double galacCenterDist;
         private int prevSize = 0;
 
+//        SysLocation () {
+//            this.xPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
+//            this.yPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
+//            galacCenterDist = Math.hypot(xPos, yPos);
+//        }
 
         SysLocation (Point layoutSize) {
             final int numXintervals = 10;
@@ -271,6 +276,13 @@ public class SolarSystem {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        SolarSystem that = (SolarSystem) other;
+        boolean sameLocation = this.getSysLocation() == that.getSysLocation();
+        boolean sameName = this.getName().equals(that.getName());
+        return sameLocation && sameName;
+    }
     public String toString() {return getName();}
 
 }
