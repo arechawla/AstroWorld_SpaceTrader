@@ -29,11 +29,4 @@ public class System_viewmodel extends AndroidViewModel {
     }
 
 
-
-//    public void generateGalaxy (int galSizeX, int galSizeY) {
-//        //Generate max number of systems
-//        for (int i = 0; i < game.getMaxSystems(); i++) {
-//            game.getSystemList().add(new SolarSystem(galSizeX, galSizeY));
-//        }
-//    }
 }
