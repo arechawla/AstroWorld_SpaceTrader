@@ -2,12 +2,14 @@ package com.gatech.astroworld.spacetrader.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
@@ -45,6 +48,8 @@ public class systemView_Activity extends AppCompatActivity
     private int viewCenterX;
     private int viewCenterY;
     private Point systemButtonSize = new Point(100, 100);
+    private AlertDialog.Builder travelAlertBuilder;
+    private HashMap.Entry destination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,25 @@ public class systemView_Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navPlanets_view);
         navigationView.setNavigationItemSelectedListener(this);
+        travelAlertBuilder = new AlertDialog.Builder(this);
+
+        travelAlertBuilder.setPositiveButton(R.string.confirmTravel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                Player currPlayer = game.getPlayer();
+                currPlayer.setCurrentPlanet((Planet) destination.getValue());
+                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+                startActivity(i);
+            }
+        });
+        travelAlertBuilder.setNegativeButton(R.string.cancelTravel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog travelAlert =  travelAlertBuilder.create();
     }
 
 
@@ -94,11 +118,11 @@ public class systemView_Activity extends AppCompatActivity
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    Player currPlayer = game.getPlayer();
-                    currPlayer.setCurrentPlanet((Planet) entry.getValue());
+                    destination = entry;
+                    travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
+                            .setTitle("Travel?");
+                    travelAlertBuilder.show();
 
-                    Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
-                    startActivity(i);
                 }
             });
         }

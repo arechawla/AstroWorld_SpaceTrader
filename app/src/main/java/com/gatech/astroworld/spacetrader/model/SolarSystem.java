@@ -19,8 +19,7 @@ public class SolarSystem {
     private SysLocation sysLocation;
     private int systemSize = 500;
     private int maxPlanets = 9;
-//    private int systemMargin = Game.getInstance().getGalaxySize() / Game.getInstance().getMaxSystems() + 150;
-//    private Galaxy_viewmodel galaxyViewmodel;
+    private int ssFuelMultipier = 3;
     private int maxPosX;
     private int maxPosY;
 
@@ -227,15 +226,10 @@ public class SolarSystem {
         private double galacCenterDist;
         private int prevSize = 0;
 
-//        SysLocation () {
-//            this.xPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
-//            this.yPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
-//            galacCenterDist = Math.hypot(xPos, yPos);
-//        }
 
         SysLocation (Point layoutSize) {
-            int numXintervals = 10;
-            int numYintervals = 10;
+            final int numXintervals = 10;
+            final int numYintervals = 10;
             int[][] grid = new int[numXintervals][numYintervals];
             int unitXPixelDist = layoutSize.x/numXintervals;
             int unitYPixelDist = layoutSize.y/numYintervals;
@@ -252,15 +246,6 @@ public class SolarSystem {
 
         }
 
-//        SysLocation (SysLocation prevSystem, Point layoutSize) {
-//            prevSize = (int)prevSystem.getGalacCenterDist();
-//            if (prevSize >= galaxySize) {
-//                prevSize = systemMargin / 3;
-//            }
-//            this.xPos = (random.nextDouble() * 2 * layoutSize.x) - (prevSize + layoutSize.x - galaxyButtonSize.x);
-//            this.yPos = (random.nextDouble() * 2 * layoutSize.y) - (prevSize + layoutSize.y - galaxyButtonSize.y);
-//            galacCenterDist = Math.hypot(xPos, yPos);
-//        }
 
         public double getGalacCenterDist() {
             return galacCenterDist;
@@ -286,13 +271,6 @@ public class SolarSystem {
     }
 
     @Override
-    public String toString() {
-
-        /*return ("\n\n\nName:  " + name + "\nPosition: (" + this.sysLocation.getxPos() + "," + this.sysLocation.getyPos() + ")"
-                + "\nTech Level: " + techLevel.toString() + "\nResources: "
-                + this.resources.toString() + "\nTech: " + techLevel.toString()) + "\nNumber of Planets: " + listOfPlanets.size(); */
-        return "Testing system toString";
-    }
-
+    public String toString() {return getName();}
 
 }
