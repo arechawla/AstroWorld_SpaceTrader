@@ -6,3 +6,4 @@ We are a group of CS Students at the Georgia Institute of Technology creating an
 
   - Fix current location marker
   - Random encounters with traders, pirates, mercenaries, and police
+  - Disable the back button in PlanetView
