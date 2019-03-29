@@ -29,7 +29,7 @@ public class configScreen_Activity extends AppCompatActivity {
     private TextView fighterCounter;
     private TextView engineerCounter;
     private TextView remainingPointsCounter;
-    public static Activity mainActivity;
+
 
     //Setting up new game variables.
     private int maxStartPoints = 16;
@@ -40,7 +40,6 @@ public class configScreen_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Init activity
-        mainActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_screen_);
         //Init UI components

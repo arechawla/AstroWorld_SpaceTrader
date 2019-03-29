@@ -46,6 +46,5 @@ public class planetView_Activity extends FragmentActivity {
             }
         });
 
-
     }
 }

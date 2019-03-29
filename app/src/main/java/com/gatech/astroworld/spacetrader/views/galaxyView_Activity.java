@@ -250,7 +250,6 @@ public class galaxyView_Activity extends AppCompatActivity
             height = maxSize;
             width = (int) (height * bitmapRatio);
         }
-
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
