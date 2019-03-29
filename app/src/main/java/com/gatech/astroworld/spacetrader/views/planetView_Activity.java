@@ -20,6 +20,7 @@ public class planetView_Activity extends FragmentActivity {
         setContentView(R.layout.activity_planet_view_);
         Button marketButton = findViewById(R.id.accessMarket_button);
         Button playerButton = findViewById(R.id.playerInfo);
+        Button orbitButton = findViewById(R.id.returnToOrbit_button);
         TextView title = findViewById(R.id.planetName);
         title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
         TextView info = findViewById(R.id.information);
@@ -45,6 +46,18 @@ public class planetView_Activity extends FragmentActivity {
                 startActivity(i);
             }
         });
+
+        orbitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
+                startActivity(i);
+            }
+        });
+
+
+
+
 
     }
 }
