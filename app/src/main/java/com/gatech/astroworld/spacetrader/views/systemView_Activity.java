@@ -28,6 +28,7 @@ import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
+import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.System_viewmodel;
 import com.google.android.material.navigation.NavigationView;
@@ -47,6 +48,7 @@ public class systemView_Activity extends AppCompatActivity
     private Point systemButtonSize = new Point(100, 100);
     private AlertDialog.Builder travelAlertBuilder;
     private HashMap.Entry destination;
+    private AlertDialog.Builder leaveSystemBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +98,36 @@ public class systemView_Activity extends AppCompatActivity
 
 
 
+        leaveSystemBuilder = new AlertDialog.Builder(this);
+        leaveSystemBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Out of the Solar System",
+                        Toast.LENGTH_LONG).show();
+                Player currPlayer = game.getPlayer();
+
+                currPlayer.setCurrentSystem((SolarSystem) destination.getValue());
+                currPlayer.setCurrentPlanet(null);
+                Intent i = new Intent(getApplicationContext(), galaxyView_Activity.class);
+                startActivity(i);
+            }
+        });
+        leaveSystemBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+
+
+
     }
+
+//    @Override
+//    public void onBackPressed(){
+//
+//    }
 
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
@@ -132,10 +163,6 @@ public class systemView_Activity extends AppCompatActivity
                         travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
                                 .setTitle("Travel?");
                         travelAlertBuilder.show();
-
-
-
-
 //                        currPlayer.setCurrentPlanet((Planet) entry.getValue());
 //                        double shipFuel = currPlayer.getShip().getFuel();
 //                        currPlayer.getShip().setFuel(shipFuel - fuelUse);
@@ -153,9 +180,11 @@ public class systemView_Activity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        leaveSystemBuilder.setMessage("Are you sure you want to leave the Solar System?")
+                .setTitle("Travel?");
+        leaveSystemBuilder.show();
+
     }
 
     @Override
