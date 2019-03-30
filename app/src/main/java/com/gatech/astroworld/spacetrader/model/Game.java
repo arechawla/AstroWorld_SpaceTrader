@@ -1,11 +1,23 @@
 package com.gatech.astroworld.spacetrader.model;
 
+import android.app.Activity;
+
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
+import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class Game {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Game extends AppCompatActivity {
 
     //Init game vars
     private Difficulty difficulty;
@@ -21,7 +33,6 @@ public class Game {
     private Game() {
         player = new Player(null);
         difficulty = Difficulty.BEGINNER;
-
     }
 
     // static method to create instance of Singleton class
@@ -71,4 +82,31 @@ public class Game {
         + "\n********************************************************"; */
         return "Game toString test";
     }
+
+
+    public void initializePlayerPlanet() {
+        DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
+        int width = disp.widthPixels;
+        int height = disp.heightPixels;
+        for (int i = 0; i < getMaxSystems(); i++) {
+            SolarSystem sys = new SolarSystem(width , height);
+            systemList.add(sys);
+            System.out.println(sys.getSysLocation().getxPos());
+            System.out.println(sys.getSysLocation().getyPos());
+            for (Planet p: systemList.get(i).getListOfPlanets()) {
+                System.out.println(p.getName());
+            }
+        }
+        Random rand = new Random();
+        player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().size() - 1)));
+        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(
+                rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
+    }
+
+//    public void generateGalaxy (int galSizeX, int galSizeY) {
+//        //Generate max number of systems
+//        for (int i = 0; i < this.getMaxSystems(); i++) {
+//            this.getSystemList().add(new SolarSystem(galSizeX, galSizeY));
+//        }
+//    }
 }

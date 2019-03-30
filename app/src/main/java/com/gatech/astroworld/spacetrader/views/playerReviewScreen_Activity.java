@@ -103,11 +103,15 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
             engineerDescription.setTextColor(Color.GREEN);
         }
 
+        /**
+         *
+         */
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Start planet view activity (Should be changed to galaxy view later)
-                Intent i = new Intent(getApplicationContext(), galaxyView_Activity.class);
+                Game.getInstance().initializePlayerPlanet();
+                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             }

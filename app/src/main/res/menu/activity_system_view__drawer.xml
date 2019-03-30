@@ -12,6 +12,10 @@
             android:id="@+id/nav2_player"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Player Status" />
+        <item
+            android:id="@+id/nav2_Galaxy"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Galaxy Map" />
     </group>
 
 </menu>
