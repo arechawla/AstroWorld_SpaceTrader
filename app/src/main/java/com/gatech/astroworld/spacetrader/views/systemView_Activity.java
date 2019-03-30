@@ -105,7 +105,6 @@ public class systemView_Activity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Out of the Solar System",
                         Toast.LENGTH_LONG).show();
                 Player currPlayer = game.getPlayer();
-                currPlayer.setCurrentSystem((SolarSystem) destination.getValue());
                 currPlayer.setCurrentPlanet(null);
                 Intent i = new Intent(getApplicationContext(), galaxyView_Activity.class);
                 startActivity(i);
@@ -117,16 +116,8 @@ public class systemView_Activity extends AppCompatActivity
                 return;
             }
         });
-
-
-
-
     }
 
-//    @Override
-//    public void onBackPressed(){
-//
-//    }
 
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
@@ -236,9 +227,16 @@ public class systemView_Activity extends AppCompatActivity
         curImage = getResizedBitmap(curImage, 110);
 
 
-        if (planet.equals(Game.getInstance().getPlayer().getCurrentPlanet())) {
-            planetButton.setImageBitmap(curImage);
-        } else {
+        if (Game.getInstance().getPlayer().getCurrentPlanet() != null) {
+            if (planet.equals(Game.getInstance().getPlayer().getCurrentPlanet())) {
+                planetButton.setImageBitmap(curImage);
+            }
+            else {
+                planetButton.setImageBitmap(image);
+            }
+        }
+
+         else {
             planetButton.setImageBitmap(image);
         }
 
