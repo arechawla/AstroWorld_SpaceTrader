@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
@@ -14,7 +15,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.Menu;
@@ -56,7 +59,7 @@ public class systemView_Activity extends AppCompatActivity
         setContentView(R.layout.activity_system_view_);
         game = Game.getInstance();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        toolbar.setTitle(game.getPlayer().getCurrentSystem().toString());
+        toolbar.setTitle(game.getPlayer().getCurrentSystem().toString() + " Solar System");
         setSupportActionBar(toolbar);
         systemViewmodel = ViewModelProviders.of(this).get(System_viewmodel.class);
         configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
@@ -168,13 +171,7 @@ public class systemView_Activity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        leaveSystemBuilder.setMessage("Are you sure you want to leave the Solar System?")
-                .setTitle("Travel?");
-        leaveSystemBuilder.show();
+        return;
 
     }
 
@@ -209,6 +206,12 @@ public class systemView_Activity extends AppCompatActivity
         if (id == R.id.nav2_player) {
             Intent i = new Intent(getApplicationContext(), PlayerInfo.class);
             startActivity(i);
+        } else if (id == R.id.nav2_Galaxy) {
+            leaveSystemBuilder.setMessage("Are you sure you want to leave the Solar System?")
+                    .setTitle("Travel?");
+            leaveSystemBuilder.show();
+//            Intent i = new Intent(getApplicationContext(), galaxyView_Activity.class);
+//            startActivity(i);
         } else if (id == R.id.nav2_ship) {
 
         }
@@ -233,11 +236,13 @@ public class systemView_Activity extends AppCompatActivity
             }
             else {
                 planetButton.setImageBitmap(image);
+                planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.rockBrown), PorterDuff.Mode.MULTIPLY);
             }
         }
 
          else {
             planetButton.setImageBitmap(image);
+            planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.rockBrown), PorterDuff.Mode.MULTIPLY);
         }
 
 
