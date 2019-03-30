@@ -130,7 +130,7 @@ public class galaxyView_Activity extends AppCompatActivity
         viewCenterY = v.getHeight() / 2;
         Random rand = new Random();
         Player currPlayer = game.getPlayer();
-        galaxyViewmodel.generateGalaxy(viewCenterX * 2, viewCenterY * 2);
+//        game.getInstance().generateGalaxy(viewCenterX * 2, viewCenterY * 2);
         configuration_viewmodel.updatePlayer(currPlayer);
         if (count == 0) {
             //currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());

@@ -2,6 +2,10 @@ package com.gatech.astroworld.spacetrader.model;
 
 import android.app.Activity;
 
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
 
@@ -9,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Game {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Game extends AppCompatActivity {
 
     //Init game vars
     private Difficulty difficulty;
@@ -77,12 +83,15 @@ public class Game {
 
 
     public void initializePlayerPlanet() {
-        Random rand = new Random();
-        for (int i = 0; i < this.getMaxSystems(); i++) {
-            this.getSystemList().add(new SolarSystem(100, 100));
+
+        for (int i = 0; i < getMaxSystems(); i++) {
+            RelativeLayout buttonContainer = findViewById(R.id.buttonContainer);
+            systemList.add(new SolarSystem(buttonContainer.getWidth() , buttonContainer.getHeight()));
+            for (Planet p: systemList.get(i).getListOfPlanets()) {
+                System.out.println(p.getName());
+            }
         }
-
-
+        Random rand = new Random();
         player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().size() - 1)));
         player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(
                 rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
