@@ -46,6 +46,7 @@ public class galaxyView_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RelativeLayout buttonContainer;
+    private static RelativeLayout dimensions;
     private Galaxy_viewmodel galaxyViewmodel;
     private Configuration_viewmodel configuration_viewmodel;
     private Game game;
@@ -74,6 +75,7 @@ public class galaxyView_Activity extends AppCompatActivity
 
 
         buttonContainer = findViewById(R.id.buttonContainer);
+        dimensions = findViewById(R.id.buttonContainer);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -113,6 +115,14 @@ public class galaxyView_Activity extends AppCompatActivity
 
     }
 
+    public static int viewX() {
+        return dimensions.getWidth();
+    }
+
+    public static int viewY() {
+        return dimensions.getHeight();
+    }
+
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
         View v = (View) buttonContainer;
@@ -123,9 +133,9 @@ public class galaxyView_Activity extends AppCompatActivity
         galaxyViewmodel.generateGalaxy(viewCenterX * 2, viewCenterY * 2);
         configuration_viewmodel.updatePlayer(currPlayer);
         if (count == 0) {
-            currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
-            currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-                    rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
+            //currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
+            //currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
+              //      rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
             for (SolarSystem system : game.getSystemList()) {
                 double xPos = system.getSysLocation().getxPos();
                 double yPos = system.getSysLocation().getyPos();
