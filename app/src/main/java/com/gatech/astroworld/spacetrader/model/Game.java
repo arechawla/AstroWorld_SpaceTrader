@@ -1,6 +1,9 @@
 package com.gatech.astroworld.spacetrader.model;
 
+import android.app.Activity;
+
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
+import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +78,20 @@ public class Game {
 
     public void initializePlayerPlanet() {
         Random rand = new Random();
+        for (int i = 0; i < this.getMaxSystems(); i++) {
+            this.getSystemList().add(new SolarSystem(100, 100));
+        }
+
+
         player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().size() - 1)));
         player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(
                 rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
+    }
+
+    public void generateGalaxy (int galSizeX, int galSizeY) {
+        //Generate max number of systems
+        for (int i = 0; i < this.getMaxSystems(); i++) {
+            this.getSystemList().add(new SolarSystem(galSizeX, galSizeY));
+        }
     }
 }
