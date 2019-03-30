@@ -85,7 +85,7 @@ public class galaxyView_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         buttonContainer = findViewById(R.id.buttonContainer);
         View v = (View) buttonContainer;
-        galaxyViewmodel.generateGalaxy(v.getWidth(), v.getHeight());
+//        galaxyViewmodel.generateGalaxy(v.getWidth(), v.getHeight());
         travelAlertBuilder = new AlertDialog.Builder(this);
         travelAlertBuilder.setPositiveButton("Travel", new DialogInterface.OnClickListener() {
             @Override
