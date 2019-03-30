@@ -2,6 +2,8 @@ package com.gatech.astroworld.spacetrader.model;
 
 import android.app.Activity;
 
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -83,10 +85,14 @@ public class Game extends AppCompatActivity {
 
 
     public void initializePlayerPlanet() {
-
+        DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
+        int width = disp.widthPixels;
+        int height = disp.heightPixels;
         for (int i = 0; i < getMaxSystems(); i++) {
-            RelativeLayout buttonContainer = findViewById(R.id.buttonContainer);
-            systemList.add(new SolarSystem(buttonContainer.getWidth() , buttonContainer.getHeight()));
+            SolarSystem sys = new SolarSystem(width , height);
+            systemList.add(sys);
+            System.out.println(sys.getSysLocation().getxPos());
+            System.out.println(sys.getSysLocation().getyPos());
             for (Planet p: systemList.get(i).getListOfPlanets()) {
                 System.out.println(p.getName());
             }
@@ -97,10 +103,10 @@ public class Game extends AppCompatActivity {
                 rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
     }
 
-    public void generateGalaxy (int galSizeX, int galSizeY) {
-        //Generate max number of systems
-        for (int i = 0; i < this.getMaxSystems(); i++) {
-            this.getSystemList().add(new SolarSystem(galSizeX, galSizeY));
-        }
-    }
+//    public void generateGalaxy (int galSizeX, int galSizeY) {
+//        //Generate max number of systems
+//        for (int i = 0; i < this.getMaxSystems(); i++) {
+//            this.getSystemList().add(new SolarSystem(galSizeX, galSizeY));
+//        }
+//    }
 }

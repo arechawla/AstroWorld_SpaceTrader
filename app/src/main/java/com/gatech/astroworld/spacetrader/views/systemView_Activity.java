@@ -105,7 +105,6 @@ public class systemView_Activity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Out of the Solar System",
                         Toast.LENGTH_LONG).show();
                 Player currPlayer = game.getPlayer();
-
                 currPlayer.setCurrentSystem((SolarSystem) destination.getValue());
                 currPlayer.setCurrentPlanet(null);
                 Intent i = new Intent(getApplicationContext(), galaxyView_Activity.class);
@@ -142,6 +141,7 @@ public class systemView_Activity extends AppCompatActivity
         HashMap<ImageButton, Planet> planetButtons = new HashMap<>();
 
         for (Planet planet : systemViewmodel.getPlanetList()) {
+            System.out.println("Before generate system button");
             double xPos = planet.getPlanLocation().getxPos();
             double yPos = planet.getPlanLocation().getyPos();
             generatePlanetButton(xPos, yPos, buttonContainer, planetButtons, planet);
@@ -235,15 +235,14 @@ public class systemView_Activity extends AppCompatActivity
         Bitmap curImage = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem_current);
         curImage = getResizedBitmap(curImage, 110);
 
-        if (Game.getInstance().getPlayer().getCurrentPlanet() != null) {
-            if (planet.equals(Game.getInstance().getPlayer().getCurrentPlanet())) {
-                planetButton.setImageBitmap(curImage);
-            }
-        }
-        else {
 
+        if (planet.equals(Game.getInstance().getPlayer().getCurrentPlanet())) {
+            planetButton.setImageBitmap(curImage);
+        } else {
             planetButton.setImageBitmap(image);
         }
+
+
         planetButton.setBackgroundResource(0);
         buttonList.put(planetButton, planet);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
