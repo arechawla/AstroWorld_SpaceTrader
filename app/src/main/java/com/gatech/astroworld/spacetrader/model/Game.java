@@ -4,6 +4,7 @@ import com.gatech.astroworld.spacetrader.entity.Difficulty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
 
@@ -21,7 +22,6 @@ public class Game {
     private Game() {
         player = new Player(null);
         difficulty = Difficulty.BEGINNER;
-
     }
 
     // static method to create instance of Singleton class
@@ -70,5 +70,13 @@ public class Game {
         + "\n\t\t* Difficulty: " + this.getDifficulty().toString()
         + "\n********************************************************"; */
         return "Game toString test";
+    }
+
+
+    public void initializePlayerPlanet() {
+        Random rand = new Random();
+        player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().size() - 1)));
+        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(
+                rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
     }
 }
