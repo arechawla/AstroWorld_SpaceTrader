@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
@@ -21,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -220,6 +223,9 @@ public class galaxyView_Activity extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.nav_ship) {
 
+        } else if (id == R.id.nav2_System) {
+            Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -235,7 +241,8 @@ public class galaxyView_Activity extends AppCompatActivity
         Bitmap curImage = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem_current);
         curImage = getResizedBitmap(curImage, 110);
         if (system.equals(Game.getInstance().getPlayer().getCurrentSystem())) {
-            systemButton.setImageBitmap(curImage);
+            systemButton.setImageBitmap(image);
+            systemButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.currentGreen), PorterDuff.Mode.MULTIPLY);
         } else {
             systemButton.setImageBitmap(image);
 
