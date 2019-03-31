@@ -79,25 +79,40 @@ public class Spaceship {
     }
 
 
-    public double travelPlanet(Planet travelTo, Point layoutSize) {
+    public double travelPlanet(Player p, Planet travelTo, Point layoutSize) {
         int numXintervals = 10;
         int numYintervals = 10;
 
         int unitXPixelDist = layoutSize.x/numXintervals;
         int unitYPixelDist = layoutSize.y/numYintervals;
+        double xDist = 0;
+        double yDist = 0;
+        Planet curr = p.getCurrentPlanet();
+        if (curr == null) {
+            xDist = Math.abs(travelTo.getPlanLocation().getxPos() -
+                    0);
+            yDist = Math.abs(travelTo.getPlanLocation().getyPos() -
+                    0);
+        } else {
+            if (travelTo.getName().equals(curr.getName())) {
+                return 0;
+            }
+            xDist = Math.abs(travelTo.getPlanLocation().getxPos() -
+                    curr.getPlanLocation().getxPos());
+            yDist = Math.abs(travelTo.getPlanLocation().getyPos() -
+                    curr.getPlanLocation().getxPos());
+        }
 
-        double xDist = Math.abs(travelTo.getPlanLocation().getxPos() -
-                0);
+
         int deltaX = (int)xDist/unitXPixelDist;
 
-        double yDist = Math.abs(travelTo.getPlanLocation().getyPos() -
-                0);
+
         int deltaY = (int)yDist/unitYPixelDist;
 
         double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         double fuelUsed = dist * unitFuelUse;
         if (fuelUsed > fuel) {
-            return 0;
+            return -1;
         } else {
             return fuelUsed;
         }

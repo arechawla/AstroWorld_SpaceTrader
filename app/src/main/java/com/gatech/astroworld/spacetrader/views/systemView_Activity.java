@@ -84,7 +84,7 @@ public class systemView_Activity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
                 Player currPlayer = game.getPlayer();
                 View v = buttonContainer;
-                double fuelUse = currPlayer.getShip().travelPlanet((Planet) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
+                double fuelUse = currPlayer.getShip().travelPlanet(currPlayer, (Planet) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
                 double shipFuel = currPlayer.getShip().getFuel();
                 currPlayer.getShip().setFuel(shipFuel - fuelUse);
                 currPlayer.setCurrentPlanet((Planet) destination.getValue());
@@ -149,8 +149,8 @@ public class systemView_Activity extends AppCompatActivity
                     final Toast error = Toast.makeText(getApplicationContext(), "You do not" +
                             " have enough fuel to go to this location!", Toast.LENGTH_LONG);
                     Player currPlayer = game.getPlayer();
-                    double fuelUse = currPlayer.getShip().travelPlanet((Planet) entry.getValue(), new Point(v.getWidth(), v.getHeight()));
-                    if (fuelUse == 0) {
+                    double fuelUse = currPlayer.getShip().travelPlanet(currPlayer, (Planet) entry.getValue(), new Point(v.getWidth(), v.getHeight()));
+                    if (fuelUse == -1) {
                         error.show();
                     } else {
                         destination = entry;
