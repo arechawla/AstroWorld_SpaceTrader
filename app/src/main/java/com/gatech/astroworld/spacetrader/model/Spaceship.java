@@ -60,6 +60,10 @@ public class Spaceship {
         int unitXPixelDist = layoutSize.x/numXintervals;
         int unitYPixelDist = layoutSize.y/numYintervals;
 
+        if (current.getName().equals(travelTo.getName())) {
+            return 0;
+        }
+
         double xDist = Math.abs(travelTo.getSysLocation().getxPos() -
                 current.getSysLocation().getxPos());
         int deltaX = (int)xDist/unitXPixelDist;
@@ -72,7 +76,7 @@ public class Spaceship {
         double fuelUsed = dist * unitFuelUse
                 * ssFuelMultiplier;
         if (fuelUsed > fuel) {
-            return 0;
+            return -1;
         } else {
             return fuelUsed;
         }

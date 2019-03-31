@@ -95,7 +95,7 @@ public class galaxyView_Activity extends AppCompatActivity
         travelAlertBuilder.setPositiveButton("Travel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_SHORT).show();
                 Player currPlayer = game.getPlayer();
                 View v = (View) buttonContainer;
                 double fuelUse = currPlayer.getShip().travelSolarSystem(currPlayer.getCurrentSystem(),
@@ -111,7 +111,7 @@ public class galaxyView_Activity extends AppCompatActivity
         travelAlertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -131,14 +131,9 @@ public class galaxyView_Activity extends AppCompatActivity
         View v = (View) buttonContainer;
         viewCenterX = v.getWidth() / 2;
         viewCenterY = v.getHeight() / 2;
-        Random rand = new Random();
         Player currPlayer = game.getPlayer();
-//        game.getInstance().generateGalaxy(viewCenterX * 2, viewCenterY * 2);
         configuration_viewmodel.updatePlayer(currPlayer);
         if (count == 0) {
-            //currPlayer.setCurrentSystem(galaxyViewmodel.getRandomSystem());
-            //currPlayer.setCurrentPlanet(currPlayer.getCurrentSystem().getListOfPlanets().get(
-              //      rand.nextInt(currPlayer.getCurrentSystem().getListOfPlanets().size())));
             for (SolarSystem system : game.getSystemList()) {
                 double xPos = system.getSysLocation().getxPos();
                 double yPos = system.getSysLocation().getyPos();
@@ -153,28 +148,21 @@ public class galaxyView_Activity extends AppCompatActivity
                 @Override
                 public void onClick(View v){
                     final Toast error = Toast.makeText(getApplicationContext(), "You do not" +
-                            " have enough fuel to go to this location!", Toast.LENGTH_LONG);
+                            " have enough fuel to go to this location!", Toast.LENGTH_SHORT);
+                    final Toast errorSameSys = Toast.makeText(getApplicationContext(), "Click Solar System" +
+                            " view in drawer!", Toast.LENGTH_SHORT);
                     Player currPlayer = game.getPlayer();
                     double fuelUse = currPlayer.getShip().travelSolarSystem(currPlayer.getCurrentSystem(),
                             (SolarSystem) entry.getValue(), new Point(v.getWidth(), v.getHeight()));
-                    if (fuelUse == 0) {
+                    if (fuelUse == -1) {
                         error.show();
+                    } else if (fuelUse == 0){
+                        errorSameSys.show();
                     } else {
-
                         destination = entry;
                         travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
                                 .setTitle("Travel?");
                         travelAlertBuilder.show();
-
-
-
-
-//                        currPlayer.setCurrentSystem((SolarSystem) entry.getValue());
-//                        currPlayer.setCurrentPlanet(null);
-//                        double shipFuel = currPlayer.getShip().getFuel();
-//                        currPlayer.getShip().setFuel(shipFuel - fuelUse);
-//                        Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
-//                        startActivity(i);
                     }
                 }
             });
