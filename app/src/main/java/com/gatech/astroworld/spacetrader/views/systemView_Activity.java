@@ -232,7 +232,8 @@ public class systemView_Activity extends AppCompatActivity
 
         if (Game.getInstance().getPlayer().getCurrentPlanet() != null) {
             if (planet.equals(Game.getInstance().getPlayer().getCurrentPlanet())) {
-                planetButton.setImageBitmap(curImage);
+                planetButton.setImageBitmap(image);
+                planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.currentGreen), PorterDuff.Mode.MULTIPLY);
             }
             else {
                 planetButton.setImageBitmap(image);
