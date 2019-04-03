@@ -60,6 +60,10 @@ public class Store {
         }
     }
 
+    public int getStoreCredits() {
+        return storeCredits;
+    }
+
     private int calculateQuantity(GoodType item) {
         int base = 10;
         if (sys.getTechLevel().ordinal() < item.getMTLP()) {

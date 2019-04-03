@@ -9,14 +9,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
+import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Game;
 
+import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
 import java.util.Random;
 
 public class playerReviewScreen_Activity extends AppCompatActivity {
@@ -24,6 +28,8 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
     private Configuration_viewmodel playerConfig;
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference currSysRef = mRootRef.child("player").child("currentSystem");
+    DatabaseReference currPlanRef = mRootRef.child("player").child("currentPlanet");
+    DatabaseReference sysListRef = mRootRef.child("systemList");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +121,9 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 //Start planet view activity (Should be changed to galaxy view later)
                 Game.getInstance().initializePlayerPlanet();
+
+
+
                 currSysRef.child("name").setValue(Game.getInstance().getPlayer().
                 getCurrentSystem().getName());
                 currSysRef.child("techLevel").setValue(Game.getInstance().getPlayer().
@@ -123,6 +132,43 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                         getPlayer().getCurrentSystem().getSysLocation().getxPos());
                 currSysRef.child("sysLocation").child("yPos").setValue(Game.getInstance().
                         getPlayer().getCurrentSystem().getSysLocation().getyPos());
+
+                currPlanRef.child("name").setValue(Game.getInstance().getPlayer().
+                        getCurrentPlanet().getName());
+                currPlanRef.child("gov").setValue(Game.getInstance().getPlayer().
+                        getCurrentPlanet().getGov().toString());
+                currPlanRef.child("planLocation").child("xPos").setValue(Game.getInstance().
+                        getPlayer().getCurrentPlanet().getPlanLocation().getxPos());
+                currPlanRef.child("planLocation").child("yPos").setValue(Game.getInstance().
+                        getPlayer().getCurrentPlanet().getPlanLocation().getyPos());
+//                currPlanRef.child("store").child("storeCredits").setValue(Game.getInstance().
+//                        getPlayer().getCurrentPlanet().getStore().getStoreCredits());
+
+                List<SolarSystem> ssList = Game.getInstance().getSystemList();
+
+                int sysNum = 1;
+                for (SolarSystem sys: ssList) {
+                    sysListRef.child("System " + sysNum).child("sysLocation").
+                            child("xPos").setValue(sys.getSysLocation().getxPos());
+                    sysListRef.child("System " + sysNum).child("sysLocation").
+                            child("yPos").setValue(sys.getSysLocation().getyPos());
+
+                    List<Planet> pList = sys.getListOfPlanets();
+                    int planNum = 1;
+                    for (Planet plan: pList) {
+                        sysListRef.child("System " + sysNum).child("listPlanets").
+                                child("Planet " + planNum).child("planLocation").
+                                child("xPos").setValue(plan.getPlanLocation().getxPos());
+                        sysListRef.child("System " + sysNum).child("listPlanets").
+                                child("Planet " + planNum).child("planLocation").
+                                child("yPos").setValue(plan.getPlanLocation().getyPos());
+                        planNum++;
+                    }
+                    sysNum++;
+                }
+
+
+
 
 
 
