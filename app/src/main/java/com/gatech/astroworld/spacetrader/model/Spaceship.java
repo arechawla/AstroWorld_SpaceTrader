@@ -16,6 +16,8 @@ public class Spaceship {
     private double fuel;
     private int ssFuelMultiplier = 3;
     private int unitFuelUse = 50;
+    private List<Weapon> weapons;
+    private int numWeapons;
 
 
     public Spaceship (String name, int capacity, int fuel) {

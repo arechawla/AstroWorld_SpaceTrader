@@ -6,6 +6,11 @@ import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.model.Spaceship;
 
+import com.gatech.astroworld.spacetrader.entity.NPCs.Pirate;
+import com.gatech.astroworld.spacetrader.entity.NPCs.Trader;
+import com.gatech.astroworld.spacetrader.entity.NPCs.Police;
+
+
 import java.util.ArrayList;
 
 public class Player {
@@ -17,6 +22,7 @@ public class Player {
     private SolarSystem currentSystem;
     private Planet currentPlanet;
     private Spaceship ship;
+    private boolean surrenderVar = false;
 
 
     public Player(){
@@ -114,9 +120,14 @@ public class Player {
         return chance;
     }
 
+    //NPC METHOD INTERACTIONS START HERE
+    public void attack() {
 
+    }
 
+    public void surrender() {
 
+    }
 
 
 

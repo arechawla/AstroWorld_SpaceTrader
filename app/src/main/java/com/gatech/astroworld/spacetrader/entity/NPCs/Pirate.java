@@ -1,6 +1,7 @@
 package com.gatech.astroworld.spacetrader.entity.NPCs;
 
 import com.gatech.astroworld.spacetrader.entity.EncounterNPC;
+import com.gatech.astroworld.spacetrader.model.Game;
 
 public class Pirate implements EncounterNPC {
 
@@ -11,23 +12,35 @@ public class Pirate implements EncounterNPC {
         this.attack = attack;
         this.lifePoints = lifePoints;
     }
-    // these parameters can be randomized upwards
-    // as player has more credits in the game
 
-    //an NPC may interact w/ you, depending on your statistics
     public void interact() {
-        //pirate ship gives you ton of money
+        int interaction = (int) (Math.random() * 100);
+        if (interaction > 5) {
+            if (Game.getInstance().getPlayer().getReputation() < 20) {
+                avoid();
+            } else {
+                attack();
+            }
+        } else {
+            avoid();
+        }
     }
 
-    //an NPC may avoid you, depending your statistics
     public void avoid() {
-        //boolean ignore
-        //true if it ignores you false otherwise
+        //AVOID AND FLEE ARE ESSENTIALLY THE SAME THING
+        return;
     }
 
-    //and NPC may attack you, dependent on your stats
+    public void trade() {
+
+    }
+
     public void attack() {
-        //detract from your ship's health
+
+    }
+
+    public void surrender() {
+
     }
 
 }
