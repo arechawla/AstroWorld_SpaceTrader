@@ -29,6 +29,14 @@
             "package_name": "com.gatech.astroworld.spacetrader",
             "certificate_hash": "36b6281a4276e9a7ec9bb8fd39a175e07cde87d4"
           }
+        },
+        {
+          "client_id": "1085852614098-94lru6a718m25tfhvqfrrblunor2ag16.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gatech.astroworld.spacetrader",
+            "certificate_hash": "cf5b303d357bdf46cd0521ad2442fd901fe98df8"
+          }
         }
       ],
       "api_key": [
