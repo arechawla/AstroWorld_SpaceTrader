@@ -1,4 +1,5 @@
 package com.gatech.astroworld.spacetrader.views;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +12,11 @@ import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import android.widget.EditText;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class configScreen_Activity extends AppCompatActivity {
 
@@ -29,6 +35,9 @@ public class configScreen_Activity extends AppCompatActivity {
     private TextView fighterCounter;
     private TextView engineerCounter;
     private TextView remainingPointsCounter;
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference difficultyRef = mRootRef.child("difficulty");
 
 
     //Setting up new game variables.
@@ -140,6 +149,8 @@ public class configScreen_Activity extends AppCompatActivity {
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(newPlayer);
 
+
+                difficultyRef.setValue(difficulty.toString());
                 Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
                 startActivity(i);
             }
@@ -148,6 +159,25 @@ public class configScreen_Activity extends AppCompatActivity {
         //Sets the viewmodel fragment up
         viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        difficultyRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String dif = dataSnapshot.getValue(String.class);
+//                difficulty = Difficulty.valueOf(dif);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//    }
 
     //Creates a new player object and populates with provided data
     private Player initPlayer () {

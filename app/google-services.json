@@ -23,8 +23,12 @@
           }
         },
         {
-          "client_id": "1085852614098-drfurd0l0gdnshfmqulmqc2n9b8lcbe4.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "1085852614098-13h6mrf292dbbctc8jvr1j9ulmsk7f1f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gatech.astroworld.spacetrader",
+            "certificate_hash": "36b6281a4276e9a7ec9bb8fd39a175e07cde87d4"
+          }
         }
       ],
       "api_key": [
@@ -33,20 +37,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "1085852614098-drfurd0l0gdnshfmqulmqc2n9b8lcbe4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
