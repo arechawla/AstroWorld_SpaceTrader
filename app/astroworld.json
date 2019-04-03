@@ -1,0 +1,23 @@
+{
+  "difficulty" : "Impossible",
+  "player" : {
+    "credits" : 0,
+    "currentSystem" : {
+      "name" : "Default",
+      "sysLocation" : {
+        "xPos" : 0,
+        "yPos" : 0
+      },
+      "techLevel" : "Default"
+    },
+    "name" : "Default",
+    "distOfPoints" : {
+      "engineerPoints" : 0,
+      "fighterPoints" : 0,
+      "pilotPoints" : 0,
+      "traderPoints" : 0
+    },
+    "skillPoints" : 16
+  }
+}
+
