@@ -14,12 +14,16 @@ import com.gatech.astroworld.spacetrader.model.Game;
 
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
 public class playerReviewScreen_Activity extends AppCompatActivity {
     private Galaxy_viewmodel galaxy_viewmodel;
     private Configuration_viewmodel playerConfig;
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference currSysRef = mRootRef.child("player").child("currentSystem");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +115,19 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 //Start planet view activity (Should be changed to galaxy view later)
                 Game.getInstance().initializePlayerPlanet();
+                currSysRef.child("name").setValue(Game.getInstance().getPlayer().
+                getCurrentSystem().getName());
+                currSysRef.child("techLevel").setValue(Game.getInstance().getPlayer().
+                        getCurrentSystem().getTechLevel().toString());
+                currSysRef.child("sysLocation").child("xPos").setValue(Game.getInstance().
+                        getPlayer().getCurrentSystem().getSysLocation().getxPos());
+                currSysRef.child("sysLocation").child("yPos").setValue(Game.getInstance().
+                        getPlayer().getCurrentSystem().getSysLocation().getyPos());
+
+
+
+
+
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
