@@ -4,6 +4,6 @@ We are a group of CS Students at the Georgia Institute of Technology creating an
 
 ## To-Do:
 
-  - Fix current location marker
+  - J Unit Testing
   - Random encounters with traders, pirates, mercenaries, and police
-  - Disable the back button in PlanetView
+  - Implement FireBase
