@@ -98,7 +98,8 @@ public class Game extends AppCompatActivity {
             }
         }
         Random rand = new Random();
-        player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().size() - 1)));
+        player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().
+                size() - 1)));
         player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(
                 rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
     }

@@ -161,21 +161,13 @@ public class SolarSystem {
          * distance is changed. */
         int sysListSize = Game.getInstance().getSystemList().size();
         this.sysLocation = new SysLocation(new Point(maxPosX, maxPosY));
-//        if(sysListSize <= 0) {
-//            sysLocation = new SysLocation();
-//        } else {
-////            sysLocation = new SysLocation(Game.getInstance().getSystemList().
-////                    get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
-//        }
-//        this.getListOfPlanets().add(new Planet(this));
+
 
         for (int i = 0; i < maxPlanets; i++) {
             addPlanet(new Planet(this));
         }
 
-//        for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
-//            addPlanet(new Planet(this));
-//        }
+
     }
 
     public int getMaxPlanets() {

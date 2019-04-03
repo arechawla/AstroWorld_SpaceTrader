@@ -20,7 +20,7 @@ public class Planet {
 
      public Planet(SolarSystem sys) {
         this.sys = sys;
-        this.store = null;
+        this.store = new Store(3000, this);
 //        this.store = new Store( 3000, sys, this);
 //        name = "Planet "+ sys.getListOfPlanets().size();
 
@@ -49,6 +49,10 @@ public class Planet {
     public void setStore(Store s) {
         store = s;
 
+    }
+
+    public SolarSystem getSys() {
+         return sys;
     }
 
     public Planet.PlanetLocation getPlanLocation() {

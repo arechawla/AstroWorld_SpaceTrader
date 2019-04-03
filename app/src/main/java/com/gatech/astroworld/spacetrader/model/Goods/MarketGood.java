@@ -14,11 +14,11 @@ public class MarketGood {
     private int quantity;
     private int price;
 
-    public MarketGood(GoodType good) {
+    public MarketGood(GoodType good, Planet p) {
         this.good = good;
         this.name = good.getName();
-        this.sys = Game.getInstance().getPlayer().getCurrentSystem();
-        this.planet = Game.getInstance().getPlayer().getCurrentPlanet();
+        this.sys = p.getSys();
+        this.planet = p;
         this.price = calculatePrice();
     }
 

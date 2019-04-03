@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
@@ -148,20 +149,39 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
 
                 int sysNum = 1;
                 for (SolarSystem sys: ssList) {
-                    sysListRef.child("System " + sysNum).child("sysLocation").
+                    String sysName = sys.getName();
+                    sysListRef.child(sysName).child("sysLocation").
                             child("xPos").setValue(sys.getSysLocation().getxPos());
-                    sysListRef.child("System " + sysNum).child("sysLocation").
+                    sysListRef.child(sysName).child("sysLocation").
                             child("yPos").setValue(sys.getSysLocation().getyPos());
+                    sysListRef.child("techLevel").setValue(sys.getTechLevel().toString());
 
                     List<Planet> pList = sys.getListOfPlanets();
                     int planNum = 1;
                     for (Planet plan: pList) {
-                        sysListRef.child("System " + sysNum).child("listPlanets").
-                                child("Planet " + planNum).child("planLocation").
+                        String planName = plan.getName();
+                        DatabaseReference planRef = sysListRef.child(sysName).child("listPlanets").
+                                child(planName);
+                        planRef.child("planLocation").
                                 child("xPos").setValue(plan.getPlanLocation().getxPos());
-                        sysListRef.child("System " + sysNum).child("listPlanets").
-                                child("Planet " + planNum).child("planLocation").
+                        planRef.child("planLocation").
                                 child("yPos").setValue(plan.getPlanLocation().getyPos());
+                        planRef.child("gov").setValue(plan.getGov().toString());
+                        planRef.child("store").child("storeCredits").
+                                setValue(plan.getStore().getStoreCredits());
+                        List<MarketGood> sInventory = plan.getStore().getStoreInventory();
+                        for (MarketGood mark: sInventory) {
+                            String markName = mark.getName();
+                            DatabaseReference markRef = planRef.child("store").
+                                    child("store inventory").child(markName);
+                            markRef.child("price").setValue(mark.getPrice());
+                            markRef.child("quantity").setValue(mark.getQuantity());
+                            markRef.child("count").setValue(mark.getCount());
+
+                        }
+
+
+
                         planNum++;
                     }
                     sysNum++;

@@ -19,19 +19,20 @@ public class Store {
     private int buyTotal;
 
 //    public Store(int storeCredits, SolarSystem sys, Planet plan)
-    public Store(int storeCredits) {
+    public Store(int storeCredits, Planet p) {
         this.storeCredits = storeCredits;
-        this.sys = Game.getInstance().getPlayer().getCurrentSystem();
-        this.plan = Game.getInstance().getPlayer().getCurrentPlanet();
+        this.sys = p.getSys();
+        this.plan = p;
         this.storeInventory = new ArrayList<>();
         this.cartBuy = new ArrayList<>();
         this.cartSell = new ArrayList<>();
+        populateStoreInventory();
     }
     
     public ArrayList<MarketGood> populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
-            MarketGood mark = new MarketGood(good);
+            MarketGood mark = new MarketGood(good, plan);
             mark.setQuantity(calculateQuantity(good));
             System.out.println(mark.getQuantity());
             if (mark.getQuantity() != 0) {
@@ -168,7 +169,7 @@ public class Store {
                 }
             }
             if (!alreadyAdded) {
-                MarketGood diffGood = new MarketGood(gSold.getGoodType());
+                MarketGood diffGood = new MarketGood(gSold.getGoodType(), plan);
                 diffGood.setQuantity(gSold.getSellCount());
                 diffGood.setSolarSystem(player.getCurrentSystem());
                 diffGood.setPlanet(player.getCurrentPlanet());
