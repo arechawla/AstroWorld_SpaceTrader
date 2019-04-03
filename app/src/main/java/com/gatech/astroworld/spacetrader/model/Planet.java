@@ -20,23 +20,29 @@ public class Planet {
 
      public Planet(SolarSystem sys) {
         this.sys = sys;
-        this.store = null;
+        this.store = new Store(3000, this);
 //        this.store = new Store( 3000, sys, this);
 //        name = "Planet "+ sys.getListOfPlanets().size();
 
-         String[] planetName = {
-                 "Mercury",
-                 "Venus",
-                 "Earth",
-                 "Mars",
-                 "Jupiter",
-                 "Saturn",
-                 "Neptune",
-                 "Pluto",
-                 "Astro",
-                 "TravisScott"
-         };
-         this.name = planetName[rand.nextInt(planetName.length)];
+//         String[] planetName = {
+//                 "Mercury",
+//                 "Venus",
+//                 "Earth",
+//                 "Mars",
+//                 "Jupiter",
+//                 "Saturn",
+//                 "Neptune",
+//                 "Pluto",
+//                 "Astro",
+//                 "TravisScott"
+//         };
+//         int[] tracker = new int[planetName.length];
+//         int i = rand.nextInt(planetName.length);
+//         while (tracker[i] == 1) {
+//             i = rand.nextInt(planetName.length);
+//         }
+//         tracker[i] = 1;
+//         this.name = planetName[i];
 
          this.planetLocation = new Planet.PlanetLocation
                  (new Point(sys.getMaxPosX(), sys.getMaxPosY()));
@@ -49,6 +55,10 @@ public class Planet {
     public void setStore(Store s) {
         store = s;
 
+    }
+
+    public SolarSystem getSys() {
+         return sys;
     }
 
     public Planet.PlanetLocation getPlanLocation() {

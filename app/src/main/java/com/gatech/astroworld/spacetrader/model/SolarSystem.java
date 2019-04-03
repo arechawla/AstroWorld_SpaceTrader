@@ -18,7 +18,7 @@ public class SolarSystem {
     private Resources resources;
     private SysLocation sysLocation;
     private int systemSize = 500;
-    private int maxPlanets = 9;
+    private int maxPlanets = 5;
     private int ssFuelMultipier = 3;
     private int maxPosX;
     private int maxPosY;
@@ -161,21 +161,31 @@ public class SolarSystem {
          * distance is changed. */
         int sysListSize = Game.getInstance().getSystemList().size();
         this.sysLocation = new SysLocation(new Point(maxPosX, maxPosY));
-//        if(sysListSize <= 0) {
-//            sysLocation = new SysLocation();
-//        } else {
-////            sysLocation = new SysLocation(Game.getInstance().getSystemList().
-////                    get(sysListSize - 1).getSysLocation(), new Point(maxPosX, maxPosY));
-//        }
-//        this.getListOfPlanets().add(new Planet(this));
-
+        String[] planetName = {
+                "Mercury",
+                "Venus",
+                "Earth",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Neptune",
+                "Pluto",
+                "Astro",
+                "TravisScott"
+        };
+        int[] tracker = new int[planetName.length];
         for (int i = 0; i < maxPlanets; i++) {
-            addPlanet(new Planet(this));
+            Planet p = new Planet(this);
+            int nameInd = rand.nextInt(planetName.length);
+            while (tracker[nameInd] == 1) {
+                nameInd = rand.nextInt(planetName.length);
+            }
+            tracker[nameInd] = 1;
+            p.setName(planetName[nameInd]);
+            addPlanet(p);
         }
 
-//        for (int i = 0; i < rand.nextInt(maxPlanets - 1) + 1; i++) {
-//            addPlanet(new Planet(this));
-//        }
+
     }
 
     public int getMaxPlanets() {
