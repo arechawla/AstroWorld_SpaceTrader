@@ -38,6 +38,7 @@ public class configScreen_Activity extends AppCompatActivity {
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference difficultyRef = mRootRef.child("difficulty");
+    DatabaseReference distOfPointsRef = mRootRef.child("player").child("distOfPoints");
 
 
     //Setting up new game variables.
@@ -151,6 +152,13 @@ public class configScreen_Activity extends AppCompatActivity {
 
 
                 difficultyRef.setValue(difficulty.toString());
+
+                distOfPointsRef.child("engineerPoints").setValue(engineerPoints.getProgress());
+                distOfPointsRef.child("pilotPoints").setValue(pilotPoints.getProgress());
+                distOfPointsRef.child("traderPoints").setValue(traderPoints.getProgress());
+                distOfPointsRef.child("fighterPoints").setValue(fighterPoints.getProgress());
+
+
                 Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
                 startActivity(i);
             }
