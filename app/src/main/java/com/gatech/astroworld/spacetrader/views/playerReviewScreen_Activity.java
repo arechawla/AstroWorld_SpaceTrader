@@ -229,10 +229,10 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
 //                }
 
 
-                Save save = new Save();
-                save.savePlayerInformation();
-                save.saveSpaceShipInformation();
-                save.saveSolarSystemList();
+
+                Save.savePlayerInformation();
+                Save.saveSpaceShipInformation();
+                Save.saveSolarSystemList();
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
