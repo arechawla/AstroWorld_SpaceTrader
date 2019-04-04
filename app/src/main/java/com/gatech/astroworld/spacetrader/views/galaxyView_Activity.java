@@ -12,6 +12,7 @@ import android.os.Bundle;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
+import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
@@ -110,6 +111,12 @@ public class galaxyView_Activity extends AppCompatActivity
                         (SolarSystem) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
                 double shipFuel = currPlayer.getShip().getFuel();
                 currPlayer.getShip().setFuel(shipFuel - fuelUse);
+
+                //UPDATE CURRENT SYSTEM REFERENCE FOR FIREBASE
+                SolarSystem ss = (SolarSystem) destination.getValue();
+                player.setCurSystemReference(Game.getInstance().getSystemList().indexOf(ss));
+                Save.savePlayerInformation();
+
                 currPlayer.setCurrentSystem((SolarSystem) destination.getValue());
                 currPlayer.setCurrentPlanet(null);
                 Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
