@@ -19,6 +19,7 @@ import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
+import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter;
@@ -134,6 +135,9 @@ public class market_Activity extends AppCompatActivity implements
 
                     nav.navigate(R.id.toBuyFragment);
                 }
+                Save.saveSolarSystemList();
+                Save.savePlayerInformation();
+                Save.saveSpaceShipInformation();
             }
         });
 
@@ -149,6 +153,9 @@ public class market_Activity extends AppCompatActivity implements
                 market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
 
                 nav.navigate(R.id.toSellFragment);
+                Save.saveSolarSystemList();
+                Save.savePlayerInformation();
+                Save.saveSpaceShipInformation();
             }
         });
 
