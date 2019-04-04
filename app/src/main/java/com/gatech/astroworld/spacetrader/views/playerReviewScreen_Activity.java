@@ -15,6 +15,7 @@ import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Game;
 
+import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.model.Spaceship;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
@@ -125,8 +126,8 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                 //Start planet view activity (Should be changed to galaxy view later)
                 Game.getInstance().initializePlayerPlanet();
 
-                mRootRef.setValue(Game.getInstance().getPlayer().getCurrentPlanet().getStore()
-                        );
+//                mRootRef.setValue(Game.getInstance().getPlayer().getCurrentPlanet().getStore()
+//                        );
 
 
                 //Set player values
@@ -228,10 +229,10 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
 //                }
 
 
-
-
-
-
+                Save save = new Save();
+                save.savePlayerInformation();
+                save.saveSpaceShipInformation();
+                save.saveSolarSystemList();
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);

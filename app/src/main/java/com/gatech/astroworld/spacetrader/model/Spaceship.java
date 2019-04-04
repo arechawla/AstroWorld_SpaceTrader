@@ -146,6 +146,8 @@ public class Spaceship {
         fuel = f;
     }
 
+    public String getName() { return name; }
+
 
     public int getCapacity() {
         return capacity;

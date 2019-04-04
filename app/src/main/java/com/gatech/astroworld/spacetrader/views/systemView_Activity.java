@@ -31,6 +31,7 @@ import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
+import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.System_viewmodel;
@@ -52,6 +53,8 @@ public class systemView_Activity extends AppCompatActivity
     private AlertDialog.Builder travelAlertBuilder;
     private HashMap.Entry destination;
     private AlertDialog.Builder leaveSystemBuilder;
+
+    Save save = new Save();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,14 @@ public class systemView_Activity extends AppCompatActivity
                 double fuelUse = currPlayer.getShip().travelPlanet(currPlayer, (Planet) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
                 double shipFuel = currPlayer.getShip().getFuel();
                 currPlayer.getShip().setFuel(shipFuel - fuelUse);
+
+
+                //UPDATE CURRENT PLANET REF FOR DATABSE
+                Planet curr = (Planet) destination.getValue();
+                player.setCurPlanetReference(player.getCurrentSystem().getListOfPlanets().indexOf(curr));
+                save.savePlayerInformation();
+
+
                 currPlayer.setCurrentPlanet((Planet) destination.getValue());
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 startActivity(i);

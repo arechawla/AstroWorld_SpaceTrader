@@ -87,6 +87,7 @@ public class Game {
 
     public void initializePlayerPlanet() {
         DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
+        Player player = Game.getInstance().getPlayer();
         int width = disp.widthPixels;
         int height = disp.heightPixels;
         for (int i = 0; i < getMaxSystems(); i++) {
@@ -99,11 +100,16 @@ public class Game {
             }
         }
         Random rand = new Random();
-        player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().
-                size() - 1)));
-        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(
-                rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
+        int playerSystemIndex = (rand.nextInt(getSystemList().size() - 1));
+        player.setCurrentSystem(this.getSystemList().get(playerSystemIndex));
+        player.setCurSystemReference(playerSystemIndex);
+
+        int playerPlanetIndex = rand.nextInt(player.getCurrentSystem().getListOfPlanets().size());
+        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(playerPlanetIndex));
+        player.setCurPlanetReference(playerPlanetIndex);
     }
+
+
 
 
 }
