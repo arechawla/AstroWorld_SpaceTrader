@@ -171,12 +171,14 @@ public class SolarSystem {
                 "Neptune",
                 "Pluto",
                 "Astro",
-                "TravisScott"
+                "Acworth",
+                "Skiles"
         };
+
         int[] tracker = new int[planetName.length];
         for (int i = 0; i < maxPlanets; i++) {
-            Planet p = new Planet(this);
-            int nameInd = rand.nextInt(planetName.length);
+            Planet p = new Planet(this); //Create new planet
+            int nameInd = rand.nextInt(planetName.length); //randomly get name
             while (tracker[nameInd] == 1) {
                 nameInd = rand.nextInt(planetName.length);
             }

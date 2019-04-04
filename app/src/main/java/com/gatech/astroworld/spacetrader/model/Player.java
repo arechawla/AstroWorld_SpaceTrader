@@ -26,6 +26,7 @@ public class Player {
         this.traderPoints = 0;
         this.engineerPoints = 0;
         this.credits = 1000;
+        this.reputation = 100;
         this.ship = new Spaceship("Gnat", 25, 5000);
     }
     public Player(String name) {

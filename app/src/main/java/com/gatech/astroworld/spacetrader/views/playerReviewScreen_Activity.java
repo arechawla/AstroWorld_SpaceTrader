@@ -16,6 +16,7 @@ import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Game;
 
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
+import com.gatech.astroworld.spacetrader.model.Spaceship;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +32,7 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
     DatabaseReference currSysRef = mRootRef.child("player").child("currentSystem");
     DatabaseReference currPlanRef = mRootRef.child("player").child("currentPlanet");
     DatabaseReference sysListRef = mRootRef.child("systemList");
+    DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
         //Init Ship Name
         TextView shipName = findViewById(R.id.shipHeader);
 
-        Player tempPlayer = Game.getInstance().getPlayer();
+        final Player tempPlayer = Game.getInstance().getPlayer();
         int pilotPoints = tempPlayer.getPilotPoints();
         int traderPoints = tempPlayer.getTraderPoints();
         int fighterPoints = tempPlayer.getFighterPoints();
@@ -124,6 +126,12 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                 Game.getInstance().initializePlayerPlanet();
 
 
+                //Set player values
+                Player player = Game.getInstance().getPlayer();
+                mRootRef.child("player").child("repuation").setValue(player.getReputation());
+                mRootRef.child("player").child("credits").setValue(player.getCredits());
+
+
 
                 currSysRef.child("name").setValue(Game.getInstance().getPlayer().
                 getCurrentSystem().getName());
@@ -188,6 +196,20 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                 }
 
 
+                //Setting ship
+                Spaceship currShip = Game.getInstance().getPlayer().getShip();
+                shipRef.child("name").setValue(Game.getInstance().getPlayer().getShip().toString());
+                shipRef.child("fuel").setValue(currShip.getFuel());
+                shipRef.child("capacity").setValue(currShip.getCapacity());
+                shipRef.child("unitFuelUse").setValue(currShip.getUnitFuelUse());
+                shipRef.child("ssFuelMult").setValue(currShip.getSsFuelMultiplier());
+
+                List<TradeGood> cList = Game.getInstance().getPlayer().getShip().getCargoList();
+                for (TradeGood t: cList) {
+                    String shipName = Game.getInstance().getPlayer().getShip().toString();
+                    String tradeName = t.getName();
+                    DatabaseReference cargoRef = shipRef.child(shipName).child("listCargo").child(tradeName);
+                }
 
 
 

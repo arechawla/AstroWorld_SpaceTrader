@@ -137,6 +137,14 @@ public class Spaceship {
         return capacity;
     }
 
+    public int getSsFuelMultiplier() {
+        return ssFuelMultiplier;
+    }
+
+    public int getUnitFuelUse() {
+        return unitFuelUse;
+    }
+
     @Override
     public String toString() {
         return name;

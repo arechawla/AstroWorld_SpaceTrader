@@ -11,6 +11,7 @@ import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
