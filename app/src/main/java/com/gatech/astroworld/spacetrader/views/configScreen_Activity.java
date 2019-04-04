@@ -119,9 +119,12 @@ public class configScreen_Activity extends AppCompatActivity {
 
 
         //Character Configuration screen toast errors.
-        final Toast error1 = Toast.makeText(getApplicationContext(), "You need at least 16 points.", Toast.LENGTH_SHORT);
-        final Toast error2 = Toast.makeText(getApplicationContext(), "Please name your character.", Toast.LENGTH_SHORT);
-        final Toast error3 = Toast.makeText(getApplicationContext(), "Character name must be less than 16 characters.", Toast.LENGTH_SHORT);
+        final Toast error1 = Toast.makeText
+                (getApplicationContext(), "You need at least 16 points.", Toast.LENGTH_SHORT);
+        final Toast error2 = Toast.makeText
+                (getApplicationContext(), "Please name your character.", Toast.LENGTH_SHORT);
+        final Toast error3 = Toast.makeText
+                (getApplicationContext(), "Character name must be less than 16 characters.", Toast.LENGTH_SHORT);
 
         //Creates listener for confirm button
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -168,24 +171,7 @@ public class configScreen_Activity extends AppCompatActivity {
         viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        difficultyRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String dif = dataSnapshot.getValue(String.class);
-//                difficulty = Difficulty.valueOf(dif);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//    }
+
 
     //Creates a new player object and populates with provided data
     private Player initPlayer () {

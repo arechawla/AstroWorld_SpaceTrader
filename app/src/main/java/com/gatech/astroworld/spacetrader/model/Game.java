@@ -18,7 +18,7 @@ import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Game extends AppCompatActivity {
+public class Game {
 
     //Init game vars
     private Difficulty difficulty;
@@ -105,10 +105,5 @@ public class Game extends AppCompatActivity {
                 rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
     }
 
-//    public void generateGalaxy (int galSizeX, int galSizeY) {
-//        //Generate max number of systems
-//        for (int i = 0; i < this.getMaxSystems(); i++) {
-//            this.getSystemList().add(new SolarSystem(galSizeX, galSizeY));
-//        }
-//    }
+
 }

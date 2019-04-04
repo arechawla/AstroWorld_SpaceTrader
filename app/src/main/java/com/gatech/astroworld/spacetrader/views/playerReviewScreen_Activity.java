@@ -127,6 +127,7 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
 
 
                 //Set player values
+
                 Player player = Game.getInstance().getPlayer();
                 mRootRef.child("player").child("repuation").setValue(player.getReputation());
                 mRootRef.child("player").child("credits").setValue(player.getCredits());
@@ -150,8 +151,20 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                         getPlayer().getCurrentPlanet().getPlanLocation().getxPos());
                 currPlanRef.child("planLocation").child("yPos").setValue(Game.getInstance().
                         getPlayer().getCurrentPlanet().getPlanLocation().getyPos());
-//                currPlanRef.child("store").child("storeCredits").setValue(Game.getInstance().
-//                        getPlayer().getCurrentPlanet().getStore().getStoreCredits());
+                currPlanRef.child("store").child("storeCredits").setValue(Game.getInstance().
+                        getPlayer().getCurrentPlanet().getStore().getStoreCredits());
+                List<MarketGood> stInventory = Game.getInstance().getPlayer().getCurrentPlanet()
+                        .getStore().getStoreInventory();
+                for (MarketGood mark: stInventory) {
+                    String markName = mark.getName();
+                    DatabaseReference markRef = currPlanRef.child("store").child("store inventory").
+                            child(markName);
+                    markRef.child("price").setValue(mark.getPrice());
+                    markRef.child("quantity").setValue(mark.getQuantity());
+                    markRef.child("count").setValue(mark.getCount());
+
+                }
+
 
                 List<SolarSystem> ssList = Game.getInstance().getSystemList();
 

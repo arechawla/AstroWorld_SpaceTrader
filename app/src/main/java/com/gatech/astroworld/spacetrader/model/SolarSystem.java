@@ -19,7 +19,6 @@ public class SolarSystem {
     private SysLocation sysLocation;
     private int systemSize = 500;
     private int maxPlanets = 5;
-    private int ssFuelMultipier = 3;
     private int maxPosX;
     private int maxPosY;
 
