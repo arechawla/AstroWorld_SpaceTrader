@@ -127,6 +127,7 @@ public class systemView_Activity extends AppCompatActivity
                         Toast.LENGTH_LONG).show();
                 Player currPlayer = game.getPlayer();
                 currPlayer.setCurrentPlanet(null);
+                Save.savePlayerInformation();
                 Intent i = new Intent(getApplicationContext(), galaxyView_Activity.class);
                 startActivity(i);
             }

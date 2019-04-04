@@ -119,6 +119,7 @@ public class galaxyView_Activity extends AppCompatActivity
 
                 currPlayer.setCurrentSystem((SolarSystem) destination.getValue());
                 currPlayer.setCurrentPlanet(null);
+                Save.savePlayerInformation();
                 Intent i = new Intent(getApplicationContext(), systemView_Activity.class);
                 startActivity(i);
             }
