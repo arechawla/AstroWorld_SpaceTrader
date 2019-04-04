@@ -125,104 +125,106 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                 //Start planet view activity (Should be changed to galaxy view later)
                 Game.getInstance().initializePlayerPlanet();
 
+                mRootRef.setValue(Game.getInstance());
+
 
                 //Set player values
 
-                Player player = Game.getInstance().getPlayer();
-                mRootRef.child("player").child("repuation").setValue(player.getReputation());
-                mRootRef.child("player").child("credits").setValue(player.getCredits());
-
-
-
-                currSysRef.child("name").setValue(Game.getInstance().getPlayer().
-                getCurrentSystem().getName());
-                currSysRef.child("techLevel").setValue(Game.getInstance().getPlayer().
-                        getCurrentSystem().getTechLevel().toString());
-                currSysRef.child("sysLocation").child("xPos").setValue(Game.getInstance().
-                        getPlayer().getCurrentSystem().getSysLocation().getxPos());
-                currSysRef.child("sysLocation").child("yPos").setValue(Game.getInstance().
-                        getPlayer().getCurrentSystem().getSysLocation().getyPos());
-
-                currPlanRef.child("name").setValue(Game.getInstance().getPlayer().
-                        getCurrentPlanet().getName());
-                currPlanRef.child("gov").setValue(Game.getInstance().getPlayer().
-                        getCurrentPlanet().getGov().toString());
-                currPlanRef.child("planLocation").child("xPos").setValue(Game.getInstance().
-                        getPlayer().getCurrentPlanet().getPlanLocation().getxPos());
-                currPlanRef.child("planLocation").child("yPos").setValue(Game.getInstance().
-                        getPlayer().getCurrentPlanet().getPlanLocation().getyPos());
-                currPlanRef.child("store").child("storeCredits").setValue(Game.getInstance().
-                        getPlayer().getCurrentPlanet().getStore().getStoreCredits());
-                List<MarketGood> stInventory = Game.getInstance().getPlayer().getCurrentPlanet()
-                        .getStore().getStoreInventory();
-                for (MarketGood mark: stInventory) {
-                    String markName = mark.getName();
-                    DatabaseReference markRef = currPlanRef.child("store").child("store inventory").
-                            child(markName);
-                    markRef.child("price").setValue(mark.getPrice());
-                    markRef.child("quantity").setValue(mark.getQuantity());
-                    markRef.child("count").setValue(mark.getCount());
-
-                }
-
-
-                List<SolarSystem> ssList = Game.getInstance().getSystemList();
-
-                int sysNum = 1;
-                for (SolarSystem sys: ssList) {
-                    String sysName = sys.getName();
-                    sysListRef.child(sysName).child("sysLocation").
-                            child("xPos").setValue(sys.getSysLocation().getxPos());
-                    sysListRef.child(sysName).child("sysLocation").
-                            child("yPos").setValue(sys.getSysLocation().getyPos());
-                    sysListRef.child("techLevel").setValue(sys.getTechLevel().toString());
-
-                    List<Planet> pList = sys.getListOfPlanets();
-                    int planNum = 1;
-                    for (Planet plan: pList) {
-                        String planName = plan.getName();
-                        DatabaseReference planRef = sysListRef.child(sysName).child("listPlanets").
-                                child(planName);
-                        planRef.child("planLocation").
-                                child("xPos").setValue(plan.getPlanLocation().getxPos());
-                        planRef.child("planLocation").
-                                child("yPos").setValue(plan.getPlanLocation().getyPos());
-                        planRef.child("gov").setValue(plan.getGov().toString());
-                        planRef.child("store").child("storeCredits").
-                                setValue(plan.getStore().getStoreCredits());
-                        List<MarketGood> sInventory = plan.getStore().getStoreInventory();
-                        for (MarketGood mark: sInventory) {
-                            String markName = mark.getName();
-                            DatabaseReference markRef = planRef.child("store").
-                                    child("store inventory").child(markName);
-                            markRef.child("price").setValue(mark.getPrice());
-                            markRef.child("quantity").setValue(mark.getQuantity());
-                            markRef.child("count").setValue(mark.getCount());
-
-                        }
-
-
-
-                        planNum++;
-                    }
-                    sysNum++;
-                }
-
-
-                //Setting ship
-                Spaceship currShip = Game.getInstance().getPlayer().getShip();
-                shipRef.child("name").setValue(Game.getInstance().getPlayer().getShip().toString());
-                shipRef.child("fuel").setValue(currShip.getFuel());
-                shipRef.child("capacity").setValue(currShip.getCapacity());
-                shipRef.child("unitFuelUse").setValue(currShip.getUnitFuelUse());
-                shipRef.child("ssFuelMult").setValue(currShip.getSsFuelMultiplier());
-
-                List<TradeGood> cList = Game.getInstance().getPlayer().getShip().getCargoList();
-                for (TradeGood t: cList) {
-                    String shipName = Game.getInstance().getPlayer().getShip().toString();
-                    String tradeName = t.getName();
-                    DatabaseReference cargoRef = shipRef.child(shipName).child("listCargo").child(tradeName);
-                }
+//                Player player = Game.getInstance().getPlayer();
+//                mRootRef.child("player").child("repuation").setValue(player.getReputation());
+//                mRootRef.child("player").child("credits").setValue(player.getCredits());
+//
+//                currSysRef.child("name").setValue(Game.getInstance().getPlayer().
+//                        getCurrentSystem().getName());
+//                currSysRef.child("techLevel").setValue(Game.getInstance().getPlayer().
+//                        getCurrentSystem().getTechLevel().toString());
+//                currSysRef.child("sysLocation").child("xPos").setValue(Game.getInstance().
+//                        getPlayer().getCurrentSystem().getSysLocation().getxPos());
+//                currSysRef.child("sysLocation").child("yPos").setValue(Game.getInstance().
+//                        getPlayer().getCurrentSystem().getSysLocation().getyPos());
+//
+//                currPlanRef.child("name").setValue(Game.getInstance().getPlayer().
+//                        getCurrentPlanet().getName());
+//                currPlanRef.child("gov").setValue(Game.getInstance().getPlayer().
+//                        getCurrentPlanet().getGov().toString());
+//                currPlanRef.child("planLocation").child("xPos").setValue(Game.getInstance().
+//                        getPlayer().getCurrentPlanet().getPlanLocation().getxPos());
+//                currPlanRef.child("planLocation").child("yPos").setValue(Game.getInstance().
+//                        getPlayer().getCurrentPlanet().getPlanLocation().getyPos());
+//                currPlanRef.child("store").child("storeCredits").setValue(Game.getInstance().
+//                        getPlayer().getCurrentPlanet().getStore().getStoreCredits());
+//                List<MarketGood> stInventory = Game.getInstance().getPlayer().getCurrentPlanet()
+//                        .getStore().getStoreInventory();
+//
+//
+//                for (MarketGood mark: stInventory) {
+//                    String markName = mark.getName();
+//                    DatabaseReference markRef = currPlanRef.child("store").child("store inventory").
+//                            child(markName);
+//                    markRef.child("price").setValue(mark.getPrice());
+//                    markRef.child("quantity").setValue(mark.getQuantity());
+//                    markRef.child("count").setValue(mark.getCount());
+//
+//                }
+//
+//
+//                List<SolarSystem> ssList = Game.getInstance().getSystemList();
+//
+//                int sysNum = 1;
+//                for (SolarSystem sys: ssList) {
+//                    String sysName = sys.getName();
+//                    sysListRef.child(sysName).child("sysLocation").
+//                            child("xPos").setValue(sys.getSysLocation().getxPos());
+//                    sysListRef.child(sysName).child("sysLocation").
+//                            child("yPos").setValue(sys.getSysLocation().getyPos());
+//                    sysListRef.child("techLevel").setValue(sys.getTechLevel().toString());
+//
+//                    List<Planet> pList = sys.getListOfPlanets();
+//                    int planNum = 1;
+//                    for (Planet plan: pList) {
+//                        String planName = plan.getName();
+//                        DatabaseReference planRef = sysListRef.child(sysName).child("listPlanets").
+//                                child(planName);
+//                        planRef.child("planLocation").
+//                                child("xPos").setValue(plan.getPlanLocation().getxPos());
+//                        planRef.child("planLocation").
+//                                child("yPos").setValue(plan.getPlanLocation().getyPos());
+//                        planRef.child("gov").setValue(plan.getGov().toString());
+//                        planRef.child("store").child("storeCredits").
+//                                setValue(plan.getStore().getStoreCredits());
+//                        List<MarketGood> sInventory = plan.getStore().getStoreInventory();
+//                        for (MarketGood mark: sInventory) {
+//                            String markName = mark.getName();
+//                            DatabaseReference markRef = planRef.child("store").
+//                                    child("store inventory").child(markName);
+//                            markRef.child("price").setValue(mark.getPrice());
+//                            markRef.child("quantity").setValue(mark.getQuantity());
+//                            markRef.child("count").setValue(mark.getCount());
+//
+//                        }
+//
+//
+//
+//                        planNum++;
+//                    }
+//                    sysNum++;
+//                }
+//
+//
+//                //Setting ship
+//                Spaceship currShip = Game.getInstance().getPlayer().getShip();
+//                shipRef.child("name").setValue(Game.getInstance().getPlayer().getShip().toString());
+//                shipRef.child("fuel").setValue(currShip.getFuel());
+//                shipRef.child("capacity").setValue(currShip.getCapacity());
+//                shipRef.child("unitFuelUse").setValue(currShip.getUnitFuelUse());
+//                shipRef.child("ssFuelMult").setValue(currShip.getSsFuelMultiplier());
+//
+//                List<TradeGood> cList = Game.getInstance().getPlayer().getShip().getCargoList();
+//                for (TradeGood t: cList) {
+//                    String shipName = Game.getInstance().getPlayer().getShip().toString();
+//                    String tradeName = t.getName();
+//                    DatabaseReference cargoRef = shipRef.child(shipName).child("listCargo").child(tradeName);
+//                }
 
 
 
