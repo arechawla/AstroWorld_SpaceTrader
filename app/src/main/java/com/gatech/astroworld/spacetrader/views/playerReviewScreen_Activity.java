@@ -125,7 +125,8 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                 //Start planet view activity (Should be changed to galaxy view later)
                 Game.getInstance().initializePlayerPlanet();
 
-                mRootRef.setValue(Game.getInstance());
+                mRootRef.setValue(Game.getInstance().getPlayer().getCurrentPlanet().getStore()
+                        );
 
 
                 //Set player values
