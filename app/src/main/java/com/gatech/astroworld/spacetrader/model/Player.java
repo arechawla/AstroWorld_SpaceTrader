@@ -19,6 +19,11 @@ public class Player {
     private Spaceship ship;
 
 
+    //for dataBase
+    private int curSystemReference;
+    private  int curPlanetReference;
+
+
     public Player(){
         this.skillPoints = 16;
         this.pilotPoints = 0;
@@ -105,6 +110,18 @@ public class Player {
     public void setCurrentSystem(SolarSystem ss) { currentSystem = ss; }
 
     public void setCurrentPlanet(Planet p) { currentPlanet = p; }
+
+    public int getCurSystemReference() { return curSystemReference; }
+
+    public void setCurSystemReference(int c) {
+        curSystemReference = c;
+    }
+
+    public int getCurPlanetReference() { return curPlanetReference; }
+
+    public void setCurPlanetReference(int c) {
+        curPlanetReference = c;
+    }
 
     /**
      *
