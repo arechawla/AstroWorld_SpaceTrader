@@ -81,7 +81,15 @@ public class systemView_Activity extends AppCompatActivity
         travelAlertBuilder.setPositiveButton("Travel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                Player player = Game.getInstance().getPlayer();
+                Planet p = (Planet) destination.getValue();
+                String message = "Congrats! The citizens of " + p.getName()
+                        + " gift you 100 credits to show their hospitality.";
+                if (player.getShip().randomEncounter()) {
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                }
                 Player currPlayer = game.getPlayer();
                 View v = buttonContainer;
                 double fuelUse = currPlayer.getShip().travelPlanet(currPlayer, (Planet) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
