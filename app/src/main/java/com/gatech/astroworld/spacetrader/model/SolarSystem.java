@@ -15,7 +15,7 @@ public class SolarSystem {
     private String name;
     private List<Planet> listOfPlanets = new ArrayList<>();
     private TechLevel techLevel;
-    private Resources resources;
+//    private Resources resources;
     private SysLocation sysLocation;
     private int systemSize = 500;
     private int maxPlanets = 5;
@@ -153,12 +153,11 @@ public class SolarSystem {
         };
         this.name = solarSystemName[rand.nextInt(solarSystemName.length)];
         this.techLevel = TECHLEVEL_VALUES[rand.nextInt(TECHLEVEL_VALUES.length - 1)];
-        this.resources = RESOURCES_VALUES[rand.nextInt(RESOURCES_VALUES.length - 1)];
+//        this.resources = RESOURCES_VALUES[rand.nextInt(RESOURCES_VALUES.length - 1)];
 
         /* Compare new system distance from galactic center to the distance of every system created.
          * If the new system is within +/- systemMargin of an existing system, then the new system
          * distance is changed. */
-        int sysListSize = Game.getInstance().getSystemList().size();
         this.sysLocation = new SysLocation(new Point(maxPosX, maxPosY));
         String[] planetName = {
                 "Mercury",
@@ -228,63 +227,6 @@ public class SolarSystem {
         return techLevel;
     }
 
-    public class SysLocation {
-        private int galaxySize = Game.getInstance().getGalaxySize();
-        private Point galaxyButtonSize = new Point(100, 100);
-        private Random random = new Random();
-        private double xPos;
-        private double yPos;
-        private double galacCenterDist;
-        private int prevSize = 0;
-
-//        SysLocation () {
-//            this.xPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
-//            this.yPos = (random.nextDouble() * 2 * systemMargin) - systemMargin;
-//            galacCenterDist = Math.hypot(xPos, yPos);
-//        }
-
-        SysLocation (Point layoutSize) {
-            final int numXintervals = 10;
-            final int numYintervals = 10;
-            int[][] grid = new int[numXintervals][numYintervals];
-            int unitXPixelDist = layoutSize.x/numXintervals;
-            int unitYPixelDist = layoutSize.y/numYintervals;
-
-            int xRandPick = random.nextInt(numXintervals);
-            int yRandPick = random.nextInt(numYintervals);
-            while (grid[xRandPick][yRandPick] == 1) {
-                xRandPick = random.nextInt(numXintervals);
-                yRandPick = random.nextInt(numYintervals);
-            }
-            grid[xRandPick][yRandPick] = 1;
-            this.xPos = (xRandPick) * unitXPixelDist - layoutSize.x/2.0;
-            this.yPos = (yRandPick) * unitYPixelDist - layoutSize.y/2.0;
-
-        }
-
-
-        public double getGalacCenterDist() {
-            return galacCenterDist;
-        }
-        public void updateLocation(double newX, double newY){
-            this.xPos = newX;
-            this.yPos = newY;
-            galacCenterDist = Math.hypot(xPos, yPos);
-        }
-        public void randomLocation() {
-            updateLocation((random.nextDouble() * 2 * galaxySize) - galaxySize,
-                            (random.nextDouble() * 2 * galaxySize) - galaxySize);
-        }
-
-        public double getxPos() {
-            return xPos;
-        }
-
-        public double getyPos() {
-            return yPos;
-        }
-
-    }
 
     @Override
     public boolean equals(Object other) {

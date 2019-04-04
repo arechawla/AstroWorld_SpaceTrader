@@ -1,8 +1,10 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.entity.TechLevel;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
+import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,26 +12,23 @@ import java.util.Random;
 
 public class Store {
 
-    private ArrayList<MarketGood> storeInventory;
+    private List<MarketGood> storeInventory;
     private int storeCredits;
-    private ArrayList<TradeGood> cartBuy;
-    private ArrayList<MarketGood> cartSell;
-    private SolarSystem sys;
+    private TechLevel techLev;
+    @Exclude
     private Planet plan;
-    private int buyTotal;
+
 
 //    public Store(int storeCredits, SolarSystem sys, Planet plan)
     public Store(int storeCredits, Planet p) {
         this.storeCredits = storeCredits;
-        this.sys = p.getSys();
+        this.techLev = p.getSys().getTechLevel();
         this.plan = p;
         this.storeInventory = new ArrayList<>();
-        this.cartBuy = new ArrayList<>();
-        this.cartSell = new ArrayList<>();
         populateStoreInventory();
     }
     
-    public ArrayList<MarketGood> populateStoreInventory() {
+    public List<MarketGood> populateStoreInventory() {
         GoodType[] goods = GoodType.values();
         for (GoodType good: goods) {
             MarketGood mark = new MarketGood(good, plan);
@@ -41,6 +40,18 @@ public class Store {
         }
         return storeInventory;
     }
+
+    @Exclude
+    public Planet getPlanet() {
+        return plan;
+    }
+
+    @Exclude
+    public void  setPlan(Planet p) {
+        plan = p;
+    }
+
+
 
     /**
      * for testing purposes
@@ -55,6 +66,11 @@ public class Store {
         return StringGoods;
     }
 
+    public TechLevel getTechLev() {
+        return  techLev;
+    }
+
+
     public void zeroMarketCounts() {
         for (MarketGood good: storeInventory) {
             good.setCount(0);
@@ -67,14 +83,14 @@ public class Store {
 
     private int calculateQuantity(GoodType item) {
         int base = 10;
-        if (sys.getTechLevel().ordinal() < item.getMTLP()) {
+        if (techLev.ordinal() < item.getMTLP()) {
             return 0;
         } else {
             Random ranCalc = new Random();
             int upperBound = 10;
             base += ranCalc.nextInt(upperBound);
 
-            if (sys.getTechLevel().ordinal() == item.getTTP()) {
+            if (techLev.ordinal() == item.getTTP()) {
                 upperBound =15;
                 base += ranCalc.nextInt(upperBound);
             }
@@ -85,6 +101,7 @@ public class Store {
 
 
     public void buy(Player buyer) {
+        ArrayList<TradeGood> cartBuy = new ArrayList<>();
         int total = 0;
         List<MarketGood> toRemove = new ArrayList<MarketGood>();
         for (MarketGood mark: storeInventory) {
@@ -124,14 +141,14 @@ public class Store {
     public void incrementCountBuy(MarketGood good) {
 
         good.setCount(good.getCount() + 1);
-        buyTotal += good.getPrice();
+
     }
 
     public void decrementCountBuy(MarketGood good) {
         int i = good.getCount() - 1;
         if (i >= 0) {
             good.setCount(i);
-            buyTotal -= good.getPrice();
+
         }
     }
 
