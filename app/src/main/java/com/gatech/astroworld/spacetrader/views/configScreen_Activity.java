@@ -154,12 +154,12 @@ public class configScreen_Activity extends AppCompatActivity {
                 viewmodel.updatePlayer(newPlayer);
 
 
-                difficultyRef.setValue(difficulty.toString());
-
-                distOfPointsRef.child("engineerPoints").setValue(engineerPoints.getProgress());
-                distOfPointsRef.child("pilotPoints").setValue(pilotPoints.getProgress());
-                distOfPointsRef.child("traderPoints").setValue(traderPoints.getProgress());
-                distOfPointsRef.child("fighterPoints").setValue(fighterPoints.getProgress());
+//                difficultyRef.setValue(difficulty.toString());
+//
+//                distOfPointsRef.child("engineerPoints").setValue(engineerPoints.getProgress());
+//                distOfPointsRef.child("pilotPoints").setValue(pilotPoints.getProgress());
+//                distOfPointsRef.child("traderPoints").setValue(traderPoints.getProgress());
+//                distOfPointsRef.child("fighterPoints").setValue(fighterPoints.getProgress());
 
 
                 Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
