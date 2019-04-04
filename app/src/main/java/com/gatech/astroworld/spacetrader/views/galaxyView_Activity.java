@@ -95,7 +95,15 @@ public class galaxyView_Activity extends AppCompatActivity
         travelAlertBuilder.setPositiveButton("Travel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_SHORT).show();
+                Player player = Game.getInstance().getPlayer();
+                SolarSystem s = (SolarSystem) destination.getValue();
+                String message = "A fellow traveler grants you 100cr on your journey to "
+                        + s.getName();
+                if (player.getShip().randomEncounter()) {
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                }
                 Player currPlayer = game.getPlayer();
                 View v = (View) buttonContainer;
                 double fuelUse = currPlayer.getShip().travelSolarSystem(currPlayer.getCurrentSystem(),

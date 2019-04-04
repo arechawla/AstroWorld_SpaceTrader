@@ -7,6 +7,7 @@ import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Spaceship {
 
@@ -87,6 +88,7 @@ public class Spaceship {
         int numXintervals = 10;
         int numYintervals = 10;
 
+
         int unitXPixelDist = layoutSize.x/numXintervals;
         int unitYPixelDist = layoutSize.y/numYintervals;
         double xDist = 0;
@@ -119,6 +121,18 @@ public class Spaceship {
             return -1;
         } else {
             return fuelUsed;
+        }
+    }
+
+    public boolean randomEncounter() {
+        Random rand = new Random();
+        Player player = Game.getInstance().getPlayer();
+        int x = rand.nextInt(100);
+        if (x < 33) {
+            player.setCredits(player.getCredits() + 100);
+            return true;
+        } else {
+            return false;
         }
     }
 
