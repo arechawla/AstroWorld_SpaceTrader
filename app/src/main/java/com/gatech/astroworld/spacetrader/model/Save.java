@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Save {
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
-    DatabaseReference sysListRef = mRootRef.child("systemList");
+    static DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    static DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
+    static DatabaseReference sysListRef = mRootRef.child("systemList");
 
-    public void savePlayerInformation() {
+    public static void savePlayerInformation() {
         Player player = Game.getInstance().getPlayer();
         mRootRef.child("player").child("repuation").setValue(player.getReputation());
         mRootRef.child("player").child("credits").setValue(player.getCredits());
@@ -32,7 +32,7 @@ public class Save {
         mRootRef.child("player").child("curPlanetIndex").setValue(player.getCurPlanetReference());
     }
 
-    public void saveSpaceShipInformation() {
+    public static void saveSpaceShipInformation() {
         Spaceship ship = Game.getInstance().getPlayer().getShip();
         shipRef.child("fuel").setValue(ship.getFuel());
         shipRef.child("capacity").setValue(ship.getCapacity());
@@ -52,7 +52,7 @@ public class Save {
     }
 
 
-    public void saveSolarSystemList() {
+    public static void saveSolarSystemList() {
         List<SolarSystem> ssList = Game.getInstance().getSystemList();
 
                 int sysNum = 1;

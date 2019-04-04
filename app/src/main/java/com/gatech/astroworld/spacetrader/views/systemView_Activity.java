@@ -54,7 +54,6 @@ public class systemView_Activity extends AppCompatActivity
     private HashMap.Entry destination;
     private AlertDialog.Builder leaveSystemBuilder;
 
-    Save save = new Save();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +102,7 @@ public class systemView_Activity extends AppCompatActivity
                 //UPDATE CURRENT PLANET REF FOR DATABSE
                 Planet curr = (Planet) destination.getValue();
                 player.setCurPlanetReference(player.getCurrentSystem().getListOfPlanets().indexOf(curr));
-                save.savePlayerInformation();
+                Save.savePlayerInformation();
 
 
                 currPlayer.setCurrentPlanet((Planet) destination.getValue());
