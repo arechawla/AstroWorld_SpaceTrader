@@ -28,7 +28,7 @@ public class Load {
 
     public static void loadCurrentPlanet() {
 
-        sysListRef.addValueEventListener(new ValueEventListener() {
+        systemRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Integer sysInd = dataSnapshot.getValue(Integer.class);
@@ -72,6 +72,7 @@ public class Load {
                     SolarSystem sys = keyNode.getValue(SolarSystem.class);
                     ssList.add(sys);
                 }
+                Game.getInstance().setSystemList(ssList);
             }
 
             @Override
