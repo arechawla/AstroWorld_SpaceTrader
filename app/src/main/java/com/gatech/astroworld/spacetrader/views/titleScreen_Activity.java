@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Load;
 
 public class titleScreen_Activity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class titleScreen_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Load.loadPlayer();
         mainActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen_);
@@ -45,10 +47,13 @@ public class titleScreen_Activity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Load.loadPlayer();
-                Load.loadShip();
-                Load.loadSystemList();
-                Load.loadCurrentPlanet();
+//                Load.loadPlayer();
+                System.out.println(Game.getInstance().getPlayer().getName());
+                System.out.println(Game.getInstance().getPlayer().getCredits());
+                System.out.println(Game.getInstance().getPlayer().getPilotPoints());
+//                Load.loadShip();
+//                Load.loadSystemList();
+//                Load.loadCurrentPlanet();
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 startActivity(i);
             }

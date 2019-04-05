@@ -25,6 +25,7 @@ public class Player {
 
 
     public Player(){
+        this.name = "Default";
         this.skillPoints = 16;
         this.pilotPoints = 0;
         this.fighterPoints = 0;

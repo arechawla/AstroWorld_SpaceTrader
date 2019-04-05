@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
+import com.gatech.astroworld.spacetrader.model.Load;
 
 public class planetView_Activity extends FragmentActivity {
 
@@ -22,9 +23,8 @@ public class planetView_Activity extends FragmentActivity {
         Button playerButton = findViewById(R.id.playerInfo);
         Button orbitButton = findViewById(R.id.returnToOrbit_button);
         TextView title = findViewById(R.id.planetName);
-        if (Game.getInstance().getSystemList() != null) {
-            System.out.println(Game.getInstance().getPlayer().getName());
-        }
+        System.out.println(Game.getInstance().getPlayer().getName());
+
         title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
         TextView info = findViewById(R.id.information);
         String gov = "Political System: " + Game.getInstance().getPlayer().getCurrentPlanet().getGov().toString();

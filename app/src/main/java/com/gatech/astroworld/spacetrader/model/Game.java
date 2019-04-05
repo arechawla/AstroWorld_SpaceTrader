@@ -32,7 +32,7 @@ public class Game {
 
     // private constructor restricted to this class itself
     private Game() {
-        player = new Player(null);
+        player = new Player("Default");
         difficulty = Difficulty.BEGINNER;
     }
 
