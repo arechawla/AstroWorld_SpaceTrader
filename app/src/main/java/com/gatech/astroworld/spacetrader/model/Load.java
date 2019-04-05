@@ -183,26 +183,26 @@ public class Load {
             }
         });
 
-        mRootRef.child("player").child("currentShip").child("listCargo").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<TradeGood> tradeGoodList = new ArrayList<>();
-                for (DataSnapshot tGoodNode: dataSnapshot.getChildren()) {
-//                    int price = tGoodNode.child("price").getValue(Integer.class);
-//                    int quantity = tGoodNode.child("quantity").getValue(Integer.class);
-//                    String name = tGoodNode.child("name").getValue(String.class);
+//        mRootRef.child("player").child("currentShip").child("listCargo").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                List<TradeGood> tradeGoodList = new ArrayList<>();
+//                for (DataSnapshot tGoodNode: dataSnapshot.getChildren()) {
+////                    int price = tGoodNode.child("price").getValue(Integer.class);
+////                    int quantity = tGoodNode.child("quantity").getValue(Integer.class);
+////                    String name = tGoodNode.child("name").getValue(String.class);
+////
+////                    cargoRef.child("price").setValue(t.getPrice());
+////                    cargoRef.child("quantity").setValue(t.getQuantity());
+////                    cargoRef.child("name").setValue(shipName);
+//                }
+//            }
 //
-//                    cargoRef.child("price").setValue(t.getPrice());
-//                    cargoRef.child("quantity").setValue(t.getQuantity());
-//                    cargoRef.child("name").setValue(shipName);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
 
