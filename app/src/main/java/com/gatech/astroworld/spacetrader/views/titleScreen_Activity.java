@@ -45,6 +45,7 @@ public class titleScreen_Activity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Load.loadCurrentPlanet();
                 Load.loadPlayer();
                 Load.loadShip();
                 Load.loadSystemList();

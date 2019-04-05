@@ -14,9 +14,31 @@ import androidx.annotation.NonNull;
 
 public class Load {
 
+
+    FirebaseDatabase mDataBase = FirebaseDatabase.getInstance();
+    DatabaseReference mRefPlayer = mDataBase.getReference("player");
+
     static DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     static DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
     static DatabaseReference sysListRef = mRootRef.child("systemList");
+    static DatabaseReference systemRef = mRootRef.child("player").child("curSystemIndex");
+    static DatabaseReference planetRef = mRootRef.child("player").child("curPlanetIndex");
+
+
+
+    public static void loadCurrentPlanet() {
+        int plan = planetRef.get
+        if (planetRef!= -1) {
+            SolarSystem s = Game.getInstance().getSystemList().get(systemRef);
+            Planet p = s.getListOfPlanets().get(planetRef);
+            Game.getInstance().getPlayer().setCurrentPlanet(p);
+            Game.getInstance().getPlayer().setCurrentSystem(s);
+        } else {
+            Game.getInstance().getPlayer().setCurrentPlanet(null);
+        }
+
+    }
+
 
 
     public static void loadSystemList() {
