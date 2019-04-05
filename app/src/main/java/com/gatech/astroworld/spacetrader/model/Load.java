@@ -131,6 +131,43 @@ public class Load {
 
             }
         });
+
+        mRootRef.child("player").child("credits").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int creds = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().setCredits(creds);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mRootRef.child("player").child("skillPoints").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int[] arr = new int [5];
+                int i = 0;
+                for (DataSnapshot skillNode: dataSnapshot.getChildren()) {
+                    int sys = skillNode.getValue(Integer.class);
+                    arr[i] = sys;
+                    i++;
+                }
+                Game.getInstance().getPlayer().setEngineerPoints(arr[0]);
+                Game.getInstance().getPlayer().setFighterPoints(arr[1]);
+                Game.getInstance().getPlayer().setPilotPoints(arr[2]);
+                Game.getInstance().getPlayer().setTraderPoints(arr[4]);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

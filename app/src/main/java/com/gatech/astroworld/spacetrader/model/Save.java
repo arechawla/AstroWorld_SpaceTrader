@@ -67,20 +67,20 @@ public class Save {
                 int sysNum = 1;
                 for (SolarSystem sys: ssList) {
                     String sysName = sys.getName();
-                    sysListRef.child(sysName).child("sysLocation").
+                    sysListRef.child("System " + sysNum).child("sysLocation").
                             child("xPos").setValue(sys.getSysLocation().getxPos());
-                    sysListRef.child(sysName).child("name").
-                            setValue(sysName);
-                    sysListRef.child(sysName).child("sysLocation").
+                    sysListRef.child("System " + sysNum).child("name").
+                            setValue("System " + sysNum);
+                    sysListRef.child("System " + sysNum).child("sysLocation").
                             child("yPos").setValue(sys.getSysLocation().getyPos());
-                    sysListRef.child(sysName).child("techLevel").setValue(sys.getTechLevel().toString());
+                    sysListRef.child("System " + sysNum).child("techLevel").setValue(sys.getTechLevel().toString());
 
                     List<Planet> pList = sys.getListOfPlanets();
                     int planNum = 1;
                     for (Planet plan: pList) {
                         String planName = plan.getName();
-                        DatabaseReference planRef = sysListRef.child(sysName).child("listPlanets").
-                                child(planName);
+                        DatabaseReference planRef = sysListRef.child("System " + sysNum).child("listPlanets").
+                                child("Planet " + planNum);
                         planRef.child("planLocation").
                                 child("xPos").setValue(plan.getPlanLocation().getxPos());
                         planRef.child("name").setValue(planName);
@@ -90,12 +90,15 @@ public class Save {
                         planRef.child("store").child("storeCredits").
                                 setValue(plan.getStore().getStoreCredits());
                         List<MarketGood> sInventory = plan.getStore().getStoreInventory();
+                        int markNum = 1;
                         for (MarketGood mark: sInventory) {
                             String markName = mark.getName();
                             DatabaseReference markRef = planRef.child("store").
-                                    child("store inventory").child(markName);
+                                    child("store inventory").child("Good " + markNum);
                             markRef.child("price").setValue(mark.getPrice());
                             markRef.child("quantity").setValue(mark.getQuantity());
+                            markRef.child("name").setValue(markName);
+                            markNum++;
 
 
                         }
