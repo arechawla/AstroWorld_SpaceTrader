@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.model.Load;
 
 public class titleScreen_Activity extends AppCompatActivity {
     public static Activity mainActivity;
     private Button playButton;
     private Button settingsButton;
+    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class titleScreen_Activity extends AppCompatActivity {
 
         playButton = findViewById(R.id.menu_play_button);
         settingsButton = findViewById(R.id.menu_settings_button);
+        continueButton = findViewById(R.id.menu_continue_button);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +39,17 @@ public class titleScreen_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Load.loadPlayer();
+                Load.loadShip();
+                Load.loadSystemList();
+                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+                startActivity(i);
             }
         });
 
