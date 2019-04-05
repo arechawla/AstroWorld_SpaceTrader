@@ -22,6 +22,7 @@ public class titleScreen_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Load.loadPlayer();
         Load.loadSystemList();
+        Load.loadShip();
         mainActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen_);
@@ -49,13 +50,21 @@ public class titleScreen_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                Load.loadPlayer();
-                System.out.println(Game.getInstance().getPlayer().getName());
-                System.out.println(Game.getInstance().getPlayer().getCredits());
-                System.out.println(Game.getInstance().getPlayer().getPilotPoints());
+                System.out.println("Name: " + Game.getInstance().getPlayer().getName());
+                System.out.println("Credits: " + Game.getInstance().getPlayer().getCredits());
+                System.out.println("Pilot Points: " + Game.getInstance().getPlayer().getPilotPoints());
+                System.out.println("Planet ref: " + Game.getInstance().getPlayer().getCurPlanetReference());
+                System.out.println("System Ref: " + Game.getInstance().getPlayer().getCurSystemReference());
+                System.out.println("Reputation :" + Game.getInstance().getPlayer().getReputation());
+                System.out.println("");
+                System.out.println("Ship name: " + Game.getInstance().getPlayer().getShip().getName());
+                System.out.println("Ship Fuel: " + Game.getInstance().getPlayer().getShip().getFuel());
+                System.out.println("Ship Capacity: " + Game.getInstance().getPlayer().getShip().getCapacity());
                 System.out.println(Game.getInstance().getSystemList().get(0).getSysLocation().getxPos());
                 System.out.println(Game.getInstance().getSystemList().get(0).getSysLocation().getyPos());
                 System.out.println(Game.getInstance().getSystemList().get(0).getTechLevel());
                 System.out.println(Game.getInstance().getSystemList().get(0).getName());
+
 //                Load.loadShip();
 //                Load.loadSystemList();
 //                Load.loadCurrentPlanet();

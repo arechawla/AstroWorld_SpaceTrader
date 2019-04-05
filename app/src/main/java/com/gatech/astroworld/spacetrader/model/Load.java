@@ -102,12 +102,13 @@ public class Load {
 
 
     public static void loadShip() {
-        sysListRef.addValueEventListener(new ValueEventListener() {
+
+        //load ship name
+        mRootRef.child("player").child("currentShip").child("capacity").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                Game.getInstance().getPlayer().setShip(dataSnapshot.getValue(Spaceship.class));
-
+                int cap = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().getShip().setCapacity(cap);
             }
 
             @Override
@@ -115,9 +116,43 @@ public class Load {
 
             }
         });
+
+        //load ship fuel
+        mRootRef.child("player").child("currentShip").child("fuel").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int fuel = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().getShip().setFuel(fuel);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mRootRef.child("player").child("currentShip").child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.getValue(String.class);
+                Game.getInstance().getPlayer().getShip().setName(name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
     }
 
     public static void loadPlayer() {
+
+        //Save name
         mRootRef.child("player").child("name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -132,6 +167,8 @@ public class Load {
             }
         });
 
+
+        //save credits
         mRootRef.child("player").child("credits").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -146,6 +183,8 @@ public class Load {
             }
         });
 
+
+        //save skill points
         mRootRef.child("player").child("skillPoints").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -168,7 +207,53 @@ public class Load {
 
             }
         });
+
+        //save reputation
+        mRootRef.child("player").child("repuation").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int rep = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().setReputation(rep);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //save planet index
+        mRootRef.child("player").child("curPlanetIndex").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int planIndex = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().setCurPlanetReference(planIndex);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //save system index
+        mRootRef.child("player").child("curSystemIndex").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int ref = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().setCurSystemReference(ref);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
+
+
+
 
 
 
