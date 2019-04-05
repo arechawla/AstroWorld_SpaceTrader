@@ -22,6 +22,9 @@ public class planetView_Activity extends FragmentActivity {
         Button playerButton = findViewById(R.id.playerInfo);
         Button orbitButton = findViewById(R.id.returnToOrbit_button);
         TextView title = findViewById(R.id.planetName);
+        if (Game.getInstance().getSystemList() != null) {
+            System.out.println(Game.getInstance().getSystemList());
+        }
         title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
         TextView info = findViewById(R.id.information);
         String gov = "Political System: " + Game.getInstance().getPlayer().getCurrentPlanet().getGov().toString();

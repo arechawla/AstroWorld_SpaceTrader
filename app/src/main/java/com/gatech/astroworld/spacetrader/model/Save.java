@@ -16,6 +16,7 @@ public class Save {
 
     public static void savePlayerInformation() {
         Player player = Game.getInstance().getPlayer();
+        mRootRef.child("player").child("name").setValue(player.getName());
         mRootRef.child("player").child("repuation").setValue(player.getReputation());
         mRootRef.child("player").child("credits").setValue(player.getCredits());
         mRootRef.child("player").child("skillPoints")
@@ -68,6 +69,8 @@ public class Save {
                     String sysName = sys.getName();
                     sysListRef.child(sysName).child("sysLocation").
                             child("xPos").setValue(sys.getSysLocation().getxPos());
+                    sysListRef.child(sysName).child("name").
+                            setValue(sysName);
                     sysListRef.child(sysName).child("sysLocation").
                             child("yPos").setValue(sys.getSysLocation().getyPos());
                     sysListRef.child(sysName).child("techLevel").setValue(sys.getTechLevel().toString());
@@ -80,6 +83,7 @@ public class Save {
                                 child(planName);
                         planRef.child("planLocation").
                                 child("xPos").setValue(plan.getPlanLocation().getxPos());
+                        planRef.child("name").setValue(planName);
                         planRef.child("planLocation").
                                 child("yPos").setValue(plan.getPlanLocation().getyPos());
                         planRef.child("gov").setValue(plan.getGov().toString());
