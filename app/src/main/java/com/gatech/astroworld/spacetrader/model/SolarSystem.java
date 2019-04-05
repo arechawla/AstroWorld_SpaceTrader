@@ -203,6 +203,14 @@ public class SolarSystem {
         return maxPosY;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTechLevel(TechLevel tech) {
+        this.techLevel = tech;
+    }
+
     public int getSystemSize() {
         return this.systemSize;
     }

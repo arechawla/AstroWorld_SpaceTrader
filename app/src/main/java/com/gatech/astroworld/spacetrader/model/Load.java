@@ -1,5 +1,9 @@
 package com.gatech.astroworld.spacetrader.model;
 
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+
+import com.gatech.astroworld.spacetrader.entity.TechLevel;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,14 +66,27 @@ public class Load {
 
 
     public static void loadSystemList() {
-        shipRef.addValueEventListener(new ValueEventListener() {
+        sysListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> keys = new ArrayList<>();
                 List<SolarSystem> ssList = Game.getInstance().getSystemList();
-                for (DataSnapshot keyNode: dataSnapshot.getChildren()) {
-                    keys.add(keyNode.getKey());
-                    SolarSystem sys = keyNode.getValue(SolarSystem.class);
+                for (DataSnapshot sysNode: dataSnapshot.getChildren()) {
+                    DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
+                    int width = disp.widthPixels;
+                    int height = disp.heightPixels;
+                    SolarSystem sys =  new SolarSystem(width, height);
+                    int xPos = sysNode.child("sysLocation").
+                            child("xPos").getValue(Integer.class);
+                    int yPos = sysNode.child("sysLocation").
+                            child("yPos").getValue(Integer.class);
+                    String name = sysNode.child("name").getValue(String.class);
+                    String techLev = sysNode.child("techLevel").getValue(String.class);
+                    System.out.println(xPos);
+                    System.out.println(yPos);
+                    sys.getSysLocation().setxPos(xPos);
+                    sys.getSysLocation().setyPos(yPos);
+                    sys.setName(name);
+                    sys.setTechLevel(TechLevel.valueOf(techLev));
                     ssList.add(sys);
                 }
                 Game.getInstance().setSystemList(ssList);
@@ -99,23 +116,6 @@ public class Load {
             }
         });
     }
-
-//    mRootRef.child("player").child("name").setValue(player.getName());
-//        mRootRef.child("player").child("repuation").setValue(player.getReputation());
-//        mRootRef.child("player").child("credits").setValue(player.getCredits());
-//        mRootRef.child("player").child("skillPoints")
-//                .child("pliotPoints").setValue(player.getPilotPoints());
-//        mRootRef.child("player").child("skillPoints")
-//                .child("remainingPoints").setValue(player.getSkillPoints());
-//        mRootRef.child("player").child("skillPoints")
-//                .child("traderPoints").setValue(player.getTraderPoints());
-//        mRootRef.child("player").child("skillPoints")
-//                .child("engineerPoints").setValue(player.getEngineerPoints());
-//        mRootRef.child("player").child("skillPoints")
-//                .child("fighterPoints").setValue(player.getFighterPoints());
-//        mRootRef.child("player").child("curSystemIndex").setValue(player.getCurSystemReference());
-//        mRootRef.child("player").child("curPlanetIndex").setValue(player.getCurPlanetReference());
-
 
     public static void loadPlayer() {
         mRootRef.child("player").child("name").addValueEventListener(new ValueEventListener() {

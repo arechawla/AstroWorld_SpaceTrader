@@ -70,7 +70,7 @@ public class Save {
                     sysListRef.child("System " + sysNum).child("sysLocation").
                             child("xPos").setValue(sys.getSysLocation().getxPos());
                     sysListRef.child("System " + sysNum).child("name").
-                            setValue("System " + sysNum);
+                            setValue(sysName);
                     sysListRef.child("System " + sysNum).child("sysLocation").
                             child("yPos").setValue(sys.getSysLocation().getyPos());
                     sysListRef.child("System " + sysNum).child("techLevel").setValue(sys.getTechLevel().toString());
