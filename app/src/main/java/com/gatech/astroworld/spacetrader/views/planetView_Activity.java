@@ -23,7 +23,7 @@ public class planetView_Activity extends FragmentActivity {
         Button orbitButton = findViewById(R.id.returnToOrbit_button);
         TextView title = findViewById(R.id.planetName);
         if (Game.getInstance().getSystemList() != null) {
-            System.out.println(Game.getInstance().getSystemList());
+            System.out.println(Game.getInstance().getPlayer().getName());
         }
         title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
         TextView info = findViewById(R.id.information);
