@@ -62,7 +62,7 @@ public class Load {
 
 
     public static void loadSystemList() {
-        sysListRef.addValueEventListener(new ValueEventListener() {
+        shipRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<String> keys = new ArrayList<>();
@@ -88,7 +88,8 @@ public class Load {
         sysListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 Game.getInstance().getPlayer().setShip(dataSnapshot.getValue(Spaceship.class));
+
+                Game.getInstance().getPlayer().setShip(dataSnapshot.getValue(Spaceship.class));
 
             }
 
@@ -99,12 +100,29 @@ public class Load {
         });
     }
 
+//    mRootRef.child("player").child("name").setValue(player.getName());
+//        mRootRef.child("player").child("repuation").setValue(player.getReputation());
+//        mRootRef.child("player").child("credits").setValue(player.getCredits());
+//        mRootRef.child("player").child("skillPoints")
+//                .child("pliotPoints").setValue(player.getPilotPoints());
+//        mRootRef.child("player").child("skillPoints")
+//                .child("remainingPoints").setValue(player.getSkillPoints());
+//        mRootRef.child("player").child("skillPoints")
+//                .child("traderPoints").setValue(player.getTraderPoints());
+//        mRootRef.child("player").child("skillPoints")
+//                .child("engineerPoints").setValue(player.getEngineerPoints());
+//        mRootRef.child("player").child("skillPoints")
+//                .child("fighterPoints").setValue(player.getFighterPoints());
+//        mRootRef.child("player").child("curSystemIndex").setValue(player.getCurSystemReference());
+//        mRootRef.child("player").child("curPlanetIndex").setValue(player.getCurPlanetReference());
+
 
     public static void loadPlayer() {
-        sysListRef.addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Game.getInstance().setPlayer(dataSnapshot.getValue(Player.class));
+                String name = dataSnapshot.getValue(String.class);
+                Game.getInstance().getPlayer().setName(name);
 
             }
 
