@@ -45,14 +45,16 @@ public class Save {
 
 
         List<TradeGood> cList = Game.getInstance().getPlayer().getShip().getCargoList();
+        int num = 1;
         for (TradeGood t: cList) {
             String shipName = Game.getInstance().getPlayer().getShip().toString();
             String tradeName = t.getName();
             DatabaseReference cargoRef = shipRef.
-                    child("listCargo").child(tradeName);
+                    child("listCargo").child("Good" + num);
             cargoRef.child("price").setValue(t.getPrice());
             cargoRef.child("quantity").setValue(t.getQuantity());
             cargoRef.child("name").setValue(shipName);
+            num++;
         }
 
         //Save ship
@@ -93,17 +95,16 @@ public class Save {
                         int markNum = 1;
                         for (MarketGood mark: sInventory) {
                             String markName = mark.getName();
+                            String markEnum = mark.getGoodType().toString();
                             DatabaseReference markRef = planRef.child("store").
                                     child("store inventory").child("Good " + markNum);
                             markRef.child("price").setValue(mark.getPrice());
                             markRef.child("quantity").setValue(mark.getQuantity());
                             markRef.child("name").setValue(markName);
+                            markRef.child("goodType").setValue(markEnum);
                             markNum++;
 
-
                         }
-
-
 
                         planNum++;
                     }

@@ -39,4 +39,12 @@ public class PlanetLocation {
         return yPos;
     }
 
+    public void setxPos(double x) {
+        this.xPos = x;
+    }
+
+    public void setyPos(double y) {
+        this.yPos = y;
+    }
+
 }

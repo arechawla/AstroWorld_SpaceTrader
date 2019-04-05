@@ -211,6 +211,10 @@ public class SolarSystem {
         this.techLevel = tech;
     }
 
+    public void setListOfPlanets(List<Planet> planList) {
+        listOfPlanets = planList;
+    }
+
     public int getSystemSize() {
         return this.systemSize;
     }

@@ -35,6 +35,7 @@ public class MarketGood {
     }
 
 
+
     public void setPrice(int p) {
         price = p;
     }
@@ -46,6 +47,10 @@ public class MarketGood {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setName(String n) {
+        this.name = n;
     }
 
 
