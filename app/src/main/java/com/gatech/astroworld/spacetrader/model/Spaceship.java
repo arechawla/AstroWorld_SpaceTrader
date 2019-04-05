@@ -161,6 +161,18 @@ public class Spaceship {
         return unitFuelUse;
     }
 
+    public void setCapacity(int cap) {
+        capacity = cap;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+
+
     @Override
     public String toString() {
         return name;

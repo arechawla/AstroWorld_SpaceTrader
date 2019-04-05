@@ -18,6 +18,12 @@ public class TradeGood {
 
     }
 
+    public TradeGood(String goodName, int price, int quantity) {
+        this.price = price;
+        this.quantity = quantity;
+        this.good = GoodType.valueOf(goodName);
+    }
+
     public void setQuantity(int q) {
         quantity = q;
     }
