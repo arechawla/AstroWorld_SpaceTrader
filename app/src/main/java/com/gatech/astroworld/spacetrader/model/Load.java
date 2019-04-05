@@ -27,15 +27,35 @@ public class Load {
 
 
     public static void loadCurrentPlanet() {
-        int plan = planetRef.get
-        if (planetRef!= -1) {
-            SolarSystem s = Game.getInstance().getSystemList().get(systemRef);
-            Planet p = s.getListOfPlanets().get(planetRef);
-            Game.getInstance().getPlayer().setCurrentPlanet(p);
-            Game.getInstance().getPlayer().setCurrentSystem(s);
-        } else {
-            Game.getInstance().getPlayer().setCurrentPlanet(null);
-        }
+
+        sysListRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Integer sysInd = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().
+                        setCurrentSystem(Game.getInstance().getSystemList().get(sysInd));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        planetRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Integer planInd = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().
+                        setCurrentPlanet(Game.getInstance().getPlayer().getCurrentSystem()
+                                .getListOfPlanets().get(planInd));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
