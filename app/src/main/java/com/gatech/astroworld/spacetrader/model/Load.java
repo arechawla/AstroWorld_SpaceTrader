@@ -1,10 +1,14 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import android.content.res.Resources;
+import android.provider.ContactsContract;
 import android.util.DisplayMetrics;
 
+import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,6 +73,7 @@ public class Load {
         sysListRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 List<SolarSystem> ssList = Game.getInstance().getSystemList();
                 for (DataSnapshot sysNode: dataSnapshot.getChildren()) {
                     DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
@@ -88,6 +93,40 @@ public class Load {
                     sys.setName(name);
                     sys.setTechLevel(TechLevel.valueOf(techLev));
                     ssList.add(sys);
+                    List<Planet> planetList = new ArrayList<>();
+                    for (DataSnapshot planNode: sysNode.child("listPlanets").getChildren()) {
+                        Planet p = new Planet(sys);
+                        int xPos2 = planNode.child("planLocation").
+                                child("xPos").getValue(Integer.class);
+                        int yPos2 = planNode.child("planLocation").
+                                child("yPos").getValue(Integer.class);
+                        int storeCreds = planNode.child("store").child("storeCredits").
+                                getValue(Integer.class);
+                        String gov = planNode.child("gov").getValue(String.class);
+                        String name2 = planNode.child("name").getValue(String.class);
+                        p.getPlanLocation().setxPos(xPos2);
+                        p.getPlanLocation().setyPos(yPos2);
+                        p.setGov(PoliticalSystems.valueOf(gov));
+                        p.setName(name2);
+                        p.getStore().setStoreCredits(storeCreds);
+                        List<MarketGood> stInven = new ArrayList<>();
+                        for (DataSnapshot goodNode: planNode.child("store").child("store inventory")
+                        .getChildren()) {
+                            String goodType = goodNode.child("goodType").getValue(String.class);
+                            String name3 = goodNode.child("name").getValue(String.class);
+                            int price = goodNode.child("price").getValue(Integer.class);
+                            int quantity = goodNode.child("quantity").getValue(Integer.class);
+                            System.out.println(goodType);
+                            MarketGood good = new MarketGood(GoodType.valueOf(goodType), p);
+                            good.setName(name3);
+                            good.setPrice(price);
+                            good.setQuantity(quantity);
+                            stInven.add(good);
+                        }
+                        p.getStore().setStoreInventory(stInven);
+                        planetList.add(p);
+                    }
+                    sys.setListOfPlanets(planetList);
                 }
                 Game.getInstance().setSystemList(ssList);
             }
@@ -143,6 +182,27 @@ public class Load {
 
             }
         });
+
+//        mRootRef.child("player").child("currentShip").child("listCargo").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                List<TradeGood> tradeGoodList = new ArrayList<>();
+//                for (DataSnapshot tGoodNode: dataSnapshot.getChildren()) {
+////                    int price = tGoodNode.child("price").getValue(Integer.class);
+////                    int quantity = tGoodNode.child("quantity").getValue(Integer.class);
+////                    String name = tGoodNode.child("name").getValue(String.class);
+////
+////                    cargoRef.child("price").setValue(t.getPrice());
+////                    cargoRef.child("quantity").setValue(t.getQuantity());
+////                    cargoRef.child("name").setValue(shipName);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
 
@@ -222,26 +282,13 @@ public class Load {
             }
         });
 
-        //save planet index
-        mRootRef.child("player").child("curPlanetIndex").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int planIndex = dataSnapshot.getValue(Integer.class);
-                Game.getInstance().getPlayer().setCurPlanetReference(planIndex);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
         //save system index
         mRootRef.child("player").child("curSystemIndex").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int ref = dataSnapshot.getValue(Integer.class);
                 Game.getInstance().getPlayer().setCurSystemReference(ref);
+//                Game.getInstance().getPlayer().setCurrentSystem(Game.getInstance().getSystemList().get(ref));
             }
 
             @Override
@@ -249,6 +296,24 @@ public class Load {
 
             }
         });
+
+        //save planet index
+        mRootRef.child("player").child("curPlanetIndex").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int planIndex = dataSnapshot.getValue(Integer.class);
+                Game.getInstance().getPlayer().setCurPlanetReference(planIndex);
+                System.out.println(Game.getInstance().getSystemList().size());
+//                Game.getInstance().getPlayer().setCurrentPlanet(Game.getInstance().getSystemList().get(0).
+//                        getListOfPlanets().get(planIndex));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 

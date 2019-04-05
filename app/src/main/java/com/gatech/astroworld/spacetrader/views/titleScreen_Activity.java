@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Load;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class titleScreen_Activity extends AppCompatActivity {
     public static Activity mainActivity;
@@ -20,8 +21,8 @@ public class titleScreen_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Load.loadPlayer();
         Load.loadSystemList();
+        Load.loadPlayer();
         Load.loadShip();
         mainActivity = this;
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class titleScreen_Activity extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseDatabase.getInstance().getInstance().getReference().setValue(null);
                 Intent i = new Intent(getApplicationContext(), configScreen_Activity.class);
                 startActivity(i);
             }
@@ -64,6 +66,14 @@ public class titleScreen_Activity extends AppCompatActivity {
                 System.out.println(Game.getInstance().getSystemList().get(0).getSysLocation().getyPos());
                 System.out.println(Game.getInstance().getSystemList().get(0).getTechLevel());
                 System.out.println(Game.getInstance().getSystemList().get(0).getName());
+                System.out.println(Game.getInstance().getSystemList().get(0).getListOfPlanets().get(0).getName());
+                int a = Game.getInstance().getPlayer().getCurSystemReference();
+                int b = Game.getInstance().getPlayer().getCurPlanetReference();
+                System.out.println(a);
+                System.out.println(b);
+                Game.getInstance().getPlayer().setCurrentSystem(Game.getInstance().getSystemList().get(a));
+                Game.getInstance().getPlayer().setCurrentPlanet(Game.getInstance().getSystemList().get(a).
+                        getListOfPlanets().get(b));
 
 //                Load.loadShip();
 //                Load.loadSystemList();

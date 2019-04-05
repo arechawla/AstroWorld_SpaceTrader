@@ -77,6 +77,14 @@ public class Store {
         }
     }
 
+    public void setStoreCredits(int storeCredits) {
+        this.storeCredits = storeCredits;
+    }
+
+    public void setStoreInventory(List<MarketGood> st) {
+        this.storeInventory = st;
+    }
+
     public int getStoreCredits() {
         return storeCredits;
     }
