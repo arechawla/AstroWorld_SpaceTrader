@@ -39,4 +39,12 @@ public class SysLocation {
         return yPos;
     }
 
+    public void setxPos(double x) {
+        xPos = x;
+    }
+
+    public void setyPos(double y) {
+        yPos = y;
+    }
+
 }

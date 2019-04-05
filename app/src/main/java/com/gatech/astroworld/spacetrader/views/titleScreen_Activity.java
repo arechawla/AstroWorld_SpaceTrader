@@ -21,6 +21,7 @@ public class titleScreen_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Load.loadPlayer();
+        Load.loadSystemList();
         mainActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen_);
@@ -51,6 +52,10 @@ public class titleScreen_Activity extends AppCompatActivity {
                 System.out.println(Game.getInstance().getPlayer().getName());
                 System.out.println(Game.getInstance().getPlayer().getCredits());
                 System.out.println(Game.getInstance().getPlayer().getPilotPoints());
+                System.out.println(Game.getInstance().getSystemList().get(0).getSysLocation().getxPos());
+                System.out.println(Game.getInstance().getSystemList().get(0).getSysLocation().getyPos());
+                System.out.println(Game.getInstance().getSystemList().get(0).getTechLevel());
+                System.out.println(Game.getInstance().getSystemList().get(0).getName());
 //                Load.loadShip();
 //                Load.loadSystemList();
 //                Load.loadCurrentPlanet();
