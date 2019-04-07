@@ -214,7 +214,7 @@ public class Load {
     public static void loadShip() {
 
         //load ship name
-        mRootRef.child("player").child("currentShip").child("capacity").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("currentShip").child("capacity").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int cap = dataSnapshot.getValue(Integer.class);
@@ -228,7 +228,7 @@ public class Load {
         });
 
         //load ship fuel
-        mRootRef.child("player").child("currentShip").child("fuel").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("currentShip").child("fuel").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int fuel = dataSnapshot.getValue(Integer.class);
@@ -241,7 +241,7 @@ public class Load {
             }
         });
 
-        mRootRef.child("player").child("currentShip").child("name").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("currentShip").child("name").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.getValue(String.class);
@@ -287,7 +287,7 @@ public class Load {
     public static void loadPlayer() {
 
         //Save name
-        mRootRef.child("player").child("name").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("name").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.getValue(String.class);
@@ -303,7 +303,7 @@ public class Load {
 
 
         //save credits
-        mRootRef.child("player").child("credits").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("credits").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int creds = dataSnapshot.getValue(Integer.class);
@@ -319,7 +319,7 @@ public class Load {
 
 
         //save skill points
-        mRootRef.child("player").child("skillPoints").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("skillPoints").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int[] arr = new int [5];
@@ -343,7 +343,7 @@ public class Load {
         });
 
         //save reputation
-        mRootRef.child("player").child("repuation").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("repuation").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int rep = dataSnapshot.getValue(Integer.class);
@@ -357,7 +357,7 @@ public class Load {
         });
 
         //save system index
-        mRootRef.child("player").child("curSystemIndex").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("curSystemIndex").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int ref = dataSnapshot.getValue(Integer.class);
@@ -372,7 +372,7 @@ public class Load {
         });
 
         //save planet index
-        mRootRef.child("player").child("curPlanetIndex").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("player").child("curPlanetIndex").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int planIndex = dataSnapshot.getValue(Integer.class);
