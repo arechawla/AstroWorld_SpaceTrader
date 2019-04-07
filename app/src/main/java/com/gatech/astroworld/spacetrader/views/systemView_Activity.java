@@ -60,7 +60,7 @@ public class systemView_Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_view_);
         game = Game.getInstance();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        Toolbar toolbar = findViewById(R.id.toolbar2);
         toolbar.setTitle(game.getPlayer().getCurrentSystem().toString() + " Solar System");
         setSupportActionBar(toolbar);
         systemViewmodel = ViewModelProviders.of(this).get(System_viewmodel.class);
@@ -70,13 +70,13 @@ public class systemView_Activity extends AppCompatActivity
 
         buttonContainer = findViewById(R.id.buttonContainer2);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout2);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navPlanets_view);
+        NavigationView navigationView = findViewById(R.id.navPlanets_view);
         navigationView.setNavigationItemSelectedListener(this);
         travelAlertBuilder = new AlertDialog.Builder(this);
 
@@ -144,7 +144,7 @@ public class systemView_Activity extends AppCompatActivity
 
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
-        View v = (View) findViewById(R.id.buttonContainer2);
+        View v = findViewById(R.id.buttonContainer2);
         viewCenterX = v.getWidth() / 2;
         viewCenterY = v.getHeight() / 2;
         Random rand = new Random();
@@ -236,7 +236,7 @@ public class systemView_Activity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout2);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

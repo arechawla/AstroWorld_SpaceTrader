@@ -1,6 +1,5 @@
 package com.gatech.astroworld.spacetrader.views;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,19 +9,16 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.gatech.astroworld.spacetrader.model.Game;
-import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 
-import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -36,22 +32,17 @@ import com.gatech.astroworld.spacetrader.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 
 public class galaxyView_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RelativeLayout buttonContainer;
     private static RelativeLayout dimensions;
-    private Galaxy_viewmodel galaxyViewmodel;
     private Configuration_viewmodel configuration_viewmodel;
     private Game game;
     private int viewCenterX;
@@ -69,29 +60,26 @@ public class galaxyView_Activity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galaxy_view_);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Galaxy Map");
         setSupportActionBar(toolbar);
-        galaxyViewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
+        Galaxy_viewmodel galaxyViewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
         configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
         //Generate buttons for galaxy view
         game = Game.getInstance();
 
 
         buttonContainer = findViewById(R.id.buttonContainer);
-        dimensions = findViewById(R.id.buttonContainer);
+        dimensions = buttonContainer;
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        buttonContainer = findViewById(R.id.buttonContainer);
-        View v = (View) buttonContainer;
-//        galaxyViewmodel.generateGalaxy(v.getWidth(), v.getHeight());
         travelAlertBuilder = new AlertDialog.Builder(this);
         travelAlertBuilder.setPositiveButton("Travel", new DialogInterface.OnClickListener() {
             @Override
@@ -106,7 +94,7 @@ public class galaxyView_Activity extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
                 }
                 Player currPlayer = game.getPlayer();
-                View v = (View) buttonContainer;
+                View v = buttonContainer;
                 double fuelUse = currPlayer.getShip().travelSolarSystem(currPlayer.getCurrentSystem(),
                         (SolarSystem) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
                 double shipFuel = currPlayer.getShip().getFuel();
@@ -144,7 +132,7 @@ public class galaxyView_Activity extends AppCompatActivity
 
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
-        View v = (View) buttonContainer;
+        View v = buttonContainer;
         viewCenterX = v.getWidth() / 2;
         viewCenterY = v.getHeight() / 2;
         Player currPlayer = game.getPlayer();
@@ -186,7 +174,7 @@ public class galaxyView_Activity extends AppCompatActivity
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -232,7 +220,7 @@ public class galaxyView_Activity extends AppCompatActivity
             startActivity(i);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

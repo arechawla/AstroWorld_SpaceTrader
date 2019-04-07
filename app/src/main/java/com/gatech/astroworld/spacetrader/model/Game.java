@@ -1,22 +1,13 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import android.app.Activity;
-
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.RelativeLayout;
 
-import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
-import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Game {
 
@@ -59,6 +50,7 @@ public class Game {
     public List<SolarSystem> getSystemList() {
         return systemList;
     }
+
     public void addSystem(SolarSystem newSystem) {
         systemList.add(newSystem);
     }
@@ -75,38 +67,27 @@ public class Game {
         return maxSystems;
     }
     @Override
-    public String toString () {
-        /* return "\n********************************************************"
-        + "\nSettings: \n"
-        + "\n********************************************************"
-        + "\nPlayer: "
-        + "\n" + player.toString() + " "
-        + "\n********************************************************"
-        + "\nGame: "
-        + "\n\t\t* Difficulty: " + this.getDifficulty().toString()
-        + "\n********************************************************"; */
-        return "Game toString test";
-    }
-
+    public String toString () {return difficulty.toString();}
 
     public void initializePlayerPlanet() {
         DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
         Player player = Game.getInstance().getPlayer();
+
         int width = disp.widthPixels;
         int height = disp.heightPixels;
+
         for (int i = 0; i < getMaxSystems(); i++) {
             SolarSystem sys = new SolarSystem(width , height);
             systemList.add(sys);
-            System.out.println(sys.getSysLocation().getxPos());
-            System.out.println(sys.getSysLocation().getyPos());
-            for (Planet p: systemList.get(i).getListOfPlanets()) {
-                System.out.println(p.getName());
-            }
+//            System.out.println(sys.getSysLocation().getxPos());
+//            System.out.println(sys.getSysLocation().getyPos());
+//            for (Planet p: systemList.get(i).getListOfPlanets()) {
+//                System.out.println(p.getName());
+//            }
         }
-        Random rand = new Random();
-        int[] arr = {1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5,
-                6, 7, 8, 9};
 
+        Random rand = new Random();
+        int[] arr = {1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5, 6, 7, 8, 9};
 
         int playerSystemIndex = (rand.nextInt(getSystemList().size()));
         player.setCurrentSystem(this.getSystemList().get(arr[playerSystemIndex]-1));
@@ -116,8 +97,5 @@ public class Game {
         player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(playerPlanetIndex));
         player.setCurPlanetReference(playerPlanetIndex);
     }
-
-
-
 
 }
