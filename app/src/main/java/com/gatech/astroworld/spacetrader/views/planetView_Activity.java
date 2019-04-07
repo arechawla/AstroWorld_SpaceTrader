@@ -23,14 +23,15 @@ public class planetView_Activity extends FragmentActivity {
         Button playerButton = findViewById(R.id.playerInfo);
         Button orbitButton = findViewById(R.id.returnToOrbit_button);
         TextView title = findViewById(R.id.planetName);
-        System.out.println(Game.getInstance().getPlayer().getName());
-
-        title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
         TextView info = findViewById(R.id.information);
-        String gov = "Political System: " + Game.getInstance().getPlayer().getCurrentPlanet().getGov().toString();
-        String tech = "Tech Level: " + Game.getInstance().getPlayer().getCurrentSystem().getTechLevel().name();
-        String system = "Solar System: " + Game.getInstance().getPlayer().getCurrentSystem().getName();
-        info.setText(system + "\n" + tech + "\n" + gov);
+        System.out.println(Game.getInstance().getPlayer().getName());
+        if (Game.getInstance().getPlayer().getCurrentPlanet() != null) {
+            title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
+            String gov = "Political System: " + Game.getInstance().getPlayer().getCurrentPlanet().getGov().toString();
+            String tech = "Tech Level: " + Game.getInstance().getPlayer().getCurrentSystem().getTechLevel().name();
+            String system = "Solar System: " + Game.getInstance().getPlayer().getCurrentSystem().getName();
+            info.setText(system + "\n" + tech + "\n" + gov);
+        }
 
 
 
@@ -57,10 +58,6 @@ public class planetView_Activity extends FragmentActivity {
                 startActivity(i);
             }
         });
-
-
-
-
 
     }
 }
