@@ -56,4 +56,8 @@ public class TradeGood {
         return price;
     }
 
+    public void setName(String n) {
+        name = n;
+    }
+
 }

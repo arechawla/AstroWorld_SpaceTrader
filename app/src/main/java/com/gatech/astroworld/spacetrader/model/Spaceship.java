@@ -44,6 +44,10 @@ public class Spaceship {
         }
     }
 
+    public void setCargoList(List<TradeGood> list) {
+        cargo = list;
+    }
+
     public Integer containsCargo(TradeGood find) {
         for (int i = 0; i < cargo.size(); i++) {
             if (find.getName().equals(cargo.get(i).getName())) {

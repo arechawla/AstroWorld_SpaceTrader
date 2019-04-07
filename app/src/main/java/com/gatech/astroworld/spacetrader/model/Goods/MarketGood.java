@@ -21,6 +21,7 @@ public class MarketGood {
         this.sys = p.getSys();
         this.planet = p;
         this.price = calculatePrice();
+        this.quantity = 0;
     }
 
     public int calculatePrice() {
@@ -31,6 +32,7 @@ public class MarketGood {
     }
 
     public void setQuantity(int q) {
+
         quantity = q;
     }
 

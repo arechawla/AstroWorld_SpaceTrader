@@ -104,8 +104,12 @@ public class Game {
             }
         }
         Random rand = new Random();
-        int playerSystemIndex = (rand.nextInt(getSystemList().size() - 1));
-        player.setCurrentSystem(this.getSystemList().get(playerSystemIndex));
+        int[] arr = {1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5,
+                6, 7, 8, 9};
+
+
+        int playerSystemIndex = (rand.nextInt(getSystemList().size()));
+        player.setCurrentSystem(this.getSystemList().get(arr[playerSystemIndex]-1));
         player.setCurSystemReference(playerSystemIndex);
 
         int playerPlanetIndex = rand.nextInt(player.getCurrentSystem().getListOfPlanets().size());
