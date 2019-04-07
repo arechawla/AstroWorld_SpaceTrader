@@ -25,6 +25,7 @@ import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter.mBuyTotal;
 import static com.gatech.astroworld.spacetrader.views.market.Sell_Item_RecyclerAdapter.mSellTotal;
@@ -135,9 +136,10 @@ public class market_Activity extends AppCompatActivity implements
 
                     nav.navigate(R.id.toBuyFragment);
                 }
-                Save.saveSolarSystemList();
-                Save.savePlayerInformation();
+
+                Save.saveCreditsInformation();
                 Save.saveSpaceShipInformation();
+
             }
         });
 
@@ -153,8 +155,8 @@ public class market_Activity extends AppCompatActivity implements
                 market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
 
                 nav.navigate(R.id.toSellFragment);
-                Save.saveSolarSystemList();
-                Save.savePlayerInformation();
+//                Save.saveSolarSystemList();
+                Save.saveCreditsInformation();
                 Save.saveSpaceShipInformation();
             }
         });

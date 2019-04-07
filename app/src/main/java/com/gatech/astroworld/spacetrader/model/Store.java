@@ -4,7 +4,9 @@ import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +123,18 @@ public class Store {
                 tGood.setPrice(mark.getPrice());
                 total += mark.getPrice() * mark.getCount();
                 cartBuy.add(tGood);
-                mark.setQuantity(markQuant - markCount);
+                int newQuant = markQuant - markCount;
+                mark.setQuantity(newQuant);
+                int[] arr = {1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5,
+                6, 7, 8, 9};
+
+                int sysRef = arr[Game.getInstance().getPlayer().getCurSystemReference()];
+                int planRef = Game.getInstance().getPlayer().getCurPlanetReference() + 1;
+
+                FirebaseDatabase.getInstance().getReference().child("systemList").
+                        child("System " + sysRef)
+                        .child("listPlanets").child("Planet " + planRef)
+                        .child("store").child("store inventory").child(mark.getName()).child("quantity").setValue(newQuant);
                 int index = buyer.getShip().containsCargo(tGood);
                 if (index == -1) {
                     buyer.getShip().getCargoList().add(tGood);
@@ -190,7 +203,17 @@ public class Store {
                 if (gSold.getName().equals(gMark.getName())) {
                     int orig = gMark.getQuantity();
                     alreadyAdded = true;
-                    gMark.setQuantity(orig + gSold.getSellCount());
+                    int newQuant = orig + gSold.getSellCount();
+                    gMark.setQuantity(newQuant);
+                    int[] arr = {1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5,
+                            6, 7, 8, 9};
+                    int sysRef = arr[Game.getInstance().getPlayer().getCurSystemReference()];
+                    int planRef = Game.getInstance().getPlayer().getCurPlanetReference() + 1;
+                    FirebaseDatabase.getInstance().getReference().child("systemList").
+                            child("System " + sysRef)
+                            .child("listPlanets").child("Planet " + planRef)
+                            .child("store").child("store inventory").child(gMark.getName()).child("quantity").
+                            setValue(newQuant);
                 }
             }
             if (!alreadyAdded) {
@@ -199,6 +222,19 @@ public class Store {
                 diffGood.setSolarSystem(player.getCurrentSystem());
                 diffGood.setPlanet(player.getCurrentPlanet());
                 storeInventory.add(diffGood);
+                int[] arr = {1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5,
+                        6, 7, 8, 9};
+                int sysRef = arr[Game.getInstance().getPlayer().getCurSystemReference()];
+                int planRef = Game.getInstance().getPlayer().getCurPlanetReference() + 1;
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("systemList").
+                        child("System " + sysRef)
+                        .child("listPlanets").child("Planet " + planRef)
+                        .child("store").child("store inventory").child(diffGood.getName());
+                ref.child("quantity").
+                        setValue(gSold.getSellCount());
+                ref.child("price").setValue(gSold.getPrice());
+                ref.child("name").setValue(gSold.getName());
+                ref.child("goodType").setValue(gSold.getGoodType());
             }
             if (gSold.getSellCount() == gSold.getQuantity()) {
                 toRemove.add(gSold);

@@ -33,6 +33,12 @@ public class Save {
         mRootRef.child("player").child("curPlanetIndex").setValue(player.getCurPlanetReference());
     }
 
+
+    public static void saveCreditsInformation() {
+        Player player = Game.getInstance().getPlayer();
+        mRootRef.child("player").child("credits").setValue(player.getCredits());
+    }
+
     public static void saveSpaceShipInformation() {
         Spaceship ship = Game.getInstance().getPlayer().getShip();
         shipRef.child("fuel").setValue(ship.getFuel());
@@ -50,10 +56,11 @@ public class Save {
             String shipName = Game.getInstance().getPlayer().getShip().toString();
             String tradeName = t.getName();
             DatabaseReference cargoRef = shipRef.
-                    child("listCargo").child("Good" + num);
+                    child("listCargo").child(tradeName);
             cargoRef.child("price").setValue(t.getPrice());
             cargoRef.child("quantity").setValue(t.getQuantity());
-            cargoRef.child("name").setValue(shipName);
+            cargoRef.child("name").setValue(tradeName);
+            cargoRef.child("goodType").setValue(t.getGoodType().toString());
             num++;
         }
 
@@ -97,7 +104,7 @@ public class Save {
                             String markName = mark.getName();
                             String markEnum = mark.getGoodType().toString();
                             DatabaseReference markRef = planRef.child("store").
-                                    child("store inventory").child("Good " + markNum);
+                                    child("store inventory").child(markName);
                             markRef.child("price").setValue(mark.getPrice());
                             markRef.child("quantity").setValue(mark.getQuantity());
                             markRef.child("name").setValue(markName);
