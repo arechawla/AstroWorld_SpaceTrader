@@ -21,12 +21,13 @@ public class titleScreen_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Load.loadSystemList();
-        Load.loadPlayer();
-        Load.loadShip();
         mainActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen_);
+
+        Load.loadSystemList();
+        Load.loadPlayer();
+        Load.loadShip();
 
         playButton = findViewById(R.id.menu_play_button);
         settingsButton = findViewById(R.id.menu_settings_button);
@@ -35,7 +36,6 @@ public class titleScreen_Activity extends AppCompatActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase.getInstance().getInstance().getReference().setValue(null);
                 Intent i = new Intent(getApplicationContext(), configScreen_Activity.class);
                 startActivity(i);
             }
