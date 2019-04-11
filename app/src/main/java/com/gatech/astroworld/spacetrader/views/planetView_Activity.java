@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
-import com.gatech.astroworld.spacetrader.model.Load;
+
 
 public class planetView_Activity extends FragmentActivity {
 

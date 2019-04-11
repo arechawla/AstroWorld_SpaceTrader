@@ -21,7 +21,7 @@ public class Store {
     private Planet plan;
 
 
-//    public Store(int storeCredits, SolarSystem sys, Planet plan)
+
     public Store(int storeCredits, Planet p) {
         this.storeCredits = storeCredits;
         this.techLev = p.getSys().getTechLevel();

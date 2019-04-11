@@ -1,22 +1,12 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import android.app.Activity;
-
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.RelativeLayout;
-
-import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
-import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Game {
 

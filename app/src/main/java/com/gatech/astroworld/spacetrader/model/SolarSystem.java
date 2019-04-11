@@ -5,8 +5,6 @@ import android.graphics.Point;
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
-import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +13,6 @@ public class SolarSystem {
     private String name;
     private List<Planet> listOfPlanets = new ArrayList<>();
     private TechLevel techLevel;
-//    private Resources resources;
     private SysLocation sysLocation;
     private int systemSize = 500;
     private int maxPlanets = 5;

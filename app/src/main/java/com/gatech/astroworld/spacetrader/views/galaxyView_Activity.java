@@ -1,6 +1,5 @@
 package com.gatech.astroworld.spacetrader.views;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,19 +9,16 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.gatech.astroworld.spacetrader.model.Game;
-import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 
-import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -36,15 +32,11 @@ import com.gatech.astroworld.spacetrader.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 
 public class galaxyView_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -101,9 +93,9 @@ public class galaxyView_Activity extends AppCompatActivity
                 String message = "A fellow traveler grants you 100cr on your journey to "
                         + s.getName();
                 if (player.getShip().randomEncounter()) {
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_SHORT).show();
                 }
                 Player currPlayer = game.getPlayer();
                 View v = (View) buttonContainer;

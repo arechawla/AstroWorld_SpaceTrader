@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,17 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gatech.astroworld.spacetrader.R;
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.gatech.astroworld.spacetrader.model.Save;
-import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.FirebaseDatabase;
 
 import static com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter.mBuyTotal;
 import static com.gatech.astroworld.spacetrader.views.market.Sell_Item_RecyclerAdapter.mSellTotal;

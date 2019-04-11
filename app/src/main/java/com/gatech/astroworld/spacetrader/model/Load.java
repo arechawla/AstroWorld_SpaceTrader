@@ -1,7 +1,6 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import android.content.res.Resources;
-import android.provider.ContactsContract;
 import android.util.DisplayMetrics;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
@@ -34,38 +33,6 @@ public class Load {
 
 
 
-//    public static void loadCurrentPlanet() {
-//
-//        systemRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Integer sysInd = dataSnapshot.getValue(Integer.class);
-//                Game.getInstance().getPlayer().
-//                        setCurrentSystem(Game.getInstance().getSystemList().get(sysInd));
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//        planetRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Integer planInd = dataSnapshot.getValue(Integer.class);
-//                Game.getInstance().getPlayer().
-//                        setCurrentPlanet(Game.getInstance().getPlayer().getCurrentSystem()
-//                                .getListOfPlanets().get(planInd));
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//    }
 
 
 

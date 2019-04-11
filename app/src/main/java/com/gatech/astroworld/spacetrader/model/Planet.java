@@ -1,14 +1,8 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import android.graphics.Point;
-import android.media.Image;
-
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
-import com.google.firebase.database.Exclude;
 
-import java.util.Random;
-
-import androidx.annotation.Nullable;
 
 public class Planet {
     private String name;

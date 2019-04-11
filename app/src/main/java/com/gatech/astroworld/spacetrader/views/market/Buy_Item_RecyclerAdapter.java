@@ -10,14 +10,12 @@ import android.widget.Toast;
 
 import com.gatech.astroworld.spacetrader.R;
 
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment.OnListFragmentInteractionListener;
 import com.gatech.astroworld.spacetrader.views.market_Activity;
 
-import org.w3c.dom.Text;
 
 import java.util.List;
 

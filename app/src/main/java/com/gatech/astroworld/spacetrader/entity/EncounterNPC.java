@@ -1,6 +1,5 @@
 package com.gatech.astroworld.spacetrader.entity;
 
-import com.gatech.astroworld.spacetrader.model.Spaceship;
 
 public interface EncounterNPC {
 

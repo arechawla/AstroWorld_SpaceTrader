@@ -1,8 +1,6 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import android.graphics.Point;
-
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
 import java.text.DecimalFormat;

@@ -1,12 +1,6 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import android.media.Image;
 
-import com.gatech.astroworld.spacetrader.model.Planet;
-import com.gatech.astroworld.spacetrader.model.SolarSystem;
-import com.gatech.astroworld.spacetrader.model.Spaceship;
-
-import java.util.ArrayList;
 
 public class Player {
     private String name;

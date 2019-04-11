@@ -1,8 +1,6 @@
 package com.gatech.astroworld.spacetrader.model.Goods;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
-import com.gatech.astroworld.spacetrader.model.Planet;
-import com.gatech.astroworld.spacetrader.model.SolarSystem;
 
 public class TradeGood {
 

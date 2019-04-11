@@ -9,23 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
-import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
-import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
-import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Game;
-
 import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
-import com.gatech.astroworld.spacetrader.model.Spaceship;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+
 
 public class playerReviewScreen_Activity extends AppCompatActivity {
     private Galaxy_viewmodel galaxy_viewmodel;
