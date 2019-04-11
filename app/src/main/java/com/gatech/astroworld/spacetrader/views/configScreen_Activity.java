@@ -1,8 +1,6 @@
 package com.gatech.astroworld.spacetrader.views;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +25,7 @@ public class configScreen_Activity extends AppCompatActivity {
 
     private EditText nameField;
     private Spinner difficultySpinner;
+    private Button confirmButton;
     private SeekBar pilotPoints;
     private SeekBar traderPoints;
     private SeekBar fighterPoints;
@@ -46,8 +45,8 @@ public class configScreen_Activity extends AppCompatActivity {
     private int maxStartPoints = 16;
     private int totalPoints = 0;
     private Difficulty difficulty;
+    //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Init activity
@@ -56,7 +55,7 @@ public class configScreen_Activity extends AppCompatActivity {
         //Init UI components
         nameField = findViewById(R.id.player_name_input);
         difficultySpinner = findViewById(R.id.difficulty_spinner);
-        Button confirmButton = findViewById(R.id.confirm_button);
+        confirmButton = findViewById(R.id.confirm_button);
         pilotPoints = findViewById(R.id.pilotBar);
         traderPoints = findViewById(R.id.traderBar);
         fighterPoints = findViewById(R.id.fighterBar);
@@ -154,14 +153,25 @@ public class configScreen_Activity extends AppCompatActivity {
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(newPlayer);
 
+
+//                difficultyRef.setValue(difficulty.toString());
+//
+//                distOfPointsRef.child("engineerPoints").setValue(engineerPoints.getProgress());
+//                distOfPointsRef.child("pilotPoints").setValue(pilotPoints.getProgress());
+//                distOfPointsRef.child("traderPoints").setValue(traderPoints.getProgress());
+//                distOfPointsRef.child("fighterPoints").setValue(fighterPoints.getProgress());
+
+
                 Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
                 startActivity(i);
             }
         });
 
-        //Sets the view model fragment up
+        //Sets the viewmodel fragment up
         viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
     }
+
+
 
     //Creates a new player object and populates with provided data
     private Player initPlayer () {
@@ -176,9 +186,10 @@ public class configScreen_Activity extends AppCompatActivity {
 
     //Sum of all player points
     private int totalPoints() {
-        return pilotPoints.getProgress()
+        int sum = pilotPoints.getProgress()
                  + engineerPoints.getProgress()
                  + traderPoints.getProgress()
                  + fighterPoints.getProgress();
+        return sum;
     }
 }

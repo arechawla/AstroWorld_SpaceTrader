@@ -85,7 +85,7 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
             minusButton = view.findViewById(R.id.minusButton);
             final TextView itemCountText = view.findViewById(R.id.countText);
             mView = view;
-            mIdView = view.findViewById(R.id.item_number);
+            mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView =  view.findViewById(R.id.itemName);
             mPriceView = view.findViewById(R.id.itemPrice);
 
