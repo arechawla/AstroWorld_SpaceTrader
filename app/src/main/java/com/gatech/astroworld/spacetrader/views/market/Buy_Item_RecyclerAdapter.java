@@ -54,14 +54,14 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).getName());
-        holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
-        String name = String.format("%11s", mValues.get(position).getName());
+        holder.mContentView.setText(holder.mItem.getName());
+        holder.mPriceView.setText(String.valueOf(holder.mItem.getPrice()));
+        String name = String.format("%11s", holder.mItem.getName());
         holder.mContentView.setText(name);
         String price = String.format("%11s", "Price: " +
-                Integer.toString(mValues.get(position).getPrice()));
+                Integer.toString(holder.mItem.getPrice()));
         String qty = String.format("%11s", "Qty: " +
-                Integer.toString(mValues.get(position).getQuantity()));
+                Integer.toString(holder.mItem.getQuantity()));
         holder.mPriceView.setText(price + "\n" + qty);
 
     }
@@ -95,10 +95,6 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             final Toast error2 = Toast.makeText(view.getContext(), "You cannot" +
                     " afford to buy this!", Toast.LENGTH_LONG);
 
-//            if (what == true) {
-//                updateQuant();
-//                what = false;
-//            }
 
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override

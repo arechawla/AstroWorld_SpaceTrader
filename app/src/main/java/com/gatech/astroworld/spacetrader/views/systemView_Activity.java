@@ -33,6 +33,7 @@ import com.gatech.astroworld.spacetrader.viewmodels.System_viewmodel;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class systemView_Activity extends AppCompatActivity
@@ -147,7 +148,7 @@ public class systemView_Activity extends AppCompatActivity
         //Assign the player a random planet in that system
         //Update the player
         configuration_viewmodel.updatePlayer(currPlayer);
-        HashMap<ImageButton, Planet> planetButtons = new HashMap<>();
+        Map<ImageButton, Planet> planetButtons = new HashMap<>();
 
         for (Planet planet : systemViewmodel.getPlanetList()) {
             System.out.println("Before generate system button");
@@ -236,7 +237,7 @@ public class systemView_Activity extends AppCompatActivity
         return true;
     }
     private void generatePlanetButton(double xPos, double yPos, RelativeLayout layout,
-                                      HashMap<ImageButton, Planet> buttonList, Planet planet) {
+                                      Map<ImageButton, Planet> buttonList, Planet planet) {
 
         ImageButton planetButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);

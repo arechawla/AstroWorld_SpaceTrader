@@ -14,9 +14,6 @@ import com.gatech.astroworld.spacetrader.model.Load;
 
 public class titleScreen_Activity extends AppCompatActivity {
     public static Activity mainActivity;
-    private Button playButton;
-    private Button settingsButton;
-    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +26,9 @@ public class titleScreen_Activity extends AppCompatActivity {
         Load.loadShip();
 
 
-        playButton = findViewById(R.id.menu_play_button);
-        settingsButton = findViewById(R.id.menu_settings_button);
-        continueButton = findViewById(R.id.menu_continue_button);
+        Button playButton = findViewById(R.id.menu_play_button);
+        Button settingsButton = findViewById(R.id.menu_settings_button);
+        Button continueButton = findViewById(R.id.menu_continue_button);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override

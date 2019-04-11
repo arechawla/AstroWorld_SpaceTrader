@@ -27,7 +27,6 @@ public class configScreen_Activity extends AppCompatActivity {
 
     private EditText nameField;
     private Spinner difficultySpinner;
-    private Button confirmButton;
     private SeekBar pilotPoints;
     private SeekBar traderPoints;
     private SeekBar fighterPoints;
@@ -57,7 +56,7 @@ public class configScreen_Activity extends AppCompatActivity {
         //Init UI components
         nameField = findViewById(R.id.player_name_input);
         difficultySpinner = findViewById(R.id.difficulty_spinner);
-        confirmButton = findViewById(R.id.confirm_button);
+        Button confirmButton = findViewById(R.id.confirm_button);
         pilotPoints = findViewById(R.id.pilotBar);
         traderPoints = findViewById(R.id.traderBar);
         fighterPoints = findViewById(R.id.fighterBar);

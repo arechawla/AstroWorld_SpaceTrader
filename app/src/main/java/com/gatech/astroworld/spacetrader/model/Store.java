@@ -111,7 +111,7 @@ public class Store {
 
 
     public void buy(Player buyer) {
-        ArrayList<TradeGood> cartBuy = new ArrayList<>();
+        List<TradeGood> cartBuy = new ArrayList<>();
         int total = 0;
         List<MarketGood> toRemove = new ArrayList<MarketGood>();
         for (MarketGood mark: storeInventory) {

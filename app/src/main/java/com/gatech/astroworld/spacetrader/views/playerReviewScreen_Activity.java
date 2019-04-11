@@ -21,8 +21,6 @@ import java.util.ArrayList;
 
 
 public class playerReviewScreen_Activity extends AppCompatActivity {
-    private Galaxy_viewmodel galaxy_viewmodel;
-    private Configuration_viewmodel playerConfig;
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference currSysRef = mRootRef.child("player").child("currentSystem");
     DatabaseReference currPlanRef = mRootRef.child("player").child("currentPlanet");
@@ -34,8 +32,6 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_review_screen);
 
-        galaxy_viewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
-        playerConfig = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
 
         //Init Counters
         TextView pilotPointCount = findViewById(R.id.pilotPointCount);

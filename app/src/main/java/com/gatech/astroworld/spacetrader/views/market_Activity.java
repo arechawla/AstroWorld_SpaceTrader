@@ -30,7 +30,6 @@ import static com.gatech.astroworld.spacetrader.views.market.Sell_Item_RecyclerA
 public class market_Activity extends AppCompatActivity implements
         Buy_ItemFragment.OnListFragmentInteractionListener,
         Sell_ItemFragment.OnListFragmentInteractionListener {
-    private BottomNavigationView bottomNav;
     private int selectedItem;
     public static TextView mShowTotal;
 //    public static boolean what = false;
@@ -51,7 +50,7 @@ public class market_Activity extends AppCompatActivity implements
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
         remainingCredits.setText("Remaining Credits: " +
                 String.valueOf(Game.getInstance().getPlayer().getCredits()));
-        bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
+        BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
         sell.setEnabled(false);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

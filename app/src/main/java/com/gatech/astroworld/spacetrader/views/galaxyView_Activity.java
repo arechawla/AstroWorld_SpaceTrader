@@ -37,20 +37,20 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class galaxyView_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RelativeLayout buttonContainer;
     private static RelativeLayout dimensions;
-    private Galaxy_viewmodel galaxyViewmodel;
     private Configuration_viewmodel configuration_viewmodel;
     private Game game;
     private int viewCenterX;
     private int viewCenterY;
     private Point galaxyButtonSize = new Point(100, 100);
-    private HashMap<ImageButton, SolarSystem> systemButtons = new HashMap<>();
-    private HashMap.Entry destination;
+    private Map<ImageButton, SolarSystem> systemButtons = new HashMap<>();
+    private Map.Entry destination;
     int count = 0;
     private AlertDialog.Builder travelAlertBuilder;
 
@@ -64,7 +64,6 @@ public class galaxyView_Activity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Galaxy Map");
         setSupportActionBar(toolbar);
-        galaxyViewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
         configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
         //Generate buttons for galaxy view
         game = Game.getInstance();
@@ -229,7 +228,7 @@ public class galaxyView_Activity extends AppCompatActivity
         return true;
     }
     private void generateSystemButton(double xPos, double yPos, RelativeLayout layout,
-                                      HashMap<ImageButton, SolarSystem> buttonList, SolarSystem system) {
+                                      Map<ImageButton, SolarSystem> buttonList, SolarSystem system) {
 
         ImageButton systemButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);

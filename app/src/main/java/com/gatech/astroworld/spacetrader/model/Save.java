@@ -9,11 +9,12 @@ import java.util.List;
 
 public class Save {
 
-    static DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    static DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
-    static DatabaseReference sysListRef = mRootRef.child("systemList");
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
+    DatabaseReference sysListRef = mRootRef.child("systemList");
 
     public static void savePlayerInformation() {
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         Player player = Game.getInstance().getPlayer();
         mRootRef.child("player").child("name").setValue(player.getName());
         mRootRef.child("player").child("repuation").setValue(player.getReputation());
@@ -34,11 +35,14 @@ public class Save {
 
 
     public static void saveCreditsInformation() {
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
         Player player = Game.getInstance().getPlayer();
         mRootRef.child("player").child("credits").setValue(player.getCredits());
     }
 
     public static void saveSpaceShipInformation() {
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
         Spaceship ship = Game.getInstance().getPlayer().getShip();
         shipRef.child("fuel").setValue(ship.getFuel());
         shipRef.child("capacity").setValue(ship.getCapacity());
@@ -70,6 +74,8 @@ public class Save {
 
 
     public static void saveSolarSystemList() {
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference sysListRef = mRootRef.child("systemList");
         List<SolarSystem> ssList = Game.getInstance().getSystemList();
 
                 int sysNum = 1;
