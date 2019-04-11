@@ -69,7 +69,7 @@ public class titleScreen_Activity extends AppCompatActivity {
                 System.out.println(a);
                 System.out.println(b);
                 Game.getInstance().getPlayer().setCurrentSystem(Game.getInstance().getSystemList().get(a));
-                if (Game.getInstance().getPlayer().getCurrentPlanet() == null) {
+                if (Game.getInstance().getPlayer().getCurPlanetReference() == -1) {
                     Intent intent = new Intent(getApplicationContext(), systemView_Activity.class);
                     startActivity(intent);
                 } else {
