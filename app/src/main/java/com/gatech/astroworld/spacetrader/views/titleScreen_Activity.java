@@ -72,14 +72,18 @@ public class titleScreen_Activity extends AppCompatActivity {
                 System.out.println(a);
                 System.out.println(b);
                 Game.getInstance().getPlayer().setCurrentSystem(Game.getInstance().getSystemList().get(a));
-                Game.getInstance().getPlayer().setCurrentPlanet(Game.getInstance().getSystemList().get(a).
-                        getListOfPlanets().get(b));
 
-//                Load.loadShip();
-//                Load.loadSystemList();
-//                Load.loadCurrentPlanet();
-                Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
-                startActivity(i);
+
+                if (Game.getInstance().getPlayer().getCurrentPlanet() == null) {
+                    Intent intent = new Intent(getApplicationContext(), systemView_Activity.class);
+                    startActivity(intent);
+                } else {
+                    Game.getInstance().getPlayer().setCurrentPlanet(Game.getInstance().getSystemList().get(a).
+                            getListOfPlanets().get(b));
+                    Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
+                    startActivity(i);
+                }
+
             }
         });
 
