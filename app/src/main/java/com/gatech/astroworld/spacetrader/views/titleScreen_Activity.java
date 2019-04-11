@@ -11,13 +11,9 @@ import android.widget.Button;
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Load;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class titleScreen_Activity extends AppCompatActivity {
     public static Activity mainActivity;
-    private Button playButton;
-    private Button settingsButton;
-    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +25,10 @@ public class titleScreen_Activity extends AppCompatActivity {
         Load.loadPlayer();
         Load.loadShip();
 
-        playButton = findViewById(R.id.menu_play_button);
-        settingsButton = findViewById(R.id.menu_settings_button);
-        continueButton = findViewById(R.id.menu_continue_button);
+
+        Button playButton = findViewById(R.id.menu_play_button);
+        Button settingsButton = findViewById(R.id.menu_settings_button);
+        Button continueButton = findViewById(R.id.menu_continue_button);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +69,7 @@ public class titleScreen_Activity extends AppCompatActivity {
                 System.out.println(a);
                 System.out.println(b);
                 Game.getInstance().getPlayer().setCurrentSystem(Game.getInstance().getSystemList().get(a));
-
-
-                if (Game.getInstance().getPlayer().getCurrentPlanet() == null) {
+                if (Game.getInstance().getPlayer().getCurPlanetReference() == -1) {
                     Intent intent = new Intent(getApplicationContext(), systemView_Activity.class);
                     startActivity(intent);
                 } else {

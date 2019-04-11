@@ -1,6 +1,5 @@
 package com.gatech.astroworld.spacetrader.views;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,19 +9,16 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.gatech.astroworld.spacetrader.model.Game;
-import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 
-import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -36,29 +32,25 @@ import com.gatech.astroworld.spacetrader.R;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 public class galaxyView_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RelativeLayout buttonContainer;
     private static RelativeLayout dimensions;
-    private Galaxy_viewmodel galaxyViewmodel;
     private Configuration_viewmodel configuration_viewmodel;
     private Game game;
     private int viewCenterX;
     private int viewCenterY;
     private Point galaxyButtonSize = new Point(100, 100);
-    private HashMap<ImageButton, SolarSystem> systemButtons = new HashMap<>();
-    private HashMap.Entry destination;
+    private Map<ImageButton, SolarSystem> systemButtons = new HashMap<>();
+    private Map.Entry destination;
     int count = 0;
     private AlertDialog.Builder travelAlertBuilder;
 
@@ -72,7 +64,6 @@ public class galaxyView_Activity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Galaxy Map");
         setSupportActionBar(toolbar);
-        galaxyViewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
         configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
         //Generate buttons for galaxy view
         game = Game.getInstance();
@@ -101,9 +92,9 @@ public class galaxyView_Activity extends AppCompatActivity
                 String message = "A fellow traveler grants you 100cr on your journey to "
                         + s.getName();
                 if (player.getShip().randomEncounter()) {
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_SHORT).show();
                 }
                 Player currPlayer = game.getPlayer();
                 View v = (View) buttonContainer;
@@ -237,7 +228,7 @@ public class galaxyView_Activity extends AppCompatActivity
         return true;
     }
     private void generateSystemButton(double xPos, double yPos, RelativeLayout layout,
-                                      HashMap<ImageButton, SolarSystem> buttonList, SolarSystem system) {
+                                      Map<ImageButton, SolarSystem> buttonList, SolarSystem system) {
 
         ImageButton systemButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);

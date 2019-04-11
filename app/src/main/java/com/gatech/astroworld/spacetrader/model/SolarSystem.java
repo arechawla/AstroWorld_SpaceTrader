@@ -5,8 +5,6 @@ import android.graphics.Point;
 import com.gatech.astroworld.spacetrader.entity.PoliticalSystems;
 import com.gatech.astroworld.spacetrader.entity.Resources;
 import com.gatech.astroworld.spacetrader.entity.TechLevel;
-import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,14 +13,12 @@ public class SolarSystem {
     private String name;
     private List<Planet> listOfPlanets = new ArrayList<>();
     private TechLevel techLevel;
-//    private Resources resources;
     private SysLocation sysLocation;
-    private int systemSize = 500;
+
     private int maxPlanets = 5;
     private int maxPosX;
     private int maxPosY;
 
-    private Random rand = new Random();
     public SolarSystem (int maxPosX, int maxPosY) {
 
         final TechLevel[] TECHLEVEL_VALUES = TechLevel.values();
@@ -151,6 +147,7 @@ public class SolarSystem {
                 "Zalkon",
                 "Zuul"
         };
+        Random rand = new Random();
         this.name = solarSystemName[rand.nextInt(solarSystemName.length)];
         this.techLevel = TECHLEVEL_VALUES[rand.nextInt(TECHLEVEL_VALUES.length - 1)];
 //        this.resources = RESOURCES_VALUES[rand.nextInt(RESOURCES_VALUES.length - 1)];
@@ -215,9 +212,6 @@ public class SolarSystem {
         listOfPlanets = planList;
     }
 
-    public int getSystemSize() {
-        return this.systemSize;
-    }
 
     public List<Planet> getListOfPlanets() {
         return listOfPlanets;

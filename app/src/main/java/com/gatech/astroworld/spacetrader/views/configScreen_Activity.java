@@ -1,22 +1,24 @@
 package com.gatech.astroworld.spacetrader.views;
-import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
-import android.app.Activity;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
-import android.widget.EditText;
+
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class configScreen_Activity extends AppCompatActivity {
 
@@ -25,7 +27,6 @@ public class configScreen_Activity extends AppCompatActivity {
 
     private EditText nameField;
     private Spinner difficultySpinner;
-    private Button confirmButton;
     private SeekBar pilotPoints;
     private SeekBar traderPoints;
     private SeekBar fighterPoints;
@@ -55,7 +56,7 @@ public class configScreen_Activity extends AppCompatActivity {
         //Init UI components
         nameField = findViewById(R.id.player_name_input);
         difficultySpinner = findViewById(R.id.difficulty_spinner);
-        confirmButton = findViewById(R.id.confirm_button);
+        Button confirmButton = findViewById(R.id.confirm_button);
         pilotPoints = findViewById(R.id.pilotBar);
         traderPoints = findViewById(R.id.traderBar);
         fighterPoints = findViewById(R.id.fighterBar);

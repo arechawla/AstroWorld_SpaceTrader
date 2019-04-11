@@ -5,7 +5,6 @@ import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Save {
@@ -15,6 +14,7 @@ public class Save {
     static DatabaseReference sysListRef = mRootRef.child("systemList");
 
     public static void savePlayerInformation() {
+
         Player player = Game.getInstance().getPlayer();
         mRootRef.child("player").child("name").setValue(player.getName());
         mRootRef.child("player").child("repuation").setValue(player.getReputation());
@@ -35,11 +35,13 @@ public class Save {
 
 
     public static void saveCreditsInformation() {
+
         Player player = Game.getInstance().getPlayer();
         mRootRef.child("player").child("credits").setValue(player.getCredits());
     }
 
     public static void saveSpaceShipInformation() {
+
         Spaceship ship = Game.getInstance().getPlayer().getShip();
         shipRef.child("fuel").setValue(ship.getFuel());
         shipRef.child("capacity").setValue(ship.getCapacity());
@@ -71,6 +73,7 @@ public class Save {
 
 
     public static void saveSolarSystemList() {
+
         List<SolarSystem> ssList = Game.getInstance().getSystemList();
 
                 int sysNum = 1;

@@ -1,6 +1,5 @@
 package com.gatech.astroworld.spacetrader.views;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +9,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,12 +28,12 @@ import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Save;
-import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.System_viewmodel;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class systemView_Activity extends AppCompatActivity
@@ -88,9 +84,9 @@ public class systemView_Activity extends AppCompatActivity
                 String message = "Congrats! The citizens of " + p.getName()
                         + " gift you 100 credits to show their hospitality.";
                 if (player.getShip().randomEncounter()) {
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Traveled", Toast.LENGTH_SHORT).show();
                 }
                 Player currPlayer = game.getPlayer();
                 View v = buttonContainer;
@@ -152,7 +148,7 @@ public class systemView_Activity extends AppCompatActivity
         //Assign the player a random planet in that system
         //Update the player
         configuration_viewmodel.updatePlayer(currPlayer);
-        HashMap<ImageButton, Planet> planetButtons = new HashMap<>();
+        Map<ImageButton, Planet> planetButtons = new HashMap<>();
 
         for (Planet planet : systemViewmodel.getPlanetList()) {
             System.out.println("Before generate system button");
@@ -241,7 +237,7 @@ public class systemView_Activity extends AppCompatActivity
         return true;
     }
     private void generatePlanetButton(double xPos, double yPos, RelativeLayout layout,
-                                      HashMap<ImageButton, Planet> buttonList, Planet planet) {
+                                      Map<ImageButton, Planet> buttonList, Planet planet) {
 
         ImageButton planetButton = new ImageButton(this);
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);

@@ -10,19 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.lifecycle.ViewModelProviders;
-import android.app.Activity;
-import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
-import com.gatech.astroworld.spacetrader.model.Store;
+
 
 import java.util.ArrayList;
 import java.util.List;

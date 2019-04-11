@@ -1,31 +1,20 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import android.app.Activity;
-
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.RelativeLayout;
-
-import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
-import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-public class Game {
+public final class Game {
 
     //Init game vars
     private Difficulty difficulty;
     private Player player;
     private List<SolarSystem> systemList = new ArrayList<>();
     private int galaxySize = 1000;
-    private int maxSystems = 15;
 
     // static variable single_instance of type Singleton
     private static Game single_instance = null;
@@ -59,21 +48,9 @@ public class Game {
     public List<SolarSystem> getSystemList() {
         return systemList;
     }
-    public void addSystem(SolarSystem newSystem) {
-        systemList.add(newSystem);
-    }
 
-    public int getGalaxySize() {
-        return this.galaxySize;
-    }
 
-    public void setGalaxySize(int newSize) {
-        this.galaxySize = newSize;
-    }
 
-    public int getMaxSystems() {
-        return maxSystems;
-    }
     @Override
     public String toString () {
         /* return "\n********************************************************"
@@ -94,7 +71,8 @@ public class Game {
         Player player = Game.getInstance().getPlayer();
         int width = disp.widthPixels;
         int height = disp.heightPixels;
-        for (int i = 0; i < getMaxSystems(); i++) {
+        int maxSystems = 15;
+        for (int i = 0; i < maxSystems; i++) {
             SolarSystem sys = new SolarSystem(width , height);
             systemList.add(sys);
             System.out.println(sys.getSysLocation().getxPos());

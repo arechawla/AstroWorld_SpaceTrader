@@ -1,10 +1,7 @@
 package com.gatech.astroworld.spacetrader.entity.NPCs;
 
-import android.widget.Toast;
-
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
-import java.util.List;
 
 public class Trader {
 

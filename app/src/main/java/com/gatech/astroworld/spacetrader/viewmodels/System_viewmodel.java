@@ -4,8 +4,6 @@ import android.app.Application;
 
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Planet;
-import com.gatech.astroworld.spacetrader.model.SolarSystem;
-import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
 import com.gatech.astroworld.spacetrader.views.systemView_Activity;
 
 import java.util.List;

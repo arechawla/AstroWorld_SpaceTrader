@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
 
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.gatech.astroworld.spacetrader.model.Store;
