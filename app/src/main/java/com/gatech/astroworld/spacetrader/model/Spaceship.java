@@ -5,6 +5,7 @@ import android.graphics.Point;
 import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -147,7 +148,8 @@ public class Spaceship {
     public double getFuel() { return fuel; }
 
     public void setFuel(double f) {
-        fuel = f;
+        DecimalFormat df = new DecimalFormat("#.00");
+        fuel =  Double.valueOf(df.format(f));
     }
 
     public String getName() { return name; }
