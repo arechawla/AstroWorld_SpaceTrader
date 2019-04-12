@@ -25,8 +25,8 @@ public class PlanetLocation {
             yRandPick = random.nextInt(numYintervals);
         }
         grid[xRandPick][yRandPick] = 1;
-        this.xPos = (xRandPick) * unitXPixelDist - layoutSize.x/2;
-        this.yPos = (yRandPick) * unitYPixelDist - layoutSize.y/2;
+        this.xPos = (xRandPick * unitXPixelDist) - layoutSize.x/2.0;
+        this.yPos = (yRandPick * unitYPixelDist) - layoutSize.y/2.0;
 
     }
 

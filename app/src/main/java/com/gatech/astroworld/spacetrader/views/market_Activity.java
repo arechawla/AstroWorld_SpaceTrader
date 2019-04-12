@@ -52,21 +52,24 @@ public class market_Activity extends AppCompatActivity implements
                 String.valueOf(Game.getInstance().getPlayer().getCredits()));
         BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
         sell.setEnabled(false);
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNav.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.destination_buy:
-                        if (nav.getCurrentDestination().getId() ==R.id.destination_buy) {
-                            Game.getInstance().getPlayer().
-                                    getCurrentPlanet().getStore().zeroMarketCounts();
-                            Game.getInstance().getPlayer().
-                                    getShip().zeroSellCounts();
-                            mBuyTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
-                            mSellTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
-                            return false;
+                        if (nav.getCurrentDestination() != null) {
+                            if (nav.getCurrentDestination().getId() == R.id.destination_buy) {
+                                Game.getInstance().getPlayer().
+                                        getCurrentPlanet().getStore().zeroMarketCounts();
+                                Game.getInstance().getPlayer().
+                                        getShip().zeroSellCounts();
+                                mBuyTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                                mSellTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
+                                return false;
+                            }
                         }
                         Game.getInstance().getPlayer().
                                 getCurrentPlanet().getStore().zeroMarketCounts();
@@ -82,16 +85,18 @@ public class market_Activity extends AppCompatActivity implements
                         nav.navigate(R.id.toBuyFragment);
                         return true;
                     case R.id.destination_sell:
-                        if (nav.getCurrentDestination().getId() ==R.id.destination_sell) {
-                            Game.getInstance().getPlayer().
-                                    getCurrentPlanet().getStore().zeroMarketCounts();
-                            Game.getInstance().getPlayer().
-                                    getShip().zeroSellCounts();
-                            mBuyTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
-                            mSellTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
-                            return false;
+                        if (nav.getCurrentDestination() != null) {
+                            if (nav.getCurrentDestination().getId() == R.id.destination_sell) {
+                                Game.getInstance().getPlayer().
+                                        getCurrentPlanet().getStore().zeroMarketCounts();
+                                Game.getInstance().getPlayer().
+                                        getShip().zeroSellCounts();
+                                mBuyTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                                mSellTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
+                                return false;
+                            }
                         }
                         Game.getInstance().getPlayer().
                                 getCurrentPlanet().getStore().zeroMarketCounts();
@@ -193,8 +198,4 @@ public class market_Activity extends AppCompatActivity implements
         return  cred;
     }
 
-//    @Override
-//    public void onListFragmentInteraction(com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem item) {
-//
-//    }
 }

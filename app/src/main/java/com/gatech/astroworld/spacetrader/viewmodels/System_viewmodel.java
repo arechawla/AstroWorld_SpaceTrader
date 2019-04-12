@@ -15,9 +15,6 @@ import androidx.lifecycle.AndroidViewModel;
 public class System_viewmodel extends AndroidViewModel {
 
     private Game game;
-    private Random rand = new Random();
-    private systemView_Activity systemViewActivity;
-
     public System_viewmodel(@NonNull Application application) {
         super(application);
         game = Game.getInstance();

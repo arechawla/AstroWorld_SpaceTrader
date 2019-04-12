@@ -134,7 +134,8 @@ public class Store {
                 FirebaseDatabase.getInstance().getReference().child("systemList").
                         child("System " + sysRef)
                         .child("listPlanets").child("Planet " + planRef)
-                        .child("store").child("store inventory").child(mark.getName()).child("quantity").setValue(newQuant);
+                        .child("store").child("store inventory").child(mark.getName()).child(
+                                "quantity").setValue(newQuant);
                 int index = buyer.getShip().containsCargo(tGood);
                 if (index == -1) {
                     buyer.getShip().getCargoList().add(tGood);
@@ -142,7 +143,7 @@ public class Store {
                     int origQuant = buyer.getShip().getCargoList().get(index).getQuantity();
                     buyer.getShip().getCargoList().get(index).setQuantity(origQuant + markCount);
                 }
-                if (markQuant - markCount == 0) {
+                if ((markQuant - markCount) == 0) {
                     toRemove.add(mark);
                 } else {
                     mark.setCount(0);
@@ -212,7 +213,8 @@ public class Store {
                     FirebaseDatabase.getInstance().getReference().child("systemList").
                             child("System " + sysRef)
                             .child("listPlanets").child("Planet " + planRef)
-                            .child("store").child("store inventory").child(gMark.getName()).child("quantity").
+                            .child("store").child("store inventory").child(gMark.getName()).child(
+                                    "quantity").
                             setValue(newQuant);
                 }
             }
@@ -226,7 +228,8 @@ public class Store {
                         6, 7, 8, 9};
                 int sysRef = arr[Game.getInstance().getPlayer().getCurSystemReference()];
                 int planRef = Game.getInstance().getPlayer().getCurPlanetReference() + 1;
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("systemList").
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(
+                        "systemList").
                         child("System " + sysRef)
                         .child("listPlanets").child("Planet " + planRef)
                         .child("store").child("store inventory").child(diffGood.getName());

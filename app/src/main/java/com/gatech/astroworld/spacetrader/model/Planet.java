@@ -64,7 +64,7 @@ public class Planet {
 
     @Override
     public boolean equals(Object other) {
-         if (this == other) return true;
+         if (this == other) { return true; }
          Planet that = (Planet) other;
          boolean sameLocation = this.getPlanLocation() == that.getPlanLocation();
          boolean sameName = this.getName().equals(that.getName());

@@ -16,18 +16,16 @@ import com.gatech.astroworld.spacetrader.views.market_Activity;
 
 import java.util.List;
 
-/**
- *
- * TODO: Replace the implementation with code for your data type.
- */
-public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_RecyclerAdapter.ViewHolder> {
+public class Sell_Item_RecyclerAdapter extends
+        RecyclerView.Adapter<Sell_Item_RecyclerAdapter.ViewHolder> {
 
     private final List<TradeGood> mValues;
     private final OnListFragmentInteractionListener mListener;
-    public static int mSellTotal = 0;
+    public static int mSellTotal;
     private Store store;
 
-    public Sell_Item_RecyclerAdapter(List<TradeGood> items, OnListFragmentInteractionListener listener) {
+    public Sell_Item_RecyclerAdapter(List<TradeGood> items,
+                                     OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         store = Game.getInstance().getPlayer().getCurrentPlanet().getStore();
@@ -47,8 +45,10 @@ public class Sell_Item_RecyclerAdapter extends RecyclerView.Adapter<Sell_Item_Re
         //holder.mContentView.setText(mValues.get(position).content);
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(mValues.get(position).getName());
-        String price = String.format("%11s", "Price: " + Integer.toString(mValues.get(position).getPrice()));
-        String qty = String.format("%11s", "Qty: " + Integer.toString(mValues.get(position).getQuantity()));
+        String price = String.format("%11s", "Price: " + Integer.toString(
+                mValues.get(position).getPrice()));
+        String qty = String.format("%11s", "Qty: " + Integer.toString(
+                mValues.get(position).getQuantity()));
         holder.mPriceView.setText(price + "\n" + qty);
 
 

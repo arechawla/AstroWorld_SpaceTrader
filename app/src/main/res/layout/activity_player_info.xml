@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=
+    "http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +16,8 @@
         android:text="Ship Name: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/shipFuel"
@@ -26,7 +28,8 @@
         android:text="Fuel Remaining: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shipName" />
+        app:layout_constraintTop_toBottomOf="@+id/shipName"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/availSpace"
@@ -37,7 +40,8 @@
         android:text="Space Left in Cargo: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shipFuel" />
+        app:layout_constraintTop_toBottomOf="@+id/shipFuel"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/currSystem"
@@ -48,7 +52,8 @@
         android:text="Solar System: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/availSpace" />
+        app:layout_constraintTop_toBottomOf="@+id/availSpace"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/currPlanet"
@@ -59,7 +64,8 @@
         android:text="Planet: "
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currSystem" />
+        app:layout_constraintTop_toBottomOf="@+id/currSystem"
+        tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/shipPlayerInfo"
@@ -69,7 +75,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ufo_spaceship" />
+        app:srcCompat="@drawable/ufo_spaceship"
+        android:contentDescription="Image"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView2"
@@ -81,7 +89,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
