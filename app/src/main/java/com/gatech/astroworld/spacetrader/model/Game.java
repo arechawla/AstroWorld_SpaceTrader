@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public final class Game {
+public class Game {
 
     //Init game vars
     private Difficulty difficulty;
@@ -17,7 +17,7 @@ public final class Game {
     private int galaxySize = 1000;
 
     // static variable single_instance of type Singleton
-    private static Game single_instance = null;
+    private static Game single_instance;
 
     // private constructor restricted to this class itself
     private Game() {
@@ -27,8 +27,9 @@ public final class Game {
 
     // static method to create instance of Singleton class
     public static Game getInstance() {
-        if (single_instance == null)
+        if (single_instance == null) {
             single_instance = new Game();
+        }
 
         return single_instance;
     }
@@ -48,9 +49,22 @@ public final class Game {
     public List<SolarSystem> getSystemList() {
         return systemList;
     }
+    public void addSystem(SolarSystem newSystem) {
+        systemList.add(newSystem);
+    }
 
+    public int getGalaxySize() {
+        return this.galaxySize;
+    }
 
+    public void setGalaxySize(int newSize) {
+        this.galaxySize = newSize;
+    }
 
+    public int getMaxSystems() {
+        int maxSystems = 15;
+        return maxSystems;
+    }
     @Override
     public String toString () {
         /* return "\n********************************************************"
@@ -71,8 +85,7 @@ public final class Game {
         Player player = Game.getInstance().getPlayer();
         int width = disp.widthPixels;
         int height = disp.heightPixels;
-        int maxSystems = 15;
-        for (int i = 0; i < maxSystems; i++) {
+        for (int i = 0; i < getMaxSystems(); i++) {
             SolarSystem sys = new SolarSystem(width , height);
             systemList.add(sys);
             System.out.println(sys.getSysLocation().getxPos());
@@ -91,7 +104,8 @@ public final class Game {
         player.setCurSystemReference(playerSystemIndex);
 
         int playerPlanetIndex = rand.nextInt(player.getCurrentSystem().getListOfPlanets().size());
-        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(playerPlanetIndex));
+        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().
+                get(playerPlanetIndex));
         player.setCurPlanetReference(playerPlanetIndex);
     }
 

@@ -43,8 +43,8 @@ public class configScreen_Activity extends AppCompatActivity {
 
 
     //Setting up new game variables.
-    private int maxStartPoints = 16;
-    private int totalPoints = 0;
+    private final int maxStartPoints = 16;
+    private int totalPoints;
     private Difficulty difficulty;
     //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -97,7 +97,8 @@ public class configScreen_Activity extends AppCompatActivity {
                 pilotPoints.setMax(maxStartPoints - (totalPoints - pilotPoints.getProgress()));
                 traderPoints.setMax(maxStartPoints - (totalPoints - traderPoints.getProgress()));
                 fighterPoints.setMax(maxStartPoints - (totalPoints - fighterPoints.getProgress()));
-                engineerPoints.setMax(maxStartPoints - (totalPoints - engineerPoints.getProgress()));
+                engineerPoints.setMax(maxStartPoints -
+                        (totalPoints - engineerPoints.getProgress()));
             }
 
             @Override
@@ -114,7 +115,8 @@ public class configScreen_Activity extends AppCompatActivity {
         engineerPoints.setOnSeekBarChangeListener(barChangeListener);
 
         //Create spinner adapter for the difficulty spinner
-        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Difficulty.values());
+        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, Difficulty.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(adapter);
 
@@ -125,7 +127,8 @@ public class configScreen_Activity extends AppCompatActivity {
         final Toast error2 = Toast.makeText
                 (getApplicationContext(), "Please name your character.", Toast.LENGTH_SHORT);
         final Toast error3 = Toast.makeText
-                (getApplicationContext(), "Character name must be less than 16 characters.", Toast.LENGTH_SHORT);
+                (getApplicationContext(), "Character name must be less than 16 characters.",
+                        Toast.LENGTH_SHORT);
 
         //Creates listener for confirm button
         confirmButton.setOnClickListener(new View.OnClickListener() {

@@ -28,16 +28,14 @@ import java.util.List;
  * interface.
  */
 public class Buy_ItemFragment extends Fragment {
-    private int itemCount = 0;
+    private int itemCount;
     private TextView countText;
     private TextView showName;
     private Button plusButton;
     private Button minusButton;
     List<MarketGood> goodList = new ArrayList<MarketGood>();
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
@@ -45,13 +43,10 @@ public class Buy_ItemFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public Buy_ItemFragment() {
-        //showName = getView().findViewById(R.id.itemName);
-    }
+    public Buy_ItemFragment() {}
 
     public TextView getShowName() { return showName; }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static Buy_ItemFragment newInstance(int columnCount) {
         Buy_ItemFragment fragment = new Buy_ItemFragment();
@@ -89,14 +84,6 @@ public class Buy_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-
-
-//            if (Game.getInstance().getPlayer().getCurrentPlanet().getStore() == null) {
-//                Game.getInstance().getPlayer().getCurrentPlanet().
-//                        setStore(new Store(3000));
-//                Game.getInstance().getPlayer().getCurrentPlanet().getStore().
-//                        populateStoreInventory();
-//            }
 
             goodList = Game.getInstance().getPlayer().getCurrentPlanet().
                     getStore().getStoreInventory();
@@ -136,7 +123,6 @@ public class Buy_ItemFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(MarketGood item);
     }
 }

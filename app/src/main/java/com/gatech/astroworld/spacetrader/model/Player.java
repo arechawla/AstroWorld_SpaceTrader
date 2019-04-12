@@ -5,7 +5,10 @@ package com.gatech.astroworld.spacetrader.model;
 public class Player {
     private String name;
     private int skillPoints;
-    private int pilotPoints, fighterPoints, traderPoints, engineerPoints;
+    private int pilotPoints;
+    private int fighterPoints;
+    private int traderPoints;
+    private int engineerPoints;
     private int credits;
     private int reputation;
     private SolarSystem currentSystem;
@@ -127,24 +130,8 @@ public class Player {
         return chance;
     }
 
-
-
-
-
-
-
     @Override
     public String toString(){
-        return String.format(
-                "\t\t* Name: %s " +
-                "\n\t\t* Credits: %d " +
-                "\n\t\t* Ship: %s " +
-                "\n\t\t* Skill Points: " +
-                "\n\t\t\t- Pilot Points:    %d" +
-                "\n\t\t\t- Fighter Points:  %d" +
-                "\n\t\t\t- Trader Points:   %d" +
-                "\n\t\t\t- Engineer Points: %d" +
-                "\nCurrent Planet: ",
-                name, getCredits(), getShip().toString(), getPilotPoints(), getFighterPoints(), getTraderPoints(), getEngineerPoints(), currentPlanet.toString());
+        return name;
     }
 }

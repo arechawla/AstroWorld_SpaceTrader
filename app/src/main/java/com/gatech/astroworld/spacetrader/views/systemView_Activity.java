@@ -45,7 +45,7 @@ public class systemView_Activity extends AppCompatActivity
     private Game game;
     private int viewCenterX;
     private int viewCenterY;
-    private Point systemButtonSize = new Point(100, 100);
+    private final Point systemButtonSize = new Point(100, 100);
     private AlertDialog.Builder travelAlertBuilder;
     private HashMap.Entry destination;
     private AlertDialog.Builder leaveSystemBuilder;
@@ -60,7 +60,8 @@ public class systemView_Activity extends AppCompatActivity
         toolbar.setTitle(game.getPlayer().getCurrentSystem().toString() + " Solar System");
         setSupportActionBar(toolbar);
         systemViewmodel = ViewModelProviders.of(this).get(System_viewmodel.class);
-        configuration_viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
+        configuration_viewmodel = ViewModelProviders.of(this)
+                .get(Configuration_viewmodel.class);
         //Generate buttons for galaxy view
 
 
@@ -68,7 +69,8 @@ public class systemView_Activity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -90,14 +92,16 @@ public class systemView_Activity extends AppCompatActivity
                 }
                 Player currPlayer = game.getPlayer();
                 View v = buttonContainer;
-                double fuelUse = currPlayer.getShip().travelPlanet(currPlayer, (Planet) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
+                double fuelUse = currPlayer.getShip().travelPlanet(currPlayer,
+                        (Planet) destination.getValue(), new Point(v.getWidth(), v.getHeight()));
                 double shipFuel = currPlayer.getShip().getFuel();
                 currPlayer.getShip().setFuel(shipFuel - fuelUse);
 
 
                 //UPDATE CURRENT PLANET REF FOR DATABSE
                 Planet curr = (Planet) destination.getValue();
-                player.setCurPlanetReference(player.getCurrentSystem().getListOfPlanets().indexOf(curr));
+                player.setCurPlanetReference(player.getCurrentSystem()
+                        .getListOfPlanets().indexOf(curr));
                 Save.savePlayerInformation();
 
 
@@ -109,7 +113,8 @@ public class systemView_Activity extends AppCompatActivity
         travelAlertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Travel Canceled", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Travel Canceled",
+                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -165,19 +170,16 @@ public class systemView_Activity extends AppCompatActivity
                     final Toast error = Toast.makeText(getApplicationContext(), "You do not" +
                             " have enough fuel to go to this location!", Toast.LENGTH_LONG);
                     Player currPlayer = game.getPlayer();
-                    double fuelUse = currPlayer.getShip().travelPlanet(currPlayer, (Planet) entry.getValue(), new Point(v.getWidth(), v.getHeight()));
+                    double fuelUse = currPlayer.getShip().travelPlanet(currPlayer,
+                            (Planet) entry.getValue(), new Point(v.getWidth(), v.getHeight()));
                     if (fuelUse == -1) {
                         error.show();
                     } else {
                         destination = entry;
-                        travelAlertBuilder.setMessage("Do you want to travel to " + entry.getValue().toString() + "?")
+                        travelAlertBuilder.setMessage(
+                                "Do you want to travel to " + entry.getValue().toString() + "?")
                                 .setTitle("Travel?");
                         travelAlertBuilder.show();
-//                        currPlayer.setCurrentPlanet((Planet) entry.getValue());
-//                        double shipFuel = currPlayer.getShip().getFuel();
-//                        currPlayer.getShip().setFuel(shipFuel - fuelUse);
-//                        Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
-//                        startActivity(i);
                     }
                 }
             });
@@ -240,33 +242,40 @@ public class systemView_Activity extends AppCompatActivity
                                       Map<ImageButton, Planet> buttonList, Planet planet) {
 
         ImageButton planetButton = new ImageButton(this);
-        Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem);
-        image = Bitmap.createScaledBitmap(image, systemButtonSize.x, systemButtonSize.y, true);
-        Bitmap curImage = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.system_emblem_current);
+        Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.system_emblem);
+        image = Bitmap.createScaledBitmap(
+                image, systemButtonSize.x, systemButtonSize.y, true);
+        Bitmap curImage = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.system_emblem_current);
         curImage = getResizedBitmap(curImage, 110);
 
 
         if (Game.getInstance().getPlayer().getCurrentPlanet() != null) {
             if (planet.equals(Game.getInstance().getPlayer().getCurrentPlanet())) {
                 planetButton.setImageBitmap(image);
-                planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.currentGreen), PorterDuff.Mode.MULTIPLY);
+                planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(),
+                        R.color.currentGreen), PorterDuff.Mode.MULTIPLY);
             }
             else {
                 planetButton.setImageBitmap(image);
-                planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.rockBrown), PorterDuff.Mode.MULTIPLY);
+                planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(),
+                        R.color.rockBrown), PorterDuff.Mode.MULTIPLY);
             }
         }
 
          else {
             planetButton.setImageBitmap(image);
-            planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.rockBrown), PorterDuff.Mode.MULTIPLY);
+            planetButton.setColorFilter(ContextCompat.getColor(getApplicationContext(),
+                    R.color.rockBrown), PorterDuff.Mode.MULTIPLY);
         }
 
 
         planetButton.setBackgroundResource(0);
         buttonList.put(planetButton, planet);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
-                (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                (RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins((int)xPos + viewCenterX, (int)yPos + viewCenterY, 0, 0);
         layout.addView(planetButton, params);
     }

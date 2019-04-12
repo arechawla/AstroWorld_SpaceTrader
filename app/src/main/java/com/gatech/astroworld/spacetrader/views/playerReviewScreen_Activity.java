@@ -107,9 +107,6 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
             engineerDescription.setTextColor(Color.GREEN);
         }
 
-        /**
-         *
-         */
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

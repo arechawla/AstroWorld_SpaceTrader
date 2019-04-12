@@ -27,9 +27,12 @@ public class planetView_Activity extends FragmentActivity {
 
         title.setText("Welcome to " + Game.getInstance().getPlayer().getCurrentPlanet().getName());
         TextView info = findViewById(R.id.information);
-        String gov = "Political System: " + Game.getInstance().getPlayer().getCurrentPlanet().getGov().toString();
-        String tech = "Tech Level: " + Game.getInstance().getPlayer().getCurrentSystem().getTechLevel().name();
-        String system = "Solar System: " + Game.getInstance().getPlayer().getCurrentSystem().getName();
+        String gov = "Political System: " + Game.getInstance().getPlayer().getCurrentPlanet()
+                .getGov().toString();
+        String tech = "Tech Level: " + Game.getInstance().getPlayer().getCurrentSystem()
+                .getTechLevel().name();
+        String system = "Solar System: " + Game.getInstance().getPlayer().getCurrentSystem()
+                .getName();
         info.setText(system + "\n" + tech + "\n" + gov);
 
 

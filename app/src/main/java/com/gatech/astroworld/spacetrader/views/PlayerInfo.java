@@ -2,6 +2,7 @@ package com.gatech.astroworld.spacetrader.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.gatech.astroworld.spacetrader.model.Player;
 
 public class PlayerInfo extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +24,11 @@ public class PlayerInfo extends AppCompatActivity {
         TextView currPlanet = findViewById(R.id.currPlanet);
         Game game = Game.getInstance();
         Player player = game.getPlayer();
-        StringBuilder strBuild = new StringBuilder();
 
-        shipName.setText(new StringBuilder().append("Ship Name: ").append(player.getShip().toString()).toString());
-        shipFuel.setText(new StringBuilder().append("Fuel Remaining: ").append(player.getShip().getFuel()).toString());
-        availSpace.setText(new StringBuilder().append("Space Left in Cargo: ").append(player.getShip().getSpaceLeft()).toString());
-        currSys.setText(new StringBuilder().append("Solar System: ").append(player.getCurrentSystem().getName()).toString());
-        currPlanet.setText(new StringBuilder().append("Planet: ").append(player.getCurrentPlanet()).toString());
+        shipName.setText("Ship Name: " + player.getShip().toString());
+        shipFuel.setText("Fuel Remaining: " + player.getShip().getFuel());
+        availSpace.setText("Space Left in Cargo: " + player.getShip().getSpaceLeft());
+        currSys.setText("Solar System: " + player.getCurrentSystem().getName());
+        currPlanet.setText("Planet: " + player.getCurrentPlanet());
     }
 }

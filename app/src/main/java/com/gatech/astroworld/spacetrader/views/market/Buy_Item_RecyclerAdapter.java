@@ -19,20 +19,15 @@ import com.gatech.astroworld.spacetrader.views.market_Activity;
 
 import java.util.List;
 
-//import static com.gatech.astroworld.spacetrader.views.market_Activity.what;
 
 
-/**
- * {@link RecyclerView.Adapter} that can display a and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
+public class Buy_Item_RecyclerAdapter extends
+        RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
     private final List<MarketGood> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Store store;
-    public static int mBuyTotal = 0;
-    public static int mCountTot = 0;
+    public static int mBuyTotal;
+    public static int mCountTot;
 
 
     public Buy_Item_RecyclerAdapter(List<MarketGood> items,
@@ -100,7 +95,7 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
                 @Override
                 public void onClick(View v) {
                     int i = mBuyTotal + mItem.getPrice();
-                    if (mItem.getCount() + 1 > mItem.getQuantity()) {
+                    if ((mItem.getCount() + 1) > mItem.getQuantity()) {
                         error.show();
                     }
                     else if (Game.getInstance().getPlayer().getCredits() < i) {

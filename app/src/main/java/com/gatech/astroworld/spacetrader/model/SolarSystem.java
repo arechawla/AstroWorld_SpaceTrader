@@ -14,8 +14,7 @@ public class SolarSystem {
     private List<Planet> listOfPlanets = new ArrayList<>();
     private TechLevel techLevel;
     private SysLocation sysLocation;
-
-    private int maxPlanets = 5;
+    private final int maxPlanets = 5;
     private int maxPosX;
     private int maxPosY;
 
@@ -212,6 +211,9 @@ public class SolarSystem {
         listOfPlanets = planList;
     }
 
+    public int getSystemSize() {
+        return 500;
+    }
 
     public List<Planet> getListOfPlanets() {
         return listOfPlanets;
@@ -236,7 +238,7 @@ public class SolarSystem {
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) return true;
+        if (this == other) { return true; }
         SolarSystem that = (SolarSystem) other;
         boolean sameLocation = this.getSysLocation() == that.getSysLocation();
         boolean sameName = this.getName().equals(that.getName());

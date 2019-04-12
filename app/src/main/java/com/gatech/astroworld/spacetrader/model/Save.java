@@ -85,13 +85,15 @@ public class Save {
                             setValue(sysName);
                     sysListRef.child("System " + sysNum).child("sysLocation").
                             child("yPos").setValue(sys.getSysLocation().getyPos());
-                    sysListRef.child("System " + sysNum).child("techLevel").setValue(sys.getTechLevel().toString());
+                    sysListRef.child("System " + sysNum).child("techLevel").setValue(
+                            sys.getTechLevel().toString());
 
                     List<Planet> pList = sys.getListOfPlanets();
                     int planNum = 1;
                     for (Planet plan: pList) {
                         String planName = plan.getName();
-                        DatabaseReference planRef = sysListRef.child("System " + sysNum).child("listPlanets").
+                        DatabaseReference planRef = sysListRef.child("System " + sysNum).child(
+                                "listPlanets").
                                 child("Planet " + planNum);
                         planRef.child("planLocation").
                                 child("xPos").setValue(plan.getPlanLocation().getxPos());
