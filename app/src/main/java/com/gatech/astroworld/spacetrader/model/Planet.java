@@ -53,6 +53,13 @@ public class Planet {
         gov = pol;
     }
 
+    public void setSys(SolarSystem sys) {
+         this.sys = sys;
+    }
+
+    public void setPlanetLocation(PlanetLocation planetLocation) {
+         this.planetLocation = planetLocation;
+    }
 
 
     @Override
@@ -64,10 +71,24 @@ public class Planet {
 
     @Override
     public boolean equals(Object other) {
-         if (this == other) { return true; }
+         if (this == other) {
+             return true;
+         }
          Planet that = (Planet) other;
+
          boolean sameLocation = this.getPlanLocation() == that.getPlanLocation();
+         if (!sameLocation) {
+             return false;
+         }
          boolean sameName = this.getName().equals(that.getName());
-         return sameLocation && sameName;
+         if (!sameName) {
+             return false;
+         }
+
+         boolean sameSystem = this.getSys().equals(that.getSys());
+         if (!sameSystem) {
+             return false;
+         }
+         return sameLocation && sameName && sameSystem;
     }
 }
