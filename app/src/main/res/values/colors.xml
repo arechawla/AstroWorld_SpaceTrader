@@ -7,4 +7,5 @@
     <color name="darkBlue">#130f20</color>
     <color name="rockBrown">#cc9900</color>
     <color name="currentGreen">#099625</color>
+    <color name="planetBackground">#2a2a35</color>
 </resources>
