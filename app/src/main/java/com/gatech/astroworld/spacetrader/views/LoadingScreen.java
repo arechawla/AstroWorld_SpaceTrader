@@ -26,7 +26,7 @@ public class LoadingScreen extends AppCompatActivity {
         loading = (ProgressBar) findViewById(R.id.progressBar);
         loading.setMax(100);
         loading.setProgress(0);
-        
+
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Load.loadSystemList();
         Load.loadPlayer();
