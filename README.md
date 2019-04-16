@@ -5,6 +5,5 @@ utilizing standard industry practices.
 
 ## To-Do:
 
-  - J Unit Testing
   - Random encounters with traders, pirates, mercenaries, and police
-  - Implement FireBase
+  - Update visuals 
