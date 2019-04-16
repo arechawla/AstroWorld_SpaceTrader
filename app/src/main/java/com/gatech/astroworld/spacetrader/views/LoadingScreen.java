@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Load;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoadingScreen extends AppCompatActivity {
     public static Activity mainActivity;
@@ -25,6 +26,8 @@ public class LoadingScreen extends AppCompatActivity {
         loading = (ProgressBar) findViewById(R.id.progressBar);
         loading.setMax(100);
         loading.setProgress(0);
+        
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Load.loadSystemList();
         Load.loadPlayer();
         Load.loadShip();
