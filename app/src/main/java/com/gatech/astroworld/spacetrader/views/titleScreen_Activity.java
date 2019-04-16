@@ -13,17 +13,18 @@ import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Load;
 
 public class titleScreen_Activity extends AppCompatActivity {
-    public static Activity mainActivity;
+    //public static Activity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mainActivity = this;
+        //mainActivity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen_);
 
-        Load.loadSystemList();
-        Load.loadPlayer();
-        Load.loadShip();
+        //MOVED to Loading Screen
+//        Load.loadSystemList();
+//        Load.loadPlayer();
+//        Load.loadShip();
 
         Button playButton = findViewById(R.id.menu_play_button);
         Button settingsButton = findViewById(R.id.menu_settings_button);
