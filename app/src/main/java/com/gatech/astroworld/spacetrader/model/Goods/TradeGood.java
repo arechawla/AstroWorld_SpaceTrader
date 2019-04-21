@@ -1,6 +1,8 @@
 package com.gatech.astroworld.spacetrader.model.Goods;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
+import com.gatech.astroworld.spacetrader.model.Planet;
+import com.gatech.astroworld.spacetrader.model.SolarSystem;
 
 public class TradeGood {
 
@@ -8,11 +10,17 @@ public class TradeGood {
     private  String name;
     private int price;
     private int sellCount;
+    private SolarSystem sys;
     private GoodType good;
+    private Planet plan;
 
-    public TradeGood(GoodType good) {
+    public TradeGood(GoodType good, Planet p) {
         this.good = good;
         this.name = good.getName();
+        this.plan = p;
+        if (plan != null) {
+            this.sys = p.getSys();
+        }
 
     }
 
@@ -20,6 +28,21 @@ public class TradeGood {
         this.price = price;
         this.quantity = quantity;
         this.good = GoodType.valueOf(goodName);
+    }
+
+    public int calculatePrice() {
+        int newPrice = 0;
+        newPrice = good.getBasePrice() + (good.getIPL() * sys.getTechLevel().ordinal()) +
+                good.getVar();
+        return newPrice;
+    }
+
+    public void setSys(SolarSystem system) {
+        sys = system;
+    }
+
+    public void setPlanet(Planet p) {
+
     }
 
     public void setQuantity(int q) {

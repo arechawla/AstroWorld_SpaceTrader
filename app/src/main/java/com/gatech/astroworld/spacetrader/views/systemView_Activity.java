@@ -106,6 +106,8 @@ public class systemView_Activity extends AppCompatActivity
 
 
                 currPlayer.setCurrentPlanet((Planet) destination.getValue());
+                currPlayer.changeCargoPrices(currPlayer.getCurrentPlanet());
+                Save.saveSpaceShipInformation();
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 startActivity(i);
             }
