@@ -118,7 +118,7 @@ public class Store {
             int markQuant = mark.getQuantity();
             int markCount = mark.getCount();
             if (markCount > 0) {
-                TradeGood tGood = new TradeGood(mark.getGoodType());
+                TradeGood tGood = new TradeGood(mark.getGoodType(), null);
                 tGood.setQuantity(markCount);
                 tGood.setPrice(mark.getPrice());
                 total += mark.getPrice() * mark.getCount();
@@ -239,16 +239,19 @@ public class Store {
                 ref.child("name").setValue(gSold.getName());
                 ref.child("goodType").setValue(gSold.getGoodType());
             }
-            if (gSold.getSellCount() == gSold.getQuantity()) {
+            gSold.setQuantity(gSold.getQuantity() - gSold.getSellCount());
+            Save.saveSpaceShipInformation();
+            if (gSold.getQuantity() == 0) {
                 toRemove.add(gSold);
             } else {
-                gSold.setQuantity(gSold.getQuantity() - gSold.getSellCount());
                 gSold.setSellCount(0);
             }
         }
         for (TradeGood t: toRemove) {
             list.remove(t);
         }
+        player.getShip().setCargoList(list);
+        Save.saveSpaceShipInformation();
         player.setCredits(player.getCredits() + total);
     }
 

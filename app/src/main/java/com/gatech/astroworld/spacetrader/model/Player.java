@@ -1,6 +1,7 @@
 package com.gatech.astroworld.spacetrader.model;
 
 
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
 public class Player {
     private String name;
@@ -119,6 +120,14 @@ public class Player {
 
     public void setCurPlanetReference(int c) {
         curPlanetReference = c;
+    }
+
+    public void changeCargoPrices(Planet p) {
+        for (TradeGood item: Game.getInstance().getPlayer().getShip().getCargoList()) {
+            item.setPlanet(p);
+            item.setSys(p.getSys());
+            item.setPrice(item.calculatePrice());
+        }
     }
 
     /**

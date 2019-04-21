@@ -160,7 +160,7 @@ public class Load {
                     int quantity = tGoodNode.child("quantity").getValue(Integer.class);
                     String name = tGoodNode.child("name").getValue(String.class);
                     String goodType = tGoodNode.child("goodType").getValue(String.class);
-                    TradeGood tGood = new TradeGood(GoodType.valueOf(goodType));
+                    TradeGood tGood = new TradeGood(GoodType.valueOf(goodType), null);
                     tGood.setName(name);
                     tGood.setPrice(price);
                     tGood.setQuantity(quantity);
