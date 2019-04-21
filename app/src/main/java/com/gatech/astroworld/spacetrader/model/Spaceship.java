@@ -18,6 +18,7 @@ public class Spaceship {
     private final int unitFuelUse = 50;
 
 
+
     public Spaceship (String name, int capacity, int fuel) {
         this.name = name;
         this.cargo = new ArrayList<>();
@@ -172,6 +173,7 @@ public class Spaceship {
     public void setName(String name) {
         this.name = name;
     }
+
 
 
     @Override

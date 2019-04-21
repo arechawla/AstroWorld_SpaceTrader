@@ -25,6 +25,7 @@ public class planetView_Activity extends FragmentActivity {
         Button marketButton = findViewById(R.id.accessMarket_button);
         Button playerButton = findViewById(R.id.playerInfo);
         Button orbitButton = findViewById(R.id.returnToOrbit_button);
+        Button shipYardButton = findViewById(R.id.shipYardbutton);
         TextView title = findViewById(R.id.planetName);
         planet = findViewById(R.id.imageView2);
         System.out.println(Game.getInstance().getPlayer().getName());
@@ -66,6 +67,16 @@ public class planetView_Activity extends FragmentActivity {
                 startActivity(i);
             }
         });
+
+        shipYardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ShipyardActivity.class);
+                startActivity(i);
+            }
+        });
+
+
 
 
 
