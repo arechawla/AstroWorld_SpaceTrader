@@ -22,7 +22,7 @@ public class Game {
     // private constructor restricted to this class itself
     private Game() {
         player = new Player("Default");
-        difficulty = Difficulty.BEGINNER;
+        difficulty = Difficulty.NORMAL;
     }
 
     // static method to create instance of Singleton class
@@ -83,6 +83,26 @@ public class Game {
     public void initializePlayerPlanet() {
         DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
         Player player = Game.getInstance().getPlayer();
+        if (Game.getInstance().getDifficulty() == Difficulty.BEGINNER) {
+            player.getShip().setFuel(10000);
+            player.setCredits(2000);
+            player.setReputation(200);
+        }
+        if (Game.getInstance().getDifficulty() == Difficulty.EASY) {
+            player.getShip().setFuel(7000);
+            player.setCredits(1600);
+            player.setReputation(150);
+        }
+        if (Game.getInstance().getDifficulty() == Difficulty.HARD) {
+            player.getShip().setFuel(3000);
+            player.setCredits(750);
+            player.setReputation(75);
+        }
+        if (Game.getInstance().getDifficulty() == Difficulty.IMPOSSIBLE) {
+            player.getShip().setFuel(2000);
+            player.setCredits(500);
+            player.setReputation(50);
+        }
         int width = disp.widthPixels;
         int height = disp.heightPixels;
         for (int i = 0; i < getMaxSystems(); i++) {
@@ -103,7 +123,8 @@ public class Game {
         player.setCurrentSystem(this.getSystemList().get(arr[playerSystemIndex]-1));
         player.setCurSystemReference(playerSystemIndex);
 
-        int playerPlanetIndex = rand.nextInt(player.getCurrentSystem().getListOfPlanets().size());
+        int playerPlanetIndex = rand.nextInt(player.getCurrentSystem().
+                getListOfPlanets().size());
         player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().
                 get(playerPlanetIndex));
         player.setCurPlanetReference(playerPlanetIndex);

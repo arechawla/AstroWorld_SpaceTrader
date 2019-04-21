@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Save;
@@ -114,6 +115,7 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getInstance().getReference().setValue(null);
                 Game.getInstance().setSystemList(new ArrayList<SolarSystem>());
                 Game.getInstance().initializePlayerPlanet();
+
 
                 Save.savePlayerInformation();
                 Save.saveSpaceShipInformation();
