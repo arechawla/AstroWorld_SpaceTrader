@@ -16,6 +16,8 @@ public class Spaceship {
     private double fuel;
     private final int ssFuelMultiplier = 3;
     private final int unitFuelUse = 50;
+    private List<Weapon> weapons;
+    private int numWeapons;
 
 
 
@@ -24,6 +26,7 @@ public class Spaceship {
         this.cargo = new ArrayList<>();
         this.capacity = capacity;
         this.fuel = fuel;
+        this.numWeapons = 20;
     }
 
     public List<TradeGood> getCargoList() {
@@ -173,6 +176,19 @@ public class Spaceship {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void populateWeapons() {
+        for(int i = 0; i < numWeapons; i++) {
+            int power = (int) (Math.random() * 20);
+            weapons.add(new Weapon(power));
+        }
+    }
+
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+
 
 
 
