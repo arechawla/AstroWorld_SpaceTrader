@@ -1,16 +1,24 @@
 package com.gatech.astroworld.spacetrader.views;
 import androidx.lifecycle.ViewModelProviders;
-import android.app.Activity;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
-import android.widget.EditText;
+
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class configScreen_Activity extends AppCompatActivity {
 
@@ -19,7 +27,6 @@ public class configScreen_Activity extends AppCompatActivity {
 
     private EditText nameField;
     private Spinner difficultySpinner;
-    private Button confirmButton;
     private SeekBar pilotPoints;
     private SeekBar traderPoints;
     private SeekBar fighterPoints;
@@ -30,10 +37,14 @@ public class configScreen_Activity extends AppCompatActivity {
     private TextView engineerCounter;
     private TextView remainingPointsCounter;
 
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference difficultyRef = mRootRef.child("difficulty");
+    DatabaseReference distOfPointsRef = mRootRef.child("player").child("distOfPoints");
+
 
     //Setting up new game variables.
-    private int maxStartPoints = 16;
-    private int totalPoints = 0;
+    private final int maxStartPoints = 16;
+    private int totalPoints;
     private Difficulty difficulty;
     //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -45,7 +56,7 @@ public class configScreen_Activity extends AppCompatActivity {
         //Init UI components
         nameField = findViewById(R.id.player_name_input);
         difficultySpinner = findViewById(R.id.difficulty_spinner);
-        confirmButton = findViewById(R.id.confirm_button);
+        Button confirmButton = findViewById(R.id.confirm_button);
         pilotPoints = findViewById(R.id.pilotBar);
         traderPoints = findViewById(R.id.traderBar);
         fighterPoints = findViewById(R.id.fighterBar);
@@ -86,7 +97,8 @@ public class configScreen_Activity extends AppCompatActivity {
                 pilotPoints.setMax(maxStartPoints - (totalPoints - pilotPoints.getProgress()));
                 traderPoints.setMax(maxStartPoints - (totalPoints - traderPoints.getProgress()));
                 fighterPoints.setMax(maxStartPoints - (totalPoints - fighterPoints.getProgress()));
-                engineerPoints.setMax(maxStartPoints - (totalPoints - engineerPoints.getProgress()));
+                engineerPoints.setMax(maxStartPoints -
+                        (totalPoints - engineerPoints.getProgress()));
             }
 
             @Override
@@ -103,15 +115,20 @@ public class configScreen_Activity extends AppCompatActivity {
         engineerPoints.setOnSeekBarChangeListener(barChangeListener);
 
         //Create spinner adapter for the difficulty spinner
-        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Difficulty.values());
+        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, Difficulty.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(adapter);
 
 
         //Character Configuration screen toast errors.
-        final Toast error1 = Toast.makeText(getApplicationContext(), "You need at least 16 points.", Toast.LENGTH_SHORT);
-        final Toast error2 = Toast.makeText(getApplicationContext(), "Please name your character.", Toast.LENGTH_SHORT);
-        final Toast error3 = Toast.makeText(getApplicationContext(), "Character name must be less than 16 characters.", Toast.LENGTH_SHORT);
+        final Toast error1 = Toast.makeText
+                (getApplicationContext(), "You need at least 16 points.", Toast.LENGTH_SHORT);
+        final Toast error2 = Toast.makeText
+                (getApplicationContext(), "Please name your character.", Toast.LENGTH_SHORT);
+        final Toast error3 = Toast.makeText
+                (getApplicationContext(), "Character name must be less than 16 characters.",
+                        Toast.LENGTH_SHORT);
 
         //Creates listener for confirm button
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +157,15 @@ public class configScreen_Activity extends AppCompatActivity {
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(newPlayer);
 
+
+//                difficultyRef.setValue(difficulty.toString());
+//
+//                distOfPointsRef.child("engineerPoints").setValue(engineerPoints.getProgress());
+//                distOfPointsRef.child("pilotPoints").setValue(pilotPoints.getProgress());
+//                distOfPointsRef.child("traderPoints").setValue(traderPoints.getProgress());
+//                distOfPointsRef.child("fighterPoints").setValue(fighterPoints.getProgress());
+
+
                 Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
                 startActivity(i);
             }
@@ -148,6 +174,8 @@ public class configScreen_Activity extends AppCompatActivity {
         //Sets the viewmodel fragment up
         viewmodel = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
     }
+
+
 
     //Creates a new player object and populates with provided data
     private Player initPlayer () {

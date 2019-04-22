@@ -10,31 +10,24 @@ import android.widget.Toast;
 
 import com.gatech.astroworld.spacetrader.R;
 
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Store;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment.OnListFragmentInteractionListener;
 import com.gatech.astroworld.spacetrader.views.market_Activity;
 
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-//import static com.gatech.astroworld.spacetrader.views.market_Activity.what;
 
 
-/**
- * {@link RecyclerView.Adapter} that can display a and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
+public class Buy_Item_RecyclerAdapter extends
+        RecyclerView.Adapter<Buy_Item_RecyclerAdapter.ViewHolder> {
     private final List<MarketGood> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Store store;
-    public static int mBuyTotal = 0;
-    public static int mCountTot = 0;
+    public static int mBuyTotal;
+    public static int mCountTot;
 
 
     public Buy_Item_RecyclerAdapter(List<MarketGood> items,
@@ -56,14 +49,14 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).getName());
-        holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
-        String name = String.format("%11s", mValues.get(position).getName());
+        holder.mContentView.setText(holder.mItem.getName());
+        holder.mPriceView.setText(String.valueOf(holder.mItem.getPrice()));
+        String name = String.format("%11s", holder.mItem.getName());
         holder.mContentView.setText(name);
         String price = String.format("%11s", "Price: " +
-                Integer.toString(mValues.get(position).getPrice()));
+                Integer.toString(holder.mItem.getPrice()));
         String qty = String.format("%11s", "Qty: " +
-                Integer.toString(mValues.get(position).getQuantity()));
+                Integer.toString(holder.mItem.getQuantity()));
         holder.mPriceView.setText(price + "\n" + qty);
 
     }
@@ -97,16 +90,12 @@ public class Buy_Item_RecyclerAdapter extends RecyclerView.Adapter<Buy_Item_Recy
             final Toast error2 = Toast.makeText(view.getContext(), "You cannot" +
                     " afford to buy this!", Toast.LENGTH_LONG);
 
-//            if (what == true) {
-//                updateQuant();
-//                what = false;
-//            }
 
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int i = mBuyTotal + mItem.getPrice();
-                    if (mItem.getCount() + 1 > mItem.getQuantity()) {
+                    if ((mItem.getCount() + 1) > mItem.getQuantity()) {
                         error.show();
                     }
                     else if (Game.getInstance().getPlayer().getCredits() < i) {

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,11 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gatech.astroworld.spacetrader.R;
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
-import com.gatech.astroworld.spacetrader.model.Store;
+import com.gatech.astroworld.spacetrader.model.Save;
 import com.gatech.astroworld.spacetrader.views.market.Buy_ItemFragment;
 import com.gatech.astroworld.spacetrader.views.market.Buy_Item_RecyclerAdapter;
 import com.gatech.astroworld.spacetrader.views.market.Sell_ItemFragment;
@@ -32,7 +30,6 @@ import static com.gatech.astroworld.spacetrader.views.market.Sell_Item_RecyclerA
 public class market_Activity extends AppCompatActivity implements
         Buy_ItemFragment.OnListFragmentInteractionListener,
         Sell_ItemFragment.OnListFragmentInteractionListener {
-    private BottomNavigationView bottomNav;
     private int selectedItem;
     public static TextView mShowTotal;
 //    public static boolean what = false;
@@ -53,23 +50,26 @@ public class market_Activity extends AppCompatActivity implements
         String credits = String.valueOf(Game.getInstance().getPlayer().getCredits());
         remainingCredits.setText("Remaining Credits: " +
                 String.valueOf(Game.getInstance().getPlayer().getCredits()));
-        bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
+        BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottomNavMenu);
         sell.setEnabled(false);
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNav.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.destination_buy:
-                        if (nav.getCurrentDestination().getId() ==R.id.destination_buy) {
-                            Game.getInstance().getPlayer().
-                                    getCurrentPlanet().getStore().zeroMarketCounts();
-                            Game.getInstance().getPlayer().
-                                    getShip().zeroSellCounts();
-                            mBuyTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
-                            mSellTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
-                            return false;
+                        if (nav.getCurrentDestination() != null) {
+                            if (nav.getCurrentDestination().getId() == R.id.destination_buy) {
+                                Game.getInstance().getPlayer().
+                                        getCurrentPlanet().getStore().zeroMarketCounts();
+                                Game.getInstance().getPlayer().
+                                        getShip().zeroSellCounts();
+                                mBuyTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                                mSellTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
+                                return false;
+                            }
                         }
                         Game.getInstance().getPlayer().
                                 getCurrentPlanet().getStore().zeroMarketCounts();
@@ -85,16 +85,18 @@ public class market_Activity extends AppCompatActivity implements
                         nav.navigate(R.id.toBuyFragment);
                         return true;
                     case R.id.destination_sell:
-                        if (nav.getCurrentDestination().getId() ==R.id.destination_sell) {
-                            Game.getInstance().getPlayer().
-                                    getCurrentPlanet().getStore().zeroMarketCounts();
-                            Game.getInstance().getPlayer().
-                                    getShip().zeroSellCounts();
-                            mBuyTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
-                            mSellTotal = 0;
-                            market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
-                            return false;
+                        if (nav.getCurrentDestination() != null) {
+                            if (nav.getCurrentDestination().getId() == R.id.destination_sell) {
+                                Game.getInstance().getPlayer().
+                                        getCurrentPlanet().getStore().zeroMarketCounts();
+                                Game.getInstance().getPlayer().
+                                        getShip().zeroSellCounts();
+                                mBuyTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mBuyTotal));
+                                mSellTotal = 0;
+                                market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
+                                return false;
+                            }
                         }
                         Game.getInstance().getPlayer().
                                 getCurrentPlanet().getStore().zeroMarketCounts();
@@ -134,6 +136,10 @@ public class market_Activity extends AppCompatActivity implements
 
                     nav.navigate(R.id.toBuyFragment);
                 }
+
+                Save.saveCreditsInformation();
+                Save.saveSpaceShipInformation();
+
             }
         });
 
@@ -149,6 +155,9 @@ public class market_Activity extends AppCompatActivity implements
                 market_Activity.mShowTotal.setText(String.valueOf(mSellTotal));
 
                 nav.navigate(R.id.toSellFragment);
+//                Save.saveSolarSystemList();
+                Save.saveCreditsInformation();
+                Save.saveSpaceShipInformation();
             }
         });
 
@@ -189,8 +198,4 @@ public class market_Activity extends AppCompatActivity implements
         return  cred;
     }
 
-//    @Override
-//    public void onListFragmentInteraction(com.gatech.astroworld.spacetrader.views.market.dummy.DummyContent.DummyItem item) {
-//
-//    }
 }

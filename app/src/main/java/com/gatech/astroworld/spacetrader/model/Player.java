@@ -1,6 +1,5 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import android.media.Image;
 
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
@@ -13,10 +12,16 @@ import com.gatech.astroworld.spacetrader.entity.NPCs.Police;
 
 import java.util.ArrayList;
 
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
+
+
 public class Player {
     private String name;
     private int skillPoints;
-    private int pilotPoints, fighterPoints, traderPoints, engineerPoints;
+    private int pilotPoints;
+    private int fighterPoints;
+    private int traderPoints;
+    private int engineerPoints;
     private int credits;
     private int reputation;
     private SolarSystem currentSystem;
@@ -25,13 +30,20 @@ public class Player {
     private boolean surrenderVar = false;
 
 
+    //for dataBase
+    private int curSystemReference;
+    private  int curPlanetReference;
+
+
     public Player(){
+        this.name = "Default";
         this.skillPoints = 16;
         this.pilotPoints = 0;
         this.fighterPoints = 0;
         this.traderPoints = 0;
         this.engineerPoints = 0;
         this.credits = 1000;
+        this.reputation = 100;
         this.ship = new Spaceship("Gnat", 25, 5000);
     }
     public Player(String name) {
@@ -111,6 +123,26 @@ public class Player {
 
     public void setCurrentPlanet(Planet p) { currentPlanet = p; }
 
+    public int getCurSystemReference() { return curSystemReference; }
+
+    public void setCurSystemReference(int c) {
+        curSystemReference = c;
+    }
+
+    public int getCurPlanetReference() { return curPlanetReference; }
+
+    public void setCurPlanetReference(int c) {
+        curPlanetReference = c;
+    }
+
+    public void changeCargoPrices(Planet p) {
+        for (TradeGood item: Game.getInstance().getPlayer().getShip().getCargoList()) {
+            item.setPlanet(p);
+            item.setSys(p.getSys());
+            item.setPrice(item.calculatePrice());
+        }
+    }
+
     /**
      *
      * @return a percent of encountering an NPC
@@ -119,6 +151,7 @@ public class Player {
         double chance = Math.random() / this.pilotPoints;
         return chance;
     }
+
 
     //NPC METHOD INTERACTIONS START HERE
     public void attack() {
@@ -130,19 +163,8 @@ public class Player {
     }
 
 
-
     @Override
     public String toString(){
-        return String.format(
-                "\t\t* Name: %s " +
-                "\n\t\t* Credits: %d " +
-                "\n\t\t* Ship: %s " +
-                "\n\t\t* Skill Points: " +
-                "\n\t\t\t- Pilot Points:    %d" +
-                "\n\t\t\t- Fighter Points:  %d" +
-                "\n\t\t\t- Trader Points:   %d" +
-                "\n\t\t\t- Engineer Points: %d" +
-                "\nCurrent Planet: ",
-                name, getCredits(), getShip().toString(), getPilotPoints(), getFighterPoints(), getTraderPoints(), getEngineerPoints(), currentPlanet.toString());
+        return name;
     }
 }

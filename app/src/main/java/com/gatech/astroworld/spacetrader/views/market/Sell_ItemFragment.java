@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gatech.astroworld.spacetrader.R;
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
-import com.gatech.astroworld.spacetrader.model.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,22 +25,16 @@ import java.util.List;
  */
 public class Sell_ItemFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    List<TradeGood> sellList = new ArrayList<>();
+    private static final String ARG_COLUMN_COUNT = "1";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public Sell_ItemFragment() {
-    }
+    public Sell_ItemFragment() {}
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static Sell_ItemFragment newInstance(int columnCount) {
         Sell_ItemFragment fragment = new Sell_ItemFragment();
         Bundle args = new Bundle();
@@ -75,7 +67,7 @@ public class Sell_ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            sellList = Game.getInstance().getPlayer().getShip().getCargoList();
+            List<TradeGood> sellList = Game.getInstance().getPlayer().getShip().getCargoList();
             recyclerView.setAdapter(new Sell_Item_RecyclerAdapter(sellList, mListener));
         }
         return view;
@@ -110,7 +102,6 @@ public class Sell_ItemFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(TradeGood item);
     }
 }

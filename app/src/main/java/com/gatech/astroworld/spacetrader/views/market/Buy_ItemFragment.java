@@ -10,19 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.lifecycle.ViewModelProviders;
-import android.app.Activity;
-import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Goods.MarketGood;
-import com.gatech.astroworld.spacetrader.model.Store;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +28,14 @@ import java.util.List;
  * interface.
  */
 public class Buy_ItemFragment extends Fragment {
-    private int itemCount = 0;
+    private int itemCount;
     private TextView countText;
     private TextView showName;
     private Button plusButton;
     private Button minusButton;
     List<MarketGood> goodList = new ArrayList<MarketGood>();
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
@@ -51,13 +43,10 @@ public class Buy_ItemFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public Buy_ItemFragment() {
-        //showName = getView().findViewById(R.id.itemName);
-    }
+    public Buy_ItemFragment() {}
 
     public TextView getShowName() { return showName; }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static Buy_ItemFragment newInstance(int columnCount) {
         Buy_ItemFragment fragment = new Buy_ItemFragment();
@@ -94,14 +83,6 @@ public class Buy_ItemFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-
-
-            if (Game.getInstance().getPlayer().getCurrentPlanet().getStore() == null) {
-                Game.getInstance().getPlayer().getCurrentPlanet().
-                        setStore(new Store(3000));
-                Game.getInstance().getPlayer().getCurrentPlanet().getStore().
-                        populateStoreInventory();
             }
 
             goodList = Game.getInstance().getPlayer().getCurrentPlanet().
@@ -142,7 +123,6 @@ public class Buy_ItemFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(MarketGood item);
     }
 }

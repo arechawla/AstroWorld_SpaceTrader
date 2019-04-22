@@ -1,12 +1,12 @@
 package com.gatech.astroworld.spacetrader.model;
 
 import android.graphics.Point;
-
-import com.gatech.astroworld.spacetrader.entity.GoodType;
 import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Spaceship {
 
@@ -14,10 +14,12 @@ public class Spaceship {
     private List<TradeGood> cargo;
     private int capacity;
     private double fuel;
+
     private int ssFuelMultiplier = 3;
     private int unitFuelUse = 50;
     private List<Weapon> weapons;
     private int numWeapons;
+
 
 
     public Spaceship (String name, int capacity, int fuel) {
@@ -43,6 +45,10 @@ public class Spaceship {
         for (TradeGood tGood: cargo) {
             tGood.setSellCount(0);
         }
+    }
+
+    public void setCargoList(List<TradeGood> list) {
+        cargo = list;
     }
 
     public Integer containsCargo(TradeGood find) {
@@ -89,6 +95,7 @@ public class Spaceship {
         int numXintervals = 10;
         int numYintervals = 10;
 
+
         int unitXPixelDist = layoutSize.x/numXintervals;
         int unitYPixelDist = layoutSize.y/numYintervals;
         double xDist = 0;
@@ -124,6 +131,18 @@ public class Spaceship {
         }
     }
 
+    public boolean randomEncounter() {
+        Random rand = new Random();
+        Player player = Game.getInstance().getPlayer();
+        int x = rand.nextInt(100);
+        if (x < 33) {
+            player.setCredits(player.getCredits() + 100);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public int getSpaceLeft() {
         return capacity - cargoAmount();
     }
@@ -131,13 +150,34 @@ public class Spaceship {
     public double getFuel() { return fuel; }
 
     public void setFuel(double f) {
-        fuel = f;
+        DecimalFormat df = new DecimalFormat("#.00");
+        fuel =  Double.valueOf(df.format(f));
     }
+
+    public String getName() { return name; }
 
 
     public int getCapacity() {
         return capacity;
     }
+
+    public int getSsFuelMultiplier() {
+        return ssFuelMultiplier;
+    }
+
+    public int getUnitFuelUse() {
+        return unitFuelUse;
+    }
+
+    public void setCapacity(int cap) {
+        capacity = cap;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 
     @Override
     public String toString() {

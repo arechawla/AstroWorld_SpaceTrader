@@ -1,44 +1,35 @@
 package com.gatech.astroworld.spacetrader.model;
 
-import android.app.Activity;
-
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.RelativeLayout;
-
-import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
-import com.gatech.astroworld.spacetrader.views.galaxyView_Activity;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-public class Game extends AppCompatActivity {
+public class Game {
 
     //Init game vars
     private Difficulty difficulty;
     private Player player;
     private List<SolarSystem> systemList = new ArrayList<>();
     private int galaxySize = 1000;
-    private int maxSystems = 15;
 
     // static variable single_instance of type Singleton
-    private static Game single_instance = null;
+    private static Game single_instance;
 
     // private constructor restricted to this class itself
     private Game() {
-        player = new Player(null);
-        difficulty = Difficulty.BEGINNER;
+        player = new Player("Default");
+        difficulty = Difficulty.NORMAL;
     }
 
     // static method to create instance of Singleton class
     public static Game getInstance() {
-        if (single_instance == null)
+        if (single_instance == null) {
             single_instance = new Game();
+        }
 
         return single_instance;
     }
@@ -50,6 +41,10 @@ public class Game extends AppCompatActivity {
     public Difficulty getDifficulty () { return this.difficulty; }
 
     public void setDifficulty (Difficulty difficulty) { this.difficulty = difficulty; }
+
+    public void setSystemList(List<SolarSystem> sysList) {
+        systemList = sysList;
+    }
 
     public List<SolarSystem> getSystemList() {
         return systemList;
@@ -67,6 +62,7 @@ public class Game extends AppCompatActivity {
     }
 
     public int getMaxSystems() {
+        int maxSystems = 15;
         return maxSystems;
     }
     @Override
@@ -86,6 +82,27 @@ public class Game extends AppCompatActivity {
 
     public void initializePlayerPlanet() {
         DisplayMetrics disp = Resources.getSystem().getDisplayMetrics();
+        Player player = Game.getInstance().getPlayer();
+        if (Game.getInstance().getDifficulty() == Difficulty.BEGINNER) {
+            player.getShip().setFuel(10000);
+            player.setCredits(2000);
+            player.setReputation(200);
+        }
+        if (Game.getInstance().getDifficulty() == Difficulty.EASY) {
+            player.getShip().setFuel(7000);
+            player.setCredits(1600);
+            player.setReputation(150);
+        }
+        if (Game.getInstance().getDifficulty() == Difficulty.HARD) {
+            player.getShip().setFuel(3000);
+            player.setCredits(750);
+            player.setReputation(75);
+        }
+        if (Game.getInstance().getDifficulty() == Difficulty.IMPOSSIBLE) {
+            player.getShip().setFuel(2000);
+            player.setCredits(500);
+            player.setReputation(50);
+        }
         int width = disp.widthPixels;
         int height = disp.heightPixels;
         for (int i = 0; i < getMaxSystems(); i++) {
@@ -98,15 +115,22 @@ public class Game extends AppCompatActivity {
             }
         }
         Random rand = new Random();
-        player.setCurrentSystem(this.getSystemList().get(rand.nextInt(getSystemList().size() - 1)));
-        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().get(
-                rand.nextInt(player.getCurrentSystem().getListOfPlanets().size())));
+        int[] arr = {1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5,
+                6, 7, 8, 9};
+
+
+        int playerSystemIndex = (rand.nextInt(getSystemList().size()));
+        player.setCurrentSystem(this.getSystemList().get(arr[playerSystemIndex]-1));
+        player.setCurSystemReference(playerSystemIndex);
+
+        int playerPlanetIndex = rand.nextInt(player.getCurrentSystem().
+                getListOfPlanets().size());
+        player.setCurrentPlanet(player.getCurrentSystem().getListOfPlanets().
+                get(playerPlanetIndex));
+        player.setCurPlanetReference(playerPlanetIndex);
     }
 
-//    public void generateGalaxy (int galSizeX, int galSizeY) {
-//        //Generate max number of systems
-//        for (int i = 0; i < this.getMaxSystems(); i++) {
-//            this.getSystemList().add(new SolarSystem(galSizeX, galSizeY));
-//        }
-//    }
+
+
+
 }

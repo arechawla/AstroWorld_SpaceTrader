@@ -9,25 +9,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
+import com.gatech.astroworld.spacetrader.entity.Difficulty;
 import com.gatech.astroworld.spacetrader.model.Player;
 import com.gatech.astroworld.spacetrader.model.Game;
-
+import com.gatech.astroworld.spacetrader.model.Save;
+import com.gatech.astroworld.spacetrader.model.SolarSystem;
 import com.gatech.astroworld.spacetrader.viewmodels.Configuration_viewmodel;
 import com.gatech.astroworld.spacetrader.viewmodels.Galaxy_viewmodel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.ArrayList;
 
-import java.util.Random;
 
 public class playerReviewScreen_Activity extends AppCompatActivity {
-    private Galaxy_viewmodel galaxy_viewmodel;
-    private Configuration_viewmodel playerConfig;
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference currSysRef = mRootRef.child("player").child("currentSystem");
+    DatabaseReference currPlanRef = mRootRef.child("player").child("currentPlanet");
+    DatabaseReference sysListRef = mRootRef.child("systemList");
+    DatabaseReference shipRef = mRootRef.child("player").child("currentShip");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_review_screen);
 
-        galaxy_viewmodel = ViewModelProviders.of(this).get(Galaxy_viewmodel.class);
-        playerConfig = ViewModelProviders.of(this).get(Configuration_viewmodel.class);
 
         //Init Counters
         TextView pilotPointCount = findViewById(R.id.pilotPointCount);
@@ -46,7 +51,7 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
         //Init Ship Name
         TextView shipName = findViewById(R.id.shipHeader);
 
-        Player tempPlayer = Game.getInstance().getPlayer();
+        final Player tempPlayer = Game.getInstance().getPlayer();
         int pilotPoints = tempPlayer.getPilotPoints();
         int traderPoints = tempPlayer.getTraderPoints();
         int fighterPoints = tempPlayer.getFighterPoints();
@@ -103,14 +108,19 @@ public class playerReviewScreen_Activity extends AppCompatActivity {
             engineerDescription.setTextColor(Color.GREEN);
         }
 
-        /**
-         *
-         */
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Start planet view activity (Should be changed to galaxy view later)
+                FirebaseDatabase.getInstance().getInstance().getReference().setValue(null);
+                Game.getInstance().setSystemList(new ArrayList<SolarSystem>());
                 Game.getInstance().initializePlayerPlanet();
+
+
+                Save.savePlayerInformation();
+                Save.saveSpaceShipInformation();
+                Save.saveSolarSystemList();
+
                 Intent i = new Intent(getApplicationContext(), planetView_Activity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);

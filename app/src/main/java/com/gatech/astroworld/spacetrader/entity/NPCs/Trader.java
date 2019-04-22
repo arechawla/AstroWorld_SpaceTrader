@@ -1,12 +1,13 @@
 package com.gatech.astroworld.spacetrader.entity.NPCs;
 
-import android.widget.Toast;
 
+import android.widget.Toast;
+import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 import com.gatech.astroworld.spacetrader.entity.EncounterNPC;
 import com.gatech.astroworld.spacetrader.model.Game;
-import com.gatech.astroworld.spacetrader.model.Goods.TradeGood;
 
-import java.util.List;
+
+
 
 public class Trader implements EncounterNPC {
 

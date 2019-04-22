@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gatech.astroworld.spacetrader.R;
-import com.gatech.astroworld.spacetrader.model.Game;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

@@ -1,7 +1,6 @@
 package com.gatech.astroworld.spacetrader.model.Goods;
 
 import com.gatech.astroworld.spacetrader.entity.GoodType;
-import com.gatech.astroworld.spacetrader.model.Game;
 import com.gatech.astroworld.spacetrader.model.Planet;
 import com.gatech.astroworld.spacetrader.model.SolarSystem;
 
@@ -14,12 +13,13 @@ public class MarketGood {
     private int quantity;
     private int price;
 
-    public MarketGood(GoodType good) {
+    public MarketGood(GoodType good, Planet p) {
         this.good = good;
         this.name = good.getName();
-        this.sys = Game.getInstance().getPlayer().getCurrentSystem();
-        this.planet = Game.getInstance().getPlayer().getCurrentPlanet();
+        this.sys = p.getSys();
+        this.planet = p;
         this.price = calculatePrice();
+        this.quantity = 0;
     }
 
     public int calculatePrice() {
@@ -30,13 +30,16 @@ public class MarketGood {
     }
 
     public void setQuantity(int q) {
+
         quantity = q;
     }
+
 
 
     public void setPrice(int p) {
         price = p;
     }
+
 
     public int getCount() {
         return count;
@@ -45,6 +48,11 @@ public class MarketGood {
     public int getQuantity() {
         return quantity;
     }
+
+    public void setName(String n) {
+        this.name = n;
+    }
+
 
     public void setCount(int c) {
         count = c;
