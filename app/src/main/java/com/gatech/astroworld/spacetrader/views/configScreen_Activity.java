@@ -2,15 +2,21 @@ package com.gatech.astroworld.spacetrader.views;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.MediaPlayer;
+import android.media.MediaTimestamp;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.gatech.astroworld.spacetrader.R;
 import com.gatech.astroworld.spacetrader.entity.Difficulty;
@@ -41,6 +47,9 @@ public class configScreen_Activity extends AppCompatActivity {
     DatabaseReference difficultyRef = mRootRef.child("difficulty");
     DatabaseReference distOfPointsRef = mRootRef.child("player").child("distOfPoints");
 
+    VideoView videoHolder;
+    MediaController mediaController;
+
 
     //Setting up new game variables.
     private final int maxStartPoints = 16;
@@ -70,6 +79,9 @@ public class configScreen_Activity extends AppCompatActivity {
         //Predetermined Vars
         remainingPointsCounter.setText("16");
         difficulty = Difficulty.BEGINNER;
+
+        //Setting up cut scene
+        videoHolder = (VideoView) findViewById(R.id.videoView2);
 
 
         //Creates SeekBar listener
@@ -121,6 +133,8 @@ public class configScreen_Activity extends AppCompatActivity {
         difficultySpinner.setAdapter(adapter);
 
 
+
+
         //Character Configuration screen toast errors.
         final Toast error1 = Toast.makeText
                 (getApplicationContext(), "You need at least 16 points.", Toast.LENGTH_SHORT);
@@ -156,18 +170,7 @@ public class configScreen_Activity extends AppCompatActivity {
                 viewmodel.updateGame(difficulty);
                 //Update game Singleton with new Player
                 viewmodel.updatePlayer(newPlayer);
-
-
-//                difficultyRef.setValue(difficulty.toString());
-//
-//                distOfPointsRef.child("engineerPoints").setValue(engineerPoints.getProgress());
-//                distOfPointsRef.child("pilotPoints").setValue(pilotPoints.getProgress());
-//                distOfPointsRef.child("traderPoints").setValue(traderPoints.getProgress());
-//                distOfPointsRef.child("fighterPoints").setValue(fighterPoints.getProgress());
-
-
-                Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
-                startActivity(i);
+                playVideo();
             }
         });
 
@@ -195,5 +198,25 @@ public class configScreen_Activity extends AppCompatActivity {
                  + traderPoints.getProgress()
                  + fighterPoints.getProgress();
         return sum;
+    }
+
+    private void playVideo() {
+
+        mediaController = new MediaController(getApplicationContext());
+        mediaController.setAnchorView(videoHolder);
+        videoHolder.setMediaController(mediaController);
+        videoHolder.setKeepScreenOn(true);
+        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.spacetrader_animation);
+        videoHolder.setVideoURI(video);
+        videoHolder.setZOrderOnTop(true);
+        videoHolder.start();
+        videoHolder.requestFocus();
+        videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Intent i = new Intent(getApplicationContext(), playerReviewScreen_Activity.class);
+                startActivity(i);
+            }
+        });
     }
 }
