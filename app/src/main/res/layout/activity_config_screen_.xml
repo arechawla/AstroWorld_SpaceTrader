@@ -8,6 +8,17 @@
     tools:context=".views.configScreen_Activity"
     tools:layout_editor_absoluteY="81dp">
 
+    <VideoView
+        android:id="@+id/videoView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="auto"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <SeekBar
         android:id="@+id/pilotBar"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
