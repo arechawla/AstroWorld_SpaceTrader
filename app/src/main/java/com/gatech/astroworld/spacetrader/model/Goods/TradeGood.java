@@ -13,7 +13,7 @@ public class TradeGood {
     private SolarSystem sys;
     private GoodType good;
     private Planet plan;
-
+    private int resID;
     public TradeGood(GoodType good, Planet p) {
         this.good = good;
         this.name = good.getName();
@@ -21,6 +21,7 @@ public class TradeGood {
         if (plan != null) {
             this.sys = p.getSys();
         }
+        this.resID = good.getResourceID();
 
     }
 
@@ -79,6 +80,10 @@ public class TradeGood {
 
     public void setName(String n) {
         name = n;
+    }
+
+    public int getResID() {
+        return resID;
     }
 
 }

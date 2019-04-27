@@ -26,7 +26,7 @@ public class planetView_Activity extends FragmentActivity {
         Button playerButton = findViewById(R.id.playerInfo);
         Button orbitButton = findViewById(R.id.returnToOrbit_button);
         Button shipYardButton = findViewById(R.id.shipYardbutton);
-        Button gambleButton = findViewById(R.id.gambleButton);
+        //Button gambleButton = findViewById(R.id.gambleButton);
         TextView title = findViewById(R.id.planetName);
         planet = findViewById(R.id.imageView2);
         System.out.println(Game.getInstance().getPlayer().getName());
@@ -76,13 +76,13 @@ public class planetView_Activity extends FragmentActivity {
                 startActivity(i);
             }
         });
-        gambleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), miniGame.class);
-                startActivity(i);
-            }
-        });
+//        gambleButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getApplicationContext(), miniGame.class);
+//                startActivity(i);
+//            }
+//        });
 
     }
 }

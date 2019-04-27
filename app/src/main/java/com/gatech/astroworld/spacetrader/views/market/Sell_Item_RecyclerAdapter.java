@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.gatech.astroworld.spacetrader.R;
 
@@ -45,6 +46,8 @@ public class Sell_Item_RecyclerAdapter extends
         //holder.mContentView.setText(mValues.get(position).content);
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(mValues.get(position).getName());
+        holder.itemIcon.setImageResource(holder.mItem.getResID());
+        holder.itemIcon.setBackgroundResource(holder.mItem.getResID());
         String price = String.format("%11s", "Price: " + Integer.toString(
                 mValues.get(position).getPrice()));
         String qty = String.format("%11s", "Qty: " + Integer.toString(
@@ -77,6 +80,7 @@ public class Sell_Item_RecyclerAdapter extends
         public final Button minusButton;
         public TradeGood mItem;
         public TextView mPriceView;
+        public ImageView itemIcon;
 
         public ViewHolder(View view) {
             super(view);
@@ -87,6 +91,7 @@ public class Sell_Item_RecyclerAdapter extends
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView =  view.findViewById(R.id.itemName);
             mPriceView = view.findViewById(R.id.itemPrice);
+            itemIcon = view.findViewById(R.id.imageView5);
 
 
             plusButton.setOnClickListener(new View.OnClickListener() {

@@ -11,4 +11,5 @@
     <string name="confirmTravel">Travel</string>
     <string name="cancelTravel">Cancel</string>
     <string name="title_activity_ship_yard">ShipYardActivity</string>
+    <string name="playerName">ShipYardActivity</string>
 </resources>
