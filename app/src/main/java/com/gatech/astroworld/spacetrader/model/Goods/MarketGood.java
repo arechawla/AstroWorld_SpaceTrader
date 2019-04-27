@@ -12,6 +12,7 @@ public class MarketGood {
     private SolarSystem sys;
     private int quantity;
     private int price;
+    private int resID;
 
     public MarketGood(GoodType good, Planet p) {
         this.good = good;
@@ -20,6 +21,7 @@ public class MarketGood {
         this.planet = p;
         this.price = calculatePrice();
         this.quantity = 0;
+        this.resID = good.getResourceID();
     }
 
     public int calculatePrice() {
@@ -76,6 +78,10 @@ public class MarketGood {
 
     public void setPlanet(Planet plan) {
         planet = plan;
+    }
+
+    public int getResID() {
+        return resID;
     }
 
 

@@ -34,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -53,7 +54,7 @@ public class galaxyView_Activity extends AppCompatActivity
     private Map.Entry destination;
     int count = 0;
     private AlertDialog.Builder travelAlertBuilder;
-
+    private TextView pName;
 
 
     @Override
@@ -80,6 +81,8 @@ public class galaxyView_Activity extends AppCompatActivity
                 R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        pName = findViewById(R.id.planetName);
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

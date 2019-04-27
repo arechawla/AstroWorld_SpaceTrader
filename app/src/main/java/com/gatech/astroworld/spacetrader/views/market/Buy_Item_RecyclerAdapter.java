@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,8 @@ public class Buy_Item_RecyclerAdapter extends
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(holder.mItem.getName());
+        holder.itemIcon.setImageResource(holder.mItem.getResID());
+        holder.itemIcon.setBackgroundResource(holder.mItem.getResID());
         holder.mPriceView.setText(String.valueOf(holder.mItem.getPrice()));
         String name = String.format("%11s", holder.mItem.getName());
         holder.mContentView.setText(name);
@@ -73,7 +76,7 @@ public class Buy_Item_RecyclerAdapter extends
         public TextView mContentView;
         public TextView mPriceView;
         public MarketGood mItem;
-
+        public ImageView itemIcon;
 
 
         public ViewHolder(View view) {
@@ -82,6 +85,8 @@ public class Buy_Item_RecyclerAdapter extends
             mIdView = view.findViewById(R.id.item_number);
             mContentView = view.findViewById(R.id.itemName);
             mPriceView = view.findViewById(R.id.itemPrice);
+            itemIcon = view.findViewById(R.id.imageView5);
+
             final TextView itemCountText = view.findViewById(R.id.countText);
             Button plusButton = mView.findViewById(R.id.plusButton);
             Button minusButton = mView.findViewById(R.id.minusButton);

@@ -26,7 +26,7 @@
         android:id="@+id/menu_play_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Play"
+        android:text="New Game"
         app:layout_constraintBottom_toTopOf="@+id/menu_continue_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
