@@ -8,4 +8,5 @@
     <color name="rockBrown">#cc9900</color>
     <color name="currentGreen">#099625</color>
     <color name="planetBackground">#2a2a35</color>
+    <color name="buttonTitle">#f49e42</color>
 </resources>
