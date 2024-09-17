@@ -14,8 +14,11 @@ public class Spaceship {
     private List<TradeGood> cargo;
     private int capacity;
     private double fuel;
-    private final int ssFuelMultiplier = 3;
-    private final int unitFuelUse = 50;
+
+    private int ssFuelMultiplier = 3;
+    private int unitFuelUse = 50;
+    private List<Weapon> weapons;
+    private int numWeapons;
 
 
 
